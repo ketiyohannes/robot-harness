@@ -1,0 +1,16 @@
+# Task 1: Push
+# STL (time in env steps, dt = 0.05 s, T = 60):
+#   F[0,T] block_in_target  AND  G[0,T] pusher_in_region
+name: push
+horizon: 60
+clauses:
+  - name: reach_target
+    op: eventually
+    predicate: block_in_target     # TARGET_RADIUS - ||block_xy - target_xy||
+    interval: [0, 60]
+    kind: liveness
+  - name: pusher_in_region
+    op: always
+    predicate: pusher_in_region    # 0.45 - max(|px|, |py|)
+    interval: [0, 60]
+    kind: safety
