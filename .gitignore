@@ -21,3 +21,6 @@ unity/[Uu]ser[Ss]ettings/
 *.sln
 .DS_Store
 .caffeinate.pid
+results/runs/**/checkpoint.zip
+results/runs/**/traces/
+results/runs/**/ensemble.pt

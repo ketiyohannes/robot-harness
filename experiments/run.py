@@ -24,6 +24,8 @@ def main():
         print(f"=== {name} seed {seed} -> {out}", flush=True)
         if cfg["method"] == "ppo":
             from baselines.ppo import run
+        elif cfg["method"] == "sac":
+            from baselines.sac import run
         elif cfg["method"] == "iva":
             from planners.agent import run
         else:

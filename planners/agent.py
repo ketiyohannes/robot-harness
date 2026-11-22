@@ -115,7 +115,7 @@ class IVAAgent:
                     violated = [k for k, v in per.items() if v <= cfg.eps]
                     if full is not None and not full[0]:
                         violated += [k for k, v in full[2].items() if v <= cfg.eps and k not in violated]
-                    branches.append(dict(idx=i, real=real[:, [0, 1, 4, 5]], passed=bool(ok), safety_rob=rob,
+                    branches.append(dict(idx=i, real=real, passed=bool(ok), safety_rob=rob,
                                          reach_rob=reach_rob, real_J=real_J, violated=violated,
                                          per_clause=per))
                 env.restore_snapshot(sid)
@@ -132,7 +132,7 @@ class IVAAgent:
             seg = _exec(env, plan["actions"][chosen, :n_act], dataset)
             committed += n_act
             history.extend(seg[1:])
-            dec.update(chosen=chosen, committed=seg[:, [0, 1, 4, 5]])
+            dec.update(chosen=chosen, committed=seg)
             if trace:
                 decisions.append(dec)
             # Warm-start the next plan from the chosen sequence, shifted by n_act.

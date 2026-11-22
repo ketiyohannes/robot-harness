@@ -1,0 +1,10 @@
+name: A2_sac_push_safely
+method: sac
+task: push_safely
+seeds: [0, 1, 2]
+total_steps: 60000      # same real-step budget as B/C/D
+eval_every: 5000
+learning_starts: 2000
+safety_penalty: 1.0
+net_arch: [256, 256]
+torch_threads: 1

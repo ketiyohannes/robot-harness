@@ -1,4 +1,4 @@
-name: ppo_push_safely
+name: A_ppo_push_safely
 method: ppo
 task: push_safely
 seeds: [0, 1, 2]
@@ -10,3 +10,5 @@ batch_size: 256
 lr: 0.0003
 gamma: 0.99
 net_arch: [64, 64]
+ent_coef: 0.0
+safety_penalty: 1.0
