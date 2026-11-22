@@ -1,0 +1,664 @@
+{
+ "summary": {
+  "n": 30,
+  "success_rate": 0.8,
+  "safety_violation_rate": 0.0,
+  "mean_robustness": 0.013291020090656601,
+  "committed_steps": 3000,
+  "branch_steps": 0,
+  "model_steps": 11696400,
+  "viol_reach_target": 0.2,
+  "viol_pusher_in_region": 0.0,
+  "viol_block_slow": 0.0,
+  "viol_block_on_table": 0.0,
+  "train_real_steps": 60000,
+  "eval_real_steps": 3000,
+  "train_wall_s": 4798.993429899216,
+  "eval_wall_s": 153.8327763080597,
+  "train_episodes": 550,
+  "train_stats": {
+   "decisions": 5500,
+   "overturned": 0,
+   "no_pass": 0,
+   "top1_failed": 0
+  },
+  "eval_stats": {
+   "decisions": 300,
+   "overturned": 0,
+   "no_pass": 0,
+   "top1_failed": 0
+  }
+ },
+ "episodes": [
+  {
+   "seed": 10000,
+   "success": true,
+   "robustness": 0.04005224518099293,
+   "per_clause": {
+    "reach_target": 0.04130711509304359,
+    "pusher_in_region": 0.21893511351855266,
+    "block_slow": 0.04005224518099293,
+    "block_on_table": 0.09748552741667886
+   },
+   "violated": {
+    "reach_target": false,
+    "pusher_in_region": false,
+    "block_slow": false,
+    "block_on_table": false
+   },
+   "safety_violation": false,
+   "committed_steps": 100,
+   "branch_steps": 0,
+   "model_steps": 389880
+  },
+  {
+   "seed": 10001,
+   "success": true,
+   "robustness": 0.05211254224043971,
+   "per_clause": {
+    "reach_target": 0.05211254224043971,
+    "pusher_in_region": 0.27284338847908257,
+    "block_slow": 0.05562578596529885,
+    "block_on_table": 0.09756868150458205
+   },
+   "violated": {
+    "reach_target": false,
+    "pusher_in_region": false,
+    "block_slow": false,
+    "block_on_table": false
+   },
+   "safety_violation": false,
+   "committed_steps": 100,
+   "branch_steps": 0,
+   "model_steps": 389880
+  },
+  {
+   "seed": 10002,
+   "success": true,
+   "robustness": 0.057838840898075505,
+   "per_clause": {
+    "reach_target": 0.057838840898075505,
+    "pusher_in_region": 0.1790707498665714,
+    "block_slow": 0.08769227656317227,
+    "block_on_table": 0.09737088247048774
+   },
+   "violated": {
+    "reach_target": false,
+    "pusher_in_region": false,
+    "block_slow": false,
+    "block_on_table": false
+   },
+   "safety_violation": false,
+   "committed_steps": 100,
+   "branch_steps": 0,
+   "model_steps": 389880
+  },
+  {
+   "seed": 10003,
+   "success": true,
+   "robustness": 0.05935489049702622,
+   "per_clause": {
+    "reach_target": 0.05935489049702622,
+    "pusher_in_region": 0.23071209128657796,
+    "block_slow": 0.07430655261615399,
+    "block_on_table": 0.09785182207084812
+   },
+   "violated": {
+    "reach_target": false,
+    "pusher_in_region": false,
+    "block_slow": false,
+    "block_on_table": false
+   },
+   "safety_violation": false,
+   "committed_steps": 100,
+   "branch_steps": 0,
+   "model_steps": 389880
+  },
+  {
+   "seed": 10004,
+   "success": true,
+   "robustness": 0.05546474907040573,
+   "per_clause": {
+    "reach_target": 0.05546474907040573,
+    "pusher_in_region": 0.26516050302142435,
+    "block_slow": 0.06185086905717782,
+    "block_on_table": 0.09681164858043588
+   },
+   "violated": {
+    "reach_target": false,
+    "pusher_in_region": false,
+    "block_slow": false,
+    "block_on_table": false
+   },
+   "safety_violation": false,
+   "committed_steps": 100,
+   "branch_steps": 0,
+   "model_steps": 389880
+  },
+  {
+   "seed": 10005,
+   "success": false,
+   "robustness": -0.03359813568741052,
+   "per_clause": {
+    "reach_target": -0.03359813568741052,
+    "pusher_in_region": 0.1995326915333639,
+    "block_slow": 0.01056568537610414,
+    "block_on_table": 0.09738709629971116
+   },
+   "violated": {
+    "reach_target": true,
+    "pusher_in_region": false,
+    "block_slow": false,
+    "block_on_table": false
+   },
+   "safety_violation": false,
+   "committed_steps": 100,
+   "branch_steps": 0,
+   "model_steps": 389880
+  },
+  {
+   "seed": 10006,
+   "success": true,
+   "robustness": 0.054578006395219064,
+   "per_clause": {
+    "reach_target": 0.054578006395219064,
+    "pusher_in_region": 0.09912751153500621,
+    "block_slow": 0.06492019866130103,
+    "block_on_table": 0.09743267703602497
+   },
+   "violated": {
+    "reach_target": false,
+    "pusher_in_region": false,
+    "block_slow": false,
+    "block_on_table": false
+   },
+   "safety_violation": false,
+   "committed_steps": 100,
+   "branch_steps": 0,
+   "model_steps": 389880
+  },
+  {
+   "seed": 10007,
+   "success": true,
+   "robustness": 0.00620500179578698,
+   "per_clause": {
+    "reach_target": 0.00620500179578698,
+    "pusher_in_region": 0.2659072071620858,
+    "block_slow": 0.044759635267926146,
+    "block_on_table": 0.09699233064610387
+   },
+   "violated": {
+    "reach_target": false,
+    "pusher_in_region": false,
+    "block_slow": false,
+    "block_on_table": false
+   },
+   "safety_violation": false,
+   "committed_steps": 100,
+   "branch_steps": 0,
+   "model_steps": 389880
+  },
+  {
+   "seed": 10008,
+   "success": true,
+   "robustness": 0.04195070869828549,
+   "per_clause": {
+    "reach_target": 0.05764750288227997,
+    "pusher_in_region": 0.1477384177081812,
+    "block_slow": 0.04195070869828549,
+    "block_on_table": 0.09707087517755465
+   },
+   "violated": {
+    "reach_target": false,
+    "pusher_in_region": false,
+    "block_slow": false,
+    "block_on_table": false
+   },
+   "safety_violation": false,
+   "committed_steps": 100,
+   "branch_steps": 0,
+   "model_steps": 389880
+  },
+  {
+   "seed": 10009,
+   "success": true,
+   "robustness": 0.020307255058878093,
+   "per_clause": {
+    "reach_target": 0.05872008168419213,
+    "pusher_in_region": 0.2675541092552076,
+    "block_slow": 0.020307255058878093,
+    "block_on_table": 0.09710667466974328
+   },
+   "violated": {
+    "reach_target": false,
+    "pusher_in_region": false,
+    "block_slow": false,
+    "block_on_table": false
+   },
+   "safety_violation": false,
+   "committed_steps": 100,
+   "branch_steps": 0,
+   "model_steps": 389880
+  },
+  {
+   "seed": 10010,
+   "success": false,
+   "robustness": -0.0982058851311283,
+   "per_clause": {
+    "reach_target": -0.0982058851311283,
+    "pusher_in_region": 0.10587264873056407,
+    "block_slow": 0.0537237053901842,
+    "block_on_table": 0.09719914556283996
+   },
+   "violated": {
+    "reach_target": true,
+    "pusher_in_region": false,
+    "block_slow": false,
+    "block_on_table": false
+   },
+   "safety_violation": false,
+   "committed_steps": 100,
+   "branch_steps": 0,
+   "model_steps": 389880
+  },
+  {
+   "seed": 10011,
+   "success": true,
+   "robustness": 0.04417960099825913,
+   "per_clause": {
+    "reach_target": 0.05908214578730637,
+    "pusher_in_region": 0.14054363737650083,
+    "block_slow": 0.04417960099825913,
+    "block_on_table": 0.09686995750696334
+   },
+   "violated": {
+    "reach_target": false,
+    "pusher_in_region": false,
+    "block_slow": false,
+    "block_on_table": false
+   },
+   "safety_violation": false,
+   "committed_steps": 100,
+   "branch_steps": 0,
+   "model_steps": 389880
+  },
+  {
+   "seed": 10012,
+   "success": true,
+   "robustness": 0.02159965634755351,
+   "per_clause": {
+    "reach_target": 0.05822288583912171,
+    "pusher_in_region": 0.2622116157945312,
+    "block_slow": 0.02159965634755351,
+    "block_on_table": 0.09654008947680934
+   },
+   "violated": {
+    "reach_target": false,
+    "pusher_in_region": false,
+    "block_slow": false,
+    "block_on_table": false
+   },
+   "safety_violation": false,
+   "committed_steps": 100,
+   "branch_steps": 0,
+   "model_steps": 389880
+  },
+  {
+   "seed": 10013,
+   "success": false,
+   "robustness": -0.16373976452085723,
+   "per_clause": {
+    "reach_target": -0.16373976452085723,
+    "pusher_in_region": 0.19162322667797066,
+    "block_slow": 0.2999695660842133,
+    "block_on_table": 0.0981549229819788
+   },
+   "violated": {
+    "reach_target": true,
+    "pusher_in_region": false,
+    "block_slow": false,
+    "block_on_table": false
+   },
+   "safety_violation": false,
+   "committed_steps": 100,
+   "branch_steps": 0,
+   "model_steps": 389880
+  },
+  {
+   "seed": 10014,
+   "success": true,
+   "robustness": 0.018216790666099388,
+   "per_clause": {
+    "reach_target": 0.018216790666099388,
+    "pusher_in_region": 0.1055392230984884,
+    "block_slow": 0.03776780662749585,
+    "block_on_table": 0.09756746085184202
+   },
+   "violated": {
+    "reach_target": false,
+    "pusher_in_region": false,
+    "block_slow": false,
+    "block_on_table": false
+   },
+   "safety_violation": false,
+   "committed_steps": 100,
+   "branch_steps": 0,
+   "model_steps": 389880
+  },
+  {
+   "seed": 10015,
+   "success": true,
+   "robustness": 0.054200977721990895,
+   "per_clause": {
+    "reach_target": 0.05521948027429881,
+    "pusher_in_region": 0.13640503248256153,
+    "block_slow": 0.054200977721990895,
+    "block_on_table": 0.09567581421094333
+   },
+   "violated": {
+    "reach_target": false,
+    "pusher_in_region": false,
+    "block_slow": false,
+    "block_on_table": false
+   },
+   "safety_violation": false,
+   "committed_steps": 100,
+   "branch_steps": 0,
+   "model_steps": 389880
+  },
+  {
+   "seed": 10016,
+   "success": false,
+   "robustness": -0.06553374292288006,
+   "per_clause": {
+    "reach_target": -0.06553374292288006,
+    "pusher_in_region": 0.1764717812025558,
+    "block_slow": 0.08204123580302802,
+    "block_on_table": 0.09805527140059714
+   },
+   "violated": {
+    "reach_target": true,
+    "pusher_in_region": false,
+    "block_slow": false,
+    "block_on_table": false
+   },
+   "safety_violation": false,
+   "committed_steps": 100,
+   "branch_steps": 0,
+   "model_steps": 389880
+  },
+  {
+   "seed": 10017,
+   "success": false,
+   "robustness": -0.13879606306828166,
+   "per_clause": {
+    "reach_target": -0.13879606306828166,
+    "pusher_in_region": 0.316277040228125,
+    "block_slow": 0.2999693861742416,
+    "block_on_table": 0.09815583074357101
+   },
+   "violated": {
+    "reach_target": true,
+    "pusher_in_region": false,
+    "block_slow": false,
+    "block_on_table": false
+   },
+   "safety_violation": false,
+   "committed_steps": 100,
+   "branch_steps": 0,
+   "model_steps": 389880
+  },
+  {
+   "seed": 10018,
+   "success": true,
+   "robustness": 0.05520973176402027,
+   "per_clause": {
+    "reach_target": 0.05520973176402027,
+    "pusher_in_region": 0.10171515548163151,
+    "block_slow": 0.0626279480177053,
+    "block_on_table": 0.09771993082310775
+   },
+   "violated": {
+    "reach_target": false,
+    "pusher_in_region": false,
+    "block_slow": false,
+    "block_on_table": false
+   },
+   "safety_violation": false,
+   "committed_steps": 100,
+   "branch_steps": 0,
+   "model_steps": 389880
+  },
+  {
+   "seed": 10019,
+   "success": true,
+   "robustness": 0.05854378691344077,
+   "per_clause": {
+    "reach_target": 0.05854378691344077,
+    "pusher_in_region": 0.26164840426993896,
+    "block_slow": 0.06133347200949313,
+    "block_on_table": 0.09771458649550673
+   },
+   "violated": {
+    "reach_target": false,
+    "pusher_in_region": false,
+    "block_slow": false,
+    "block_on_table": false
+   },
+   "safety_violation": false,
+   "committed_steps": 100,
+   "branch_steps": 0,
+   "model_steps": 389880
+  },
+  {
+   "seed": 10020,
+   "success": true,
+   "robustness": 0.058471420503949316,
+   "per_clause": {
+    "reach_target": 0.058471420503949316,
+    "pusher_in_region": 0.14776436610897642,
+    "block_slow": 0.06152103999676567,
+    "block_on_table": 0.09695421421744599
+   },
+   "violated": {
+    "reach_target": false,
+    "pusher_in_region": false,
+    "block_slow": false,
+    "block_on_table": false
+   },
+   "safety_violation": false,
+   "committed_steps": 100,
+   "branch_steps": 0,
+   "model_steps": 389880
+  },
+  {
+   "seed": 10021,
+   "success": true,
+   "robustness": 0.054911297041976004,
+   "per_clause": {
+    "reach_target": 0.05939213460225159,
+    "pusher_in_region": 0.22493632287335033,
+    "block_slow": 0.054911297041976004,
+    "block_on_table": 0.0960359924399446
+   },
+   "violated": {
+    "reach_target": false,
+    "pusher_in_region": false,
+    "block_slow": false,
+    "block_on_table": false
+   },
+   "safety_violation": false,
+   "committed_steps": 100,
+   "branch_steps": 0,
+   "model_steps": 389880
+  },
+  {
+   "seed": 10022,
+   "success": true,
+   "robustness": 0.017168623149114826,
+   "per_clause": {
+    "reach_target": 0.058320350923230374,
+    "pusher_in_region": 0.11985078976574659,
+    "block_slow": 0.017168623149114826,
+    "block_on_table": 0.0967102410822618
+   },
+   "violated": {
+    "reach_target": false,
+    "pusher_in_region": false,
+    "block_slow": false,
+    "block_on_table": false
+   },
+   "safety_violation": false,
+   "committed_steps": 100,
+   "branch_steps": 0,
+   "model_steps": 389880
+  },
+  {
+   "seed": 10023,
+   "success": true,
+   "robustness": 0.033081012291621914,
+   "per_clause": {
+    "reach_target": 0.05916230687984571,
+    "pusher_in_region": 0.1500899839633647,
+    "block_slow": 0.033081012291621914,
+    "block_on_table": 0.09678636897780443
+   },
+   "violated": {
+    "reach_target": false,
+    "pusher_in_region": false,
+    "block_slow": false,
+    "block_on_table": false
+   },
+   "safety_violation": false,
+   "committed_steps": 100,
+   "branch_steps": 0,
+   "model_steps": 389880
+  },
+  {
+   "seed": 10024,
+   "success": true,
+   "robustness": 0.05936197936888741,
+   "per_clause": {
+    "reach_target": 0.05936197936888741,
+    "pusher_in_region": 0.11388827104527094,
+    "block_slow": 0.07410045286697278,
+    "block_on_table": 0.09521343938417517
+   },
+   "violated": {
+    "reach_target": false,
+    "pusher_in_region": false,
+    "block_slow": false,
+    "block_on_table": false
+   },
+   "safety_violation": false,
+   "committed_steps": 100,
+   "branch_steps": 0,
+   "model_steps": 389880
+  },
+  {
+   "seed": 10025,
+   "success": true,
+   "robustness": 0.03069478266017145,
+   "per_clause": {
+    "reach_target": 0.0588645151013757,
+    "pusher_in_region": 0.24303344551785636,
+    "block_slow": 0.03069478266017145,
+    "block_on_table": 0.0969707508021657
+   },
+   "violated": {
+    "reach_target": false,
+    "pusher_in_region": false,
+    "block_slow": false,
+    "block_on_table": false
+   },
+   "safety_violation": false,
+   "committed_steps": 100,
+   "branch_steps": 0,
+   "model_steps": 389880
+  },
+  {
+   "seed": 10026,
+   "success": false,
+   "robustness": -0.17113284456011668,
+   "per_clause": {
+    "reach_target": -0.17113284456011668,
+    "pusher_in_region": 0.10702681360952243,
+    "block_slow": 0.2999640563041843,
+    "block_on_table": 0.09815538396437526
+   },
+   "violated": {
+    "reach_target": true,
+    "pusher_in_region": false,
+    "block_slow": false,
+    "block_on_table": false
+   },
+   "safety_violation": false,
+   "committed_steps": 100,
+   "branch_steps": 0,
+   "model_steps": 389880
+  },
+  {
+   "seed": 10027,
+   "success": true,
+   "robustness": 0.05803853374014031,
+   "per_clause": {
+    "reach_target": 0.05954581700087873,
+    "pusher_in_region": 0.19024551715936905,
+    "block_slow": 0.05803853374014031,
+    "block_on_table": 0.09494145457596385
+   },
+   "violated": {
+    "reach_target": false,
+    "pusher_in_region": false,
+    "block_slow": false,
+    "block_on_table": false
+   },
+   "safety_violation": false,
+   "committed_steps": 100,
+   "branch_steps": 0,
+   "model_steps": 389880
+  },
+  {
+   "seed": 10028,
+   "success": true,
+   "robustness": 0.0583442473227913,
+   "per_clause": {
+    "reach_target": 0.0583442473227913,
+    "pusher_in_region": 0.10519777178136147,
+    "block_slow": 0.07841966219843136,
+    "block_on_table": 0.09789996576940034
+   },
+   "violated": {
+    "reach_target": false,
+    "pusher_in_region": false,
+    "block_slow": false,
+    "block_on_table": false
+   },
+   "safety_violation": false,
+   "committed_steps": 100,
+   "branch_steps": 0,
+   "model_steps": 389880
+  },
+  {
+   "seed": 10029,
+   "success": true,
+   "robustness": 0.05985035828524614,
+   "per_clause": {
+    "reach_target": 0.05985035828524614,
+    "pusher_in_region": 0.18477923900720222,
+    "block_slow": 0.07195457233359967,
+    "block_on_table": 0.0977920599216652
+   },
+   "violated": {
+    "reach_target": false,
+    "pusher_in_region": false,
+    "block_slow": false,
+    "block_on_table": false
+   },
+   "safety_violation": false,
+   "committed_steps": 100,
+   "branch_steps": 0,
+   "model_steps": 389880
+  }
+ ]
+}

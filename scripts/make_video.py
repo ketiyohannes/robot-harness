@@ -60,6 +60,23 @@ class SceneRenderer:
         self.env = PushEnv(render_size=(size, size))
         self.env.reset(0)
         self.size = size
+        self.cam = self.env.model.camera("top").id
+        self.center = np.zeros(2)
+        self.extent = 1.16
+
+    def set_view(self, center=(0.0, 0.0), extent=1.16):
+        """Orthographic top-down view centred at `center` covering `extent` metres."""
+        self.center = np.asarray(center, dtype=float)
+        self.extent = float(extent)
+        self.env.model.cam_pos[self.cam] = [self.center[0], self.center[1], 2.0]
+        self.env.model.cam_fovy[self.cam] = self.extent
+
+    def zoom_to(self, rec, extent=0.62):
+        tr = rec["trace"]
+        pts = np.concatenate([tr["history"][:, 0:2], tr["history"][:, 4:6], tr["target"][None]])
+        c = 0.5 * (pts.min(0) + pts.max(0))
+        ext = max(extent, float((pts.max(0) - pts.min(0)).max()) + 0.2)
+        self.set_view(c, ext)
 
     def render(self, state, target):
         e = self.env
@@ -73,7 +90,8 @@ class SceneRenderer:
         return Image.fromarray(e.render())
 
     def px(self, xy):
-        return top_camera_world_to_pixel(np.asarray(xy)[..., :2], size=self.size)
+        xy = np.asarray(xy, dtype=float)[..., :2] - self.center
+        return top_camera_world_to_pixel(xy, size=self.size, extent=self.extent)
 
 
 def interp_states(states, sub):
@@ -153,6 +171,7 @@ def hud(img: Image.Image, phase: str, phase_color, lines: list[str], status=None
             d.text((x, y), ln, font=F_MONO, fill=col)
             y += 22
     if show_legend:
+        legend(d)
     if caption:
         # Wrap caption at the bottom of the panel.
         words, cur, rows = caption.split(), "", []
@@ -321,10 +340,10 @@ def decision_walkthrough(v: Video, sr, spec, rec, k_idx, label, caption=""):
             upto = min(len(real), fi // 2 + 1)
             draw_path(d, sr.px(real[:upto, 4:6]), WHITE, width=4, alpha=230)
             draw_path(d, sr.px(real[:upto, 0:2]), WHITE, width=2, alpha=140, dashed=True)
-                img = compose(scene, ov)
+            img = compose(scene, ov)
             hud(img, f"VERIFY branch {bi + 1}/{len(branches)}", AMBER,
                 info_lines(f"restore snapshot → run candidate #{br['idx'] + 1} for real"), status, caption,
-                [(f"#{pb['idx'] + 1}: {'PASS' if pb['passed'] else 'FAIL'}  real score {pb['real_J']:+.3f}", GREEN if pb['passed'] else RED)
+                [(f"#{pb['idx'] + 1}: {'PASS' if pb['passed'] else 'FAIL ' + '/'.join(pb['violated'])[:18]}  score {pb['real_J']:+.3f}", GREEN if pb['passed'] else RED)
                  for pb in done], show_legend=True)
             v.add(img)
         done.append(br)
@@ -340,7 +359,7 @@ def decision_walkthrough(v: Video, sr, spec, rec, k_idx, label, caption=""):
         img = compose(sr.render(real[-1], tgt), ov)
         hud(img, f"VERIFY branch {bi + 1}/{len(branches)}", AMBER,
             info_lines(f"safety ρ = {br['safety_rob']:+.3f}   reach ρ = {br['reach_rob']:+.3f}"), status, caption,
-            [(f"#{pb['idx'] + 1}: {'PASS' if pb['passed'] else 'FAIL'}  real score {pb['real_J']:+.3f}", GREEN if pb['passed'] else RED)
+            [(f"#{pb['idx'] + 1}: {'PASS' if pb['passed'] else 'FAIL ' + '/'.join(pb['violated'])[:18]}  score {pb['real_J']:+.3f}", GREEN if pb['passed'] else RED)
              for pb in done], show_legend=True)
         v.add(img, int(0.5 * FPS))
 
@@ -407,6 +426,9 @@ def full_episode(v: Video, sr, spec, rec, label, caption="", speed=1.0):
 def side_by_side(v: Video, spec, rec_b, rec_c, sub=2):
     size = 600
     srs = SceneRenderer(size)
+    pts = np.concatenate([rec_b["trace"]["history"][:, [0, 1]], rec_b["trace"]["history"][:, [4, 5]],
+                          rec_c["trace"]["history"][:, [0, 1]], rec_c["trace"]["history"][:, [4, 5]], rec_c["trace"]["target"][None]])
+    srs.set_view(0.5 * (pts.min(0) + pts.max(0)), max(0.62, float((pts.max(0) - pts.min(0)).max()) + 0.2))
     trb, trc = rec_b["trace"], rec_c["trace"]
     tgt = trc["target"]
     hb, hc = trb["history"], trc["history"]
@@ -439,7 +461,20 @@ def side_by_side(v: Video, spec, rec_b, rec_c, sub=2):
         v.add(img)
 
 
-def end_card(v: Video, summary: dict | None, seconds=7.0):
+def plot_slide(v: Video, path: Path, title: str, seconds=7.0):
+    if not path.exists():
+        return
+    img = Image.new("RGB", (W, H), BG)
+    d = ImageDraw.Draw(img)
+    d.text((40, 24), title, font=F_MED, fill=FG)
+    pl = Image.open(path).convert("RGB")
+    scale = min((W - 80) / pl.width, (H - 100) / pl.height)
+    pl = pl.resize((int(pl.width * scale), int(pl.height * scale)), Image.LANCZOS)
+    img.paste(pl, ((W - pl.width) // 2, 80))
+    v.add(img, int(seconds * FPS))
+
+
+def end_card(v: Video, summary: dict | None, seconds=9.0):
     img = Image.new("RGB", (W, H), BG)
     d = ImageDraw.Draw(img)
     d.text((60, 40), "Results (push-safely, 30 held-out episodes, mean ± std over seeds)", font=F_MED, fill=FG)
@@ -447,18 +482,18 @@ def end_card(v: Video, summary: dict | None, seconds=7.0):
         d.text((60, 120), "results/summary.json missing", font=F_MED, fill=RED)
     else:
         rows = summary["table"]
-        cols = ["method", "train budget", "success", "safety viol.", "real steps / eval ep", "overturned #1"]
-        xs = [60, 420, 600, 760, 930, 1130]
+        cols = ["method", "seeds", "budget", "success", "safety viol.", "real steps / eval ep", "overturned #1"]
+        xs = [50, 400, 470, 580, 740, 900, 1110]
         y = 110
         for x, c in zip(xs, cols):
             d.text((x, y), c, font=F_SMALL, fill=DIM)
         y += 34
         for r in rows:
-            vals = [r["method"], r["budget"], r["success"], r["safety"], r["steps_per_ep"], r.get("overturned", "-")]
+            vals = [r["method"], r.get("seeds", "-"), r["budget"], r["success"], r["safety"], r["steps_per_ep"], r.get("overturned", "-")]
             for x, val in zip(xs, vals):
                 d.text((x, y), str(val), font=F_SMALL, fill=FG)
-            y += 32
-        y += 20
+            y += 29
+        y += 14
         for ln in summary.get("notes", []):
             d.text((60, y), ln, font=F_SMALL, fill=AMBER)
             y += 26
@@ -493,6 +528,7 @@ def main():
                       "overnight MVP: small models, short budgets, few seeds"])
     scene_intro(v, sr, spec, c_succ)
     picks = pick_decisions(c_succ["trace"], n=2)
+    sr.zoom_to(c_succ)
     for n_, k in enumerate(picks):
         decision_walkthrough(v, sr, spec, c_succ, k, f"C (k=4), eval seed {c_succ['seed']}",
                              caption=f"Decision {n_ + 1} of the walkthrough: imagine in the model, verify the top-4 for real from a snapshot, act.")
@@ -501,12 +537,16 @@ def main():
     if c_ov is not None and idx.get("c_overturn_decision") is not None:
         title_card(v, "When the model is wrong", "the world model's favourite plan fails verification; a verified alternative is committed",
                    seconds=2.5)
+        sr.zoom_to(c_ov)
         decision_walkthrough(v, sr, spec, c_ov, idx["c_overturn_decision"], f"C (k=4), eval seed {c_ov['seed']}",
                              caption="Overturn: candidate #1 (the model's pick) violates the spec when actually executed.")
     contrast = (TRACES / "c_vs_b_contrast_c.pkl").exists()
     rb, rc = (load("c_vs_b_contrast_b.pkl"), load("c_vs_b_contrast_c.pkl")) if contrast else (b_same, c_succ)
-    title_card(v, "Same seed: without vs with verification", f"eval seed {rc['seed']}  (B and C each use their own trained world model)", seconds=2.5)
+    title_card(v, "Same seed: without vs with verification",
+               f"eval seed {rc['seed']}  (B and C each use their own trained world model, 60k-step budget)", seconds=2.5)
     side_by_side(v, spec, rb, rc)
+    plot_slide(v, ROOT / "results" / "plots" / "learning_and_safety.png",
+               "Learning curves vs total real steps (incl. branches) and committed safety violations")
     end_card(v, summary)
 
     out = ROOT / "results" / "demo.mp4"

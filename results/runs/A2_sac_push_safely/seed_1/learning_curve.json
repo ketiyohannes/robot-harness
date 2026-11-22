@@ -148,5 +148,35 @@
   "viol_pusher_in_region": 0.03333333333333333,
   "viol_block_slow": 0.03333333333333333,
   "viol_block_on_table": 0.0
+ },
+ {
+  "train_steps": 55000,
+  "wall": 1795386536.2154508,
+  "n": 30,
+  "success_rate": 0.0,
+  "safety_violation_rate": 0.03333333333333333,
+  "mean_robustness": -0.15188810493764032,
+  "committed_steps": 3000,
+  "branch_steps": 0,
+  "model_steps": 0,
+  "viol_reach_target": 1.0,
+  "viol_pusher_in_region": 0.03333333333333333,
+  "viol_block_slow": 0.0,
+  "viol_block_on_table": 0.0
+ },
+ {
+  "train_steps": 60000,
+  "wall": 1795386660.233202,
+  "n": 30,
+  "success_rate": 0.0,
+  "safety_violation_rate": 0.16666666666666666,
+  "mean_robustness": -0.15579235746225498,
+  "committed_steps": 3000,
+  "branch_steps": 0,
+  "model_steps": 0,
+  "viol_reach_target": 0.9666666666666667,
+  "viol_pusher_in_region": 0.06666666666666667,
+  "viol_block_slow": 0.1,
+  "viol_block_on_table": 0.0
  }
 ]

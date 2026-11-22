@@ -31,6 +31,9 @@ METHODS = {
     "D_verify_k4_lam0": "D: C with lambda=0",
     "E_verify_k2": "E: verify k=2",
     "F_verify_k8": "F: verify k=8",
+    "A2_sac_long": "A2: SAC (long)",
+    "B_plan_k1_long": "B: no verify, 120k budget",
+    "C_verify_k4_long": "C: verify k=4, 120k budget",
     "B_plan_k1_push": "[Task 1: push] B (k=1)",
     "C_verify_k4_push": "[Task 1: push] C (k=4)",
 }
@@ -110,7 +113,7 @@ def main():
                 curves.setdefault(key, []).append(([r["train_steps"] for r in lc], [r["success_rate"] for r in lc]))
             for name, sums, budget in [(label + f" @ {BUDGET // 1000}k", at_b, BUDGET),
                                        (label + f" @ {fin[0]['train_real_steps'] // 1000}k (final)", fin, fin[0]["train_real_steps"])]:
-                if not sums or (budget == BUDGET and key == "A2_sac_push_safely" and name.endswith("(final)")):
+                if not sums or (budget == BUDGET and key == "A2_sac_push_safely" and name.endswith("(final)")) or (key == "A2_sac_long" and not name.endswith("(final)")):
                     continue
                 table.append(dict(method=name, key=key, seeds=len(sums), budget=f"{budget // 1000}k",
                                   success=ms([x["success_rate"] for x in sums], pct=True),
@@ -131,7 +134,8 @@ def main():
         train_viol = [np.mean([c["safety_violation"] for c in lg["curve"]]) for lg in logs]
         train_succ = [np.mean([c["success"] for c in lg["curve"]]) for lg in logs]
         to50 = [first_cross([c["real_steps"] for c in lg["curve"]], rolling([c["success"] for c in lg["curve"]])) for lg in logs]
-        table.append(dict(method=label, key=key, seeds=len(sums), budget=f"{BUDGET // 1000}k",
+        table.append(dict(method=label, key=key, seeds=len(sums),
+                          budget=f"{round(np.mean([x['train_real_steps'] for x in sums]) / 1000)}k",
                           success=ms([x["success_rate"] for x in sums], pct=True),
                           safety=ms([x["safety_violation_rate"] for x in sums], pct=True),
                           steps_per_ep=f"{np.mean(steps_ep):.0f}",
@@ -162,7 +166,8 @@ def main():
     fig, ax = plt.subplots(1, 2, figsize=(13, 4.5))
     colors = {"B_plan_k1": "tab:blue", "C_verify_k4": "tab:green", "D_verify_k4_lam0": "tab:olive",
               "A_ppo_push_safely": "tab:red", "A2_sac_push_safely": "tab:purple",
-              "E_verify_k2": "tab:cyan", "F_verify_k8": "tab:brown"}
+              "E_verify_k2": "tab:cyan", "F_verify_k8": "tab:brown",
+              "A2_sac_long": "tab:purple", "B_plan_k1_long": "navy", "C_verify_k4_long": "darkgreen"}
     for key, logs in details.items():
         for i, lg in enumerate(logs):
             st = [c["real_steps"] for c in lg["curve"]]
@@ -173,7 +178,7 @@ def main():
     for key, cl in curves.items():
         for i, (st, sr) in enumerate(cl):
             ax[0].plot(st, sr, color=colors[key], ls="--", alpha=0.8, label=METHODS[key] + " (eval)" if i == 0 else None)
-    ax[0].set_xlim(0, BUDGET * 1.05)
+    ax[0].set_xlim(0, max([BUDGET] + [lg["curve"][-1]["real_steps"] for lgs in details.values() for lg in lgs]) * 1.03)
     ax[0].set_xlabel("total real env steps (incl. pretraining + branches)")
     ax[0].set_ylabel("success rate (rolling 10 train eps; RL: eval)")
     ax[0].set_title("Learning: success vs real steps")
@@ -236,11 +241,11 @@ def main():
     print("\n".join(lines))
 
     summary = dict(table=[dict(method=r["method"].split(" (")[0] if len(r["method"]) > 34 else r["method"],
-                               budget=r["budget"], success=r["success"], safety=r["safety"],
+                               seeds=r["seeds"], budget=r["budget"], success=r["success"], safety=r["safety"],
                                steps_per_ep=r["steps_per_ep"], overturned=r["overturned"]) for r in table],
                    notes=["Real steps per eval episode include verification branches (C/D).",
                           "Budget = total real sim steps for training, incl. world-model pretraining.",
-                          "MVP scale: 3 seeds, 30 eval episodes per seed; see RESULTS.md for caveats."])
+                          "MVP scale: 2-7 seeds per method, 30 eval episodes per seed; see RESULTS.md for caveats."])
     (ROOT / "results" / "summary.json").write_text(json.dumps(summary, indent=1))
 
 

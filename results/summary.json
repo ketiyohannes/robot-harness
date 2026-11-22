@@ -1,7 +1,44 @@
 {
  "table": [
   {
+   "method": "A: PPO @ 60k",
+   "seeds": 3,
+   "budget": "60k",
+   "success": "0% \u00b1 0",
+   "safety": "0% \u00b1 0",
+   "steps_per_ep": "100",
+   "overturned": "-"
+  },
+  {
+   "method": "A: PPO @ 1001k (final)",
+   "seeds": 3,
+   "budget": "1001k",
+   "success": "0% \u00b1 0",
+   "safety": "0% \u00b1 0",
+   "steps_per_ep": "100",
+   "overturned": "-"
+  },
+  {
+   "method": "A2: SAC @ 60k",
+   "seeds": 3,
+   "budget": "60k",
+   "success": "0% \u00b1 0",
+   "safety": "9% \u00b1 6",
+   "steps_per_ep": "100",
+   "overturned": "-"
+  },
+  {
+   "method": "B: WM+CEM, no verify (k=1)",
+   "seeds": 3,
+   "budget": "60k",
+   "success": "83% \u00b1 3",
+   "safety": "4% \u00b1 3",
+   "steps_per_ep": "100",
+   "overturned": "-"
+  },
+  {
    "method": "C: WM+CEM+verify (k=4)",
+   "seeds": 3,
    "budget": "60k",
    "success": "83% \u00b1 7",
    "safety": "0% \u00b1 0",
@@ -10,16 +47,62 @@
   },
   {
    "method": "D: C with lambda=0",
+   "seeds": 3,
    "budget": "60k",
    "success": "91% \u00b1 2",
    "safety": "0% \u00b1 0",
    "steps_per_ep": "860",
    "overturned": "39% \u00b1 2"
+  },
+  {
+   "method": "E: verify k=2",
+   "seeds": 3,
+   "budget": "60k",
+   "success": "92% \u00b1 2",
+   "safety": "1% \u00b1 2",
+   "steps_per_ep": "480",
+   "overturned": "30% \u00b1 3"
+  },
+  {
+   "method": "F: verify k=8",
+   "seeds": 3,
+   "budget": "60k",
+   "success": "93% \u00b1 0",
+   "safety": "0% \u00b1 0",
+   "steps_per_ep": "1620",
+   "overturned": "50% \u00b1 1"
+  },
+  {
+   "method": "A2: SAC (long) @ 300k (final)",
+   "seeds": 2,
+   "budget": "300k",
+   "success": "0% \u00b1 0",
+   "safety": "3% \u00b1 3",
+   "steps_per_ep": "100",
+   "overturned": "-"
+  },
+  {
+   "method": "C: verify k=4, 120k budget",
+   "seeds": 2,
+   "budget": "120k",
+   "success": "97% \u00b1 3",
+   "safety": "0% \u00b1 0",
+   "steps_per_ep": "860",
+   "overturned": "35% \u00b1 1"
+  },
+  {
+   "method": "[Task 1: push] C (k=4)",
+   "seeds": 2,
+   "budget": "60k",
+   "success": "100% \u00b1 0",
+   "safety": "0% \u00b1 0",
+   "steps_per_ep": "860",
+   "overturned": "59% \u00b1 1"
   }
  ],
  "notes": [
   "Real steps per eval episode include verification branches (C/D).",
   "Budget = total real sim steps for training, incl. world-model pretraining.",
-  "MVP scale: 3 seeds, 30 eval episodes per seed; see RESULTS.md for caveats."
+  "MVP scale: 2-7 seeds per method, 30 eval episodes per seed; see RESULTS.md for caveats."
  ]
 }
