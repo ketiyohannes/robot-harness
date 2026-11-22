@@ -1,0 +1,10 @@
+name: A2_sac_long
+method: sac
+task: push_safely
+seeds: [0, 1]
+total_steps: 300000     # 5x budget (bigger experiment)
+eval_every: 20000
+learning_starts: 2000
+safety_penalty: 1.0
+net_arch: [256, 256]
+torch_threads: 1

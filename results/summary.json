@@ -1,0 +1,25 @@
+{
+ "table": [
+  {
+   "method": "C: WM+CEM+verify (k=4)",
+   "budget": "60k",
+   "success": "83% \u00b1 7",
+   "safety": "0% \u00b1 0",
+   "steps_per_ep": "860",
+   "overturned": "40% \u00b1 4"
+  },
+  {
+   "method": "D: C with lambda=0",
+   "budget": "60k",
+   "success": "91% \u00b1 2",
+   "safety": "0% \u00b1 0",
+   "steps_per_ep": "860",
+   "overturned": "39% \u00b1 2"
+  }
+ ],
+ "notes": [
+  "Real steps per eval episode include verification branches (C/D).",
+  "Budget = total real sim steps for training, incl. world-model pretraining.",
+  "MVP scale: 3 seeds, 30 eval episodes per seed; see RESULTS.md for caveats."
+ ]
+}

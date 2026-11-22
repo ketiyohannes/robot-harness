@@ -599,6 +599,46 @@
    "committed": 100,
    "branch": 760,
    "wall": 643.2204978466034
+  },
+  {
+   "episode": 60,
+   "real_steps": 57460,
+   "success": true,
+   "safety_violation": false,
+   "robustness": 0.031610101088531344,
+   "committed": 100,
+   "branch": 760,
+   "wall": 670.1525590419769
+  },
+  {
+   "episode": 61,
+   "real_steps": 58320,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.1620994240922659,
+   "committed": 100,
+   "branch": 760,
+   "wall": 678.4905071258545
+  },
+  {
+   "episode": 62,
+   "real_steps": 59180,
+   "success": true,
+   "safety_violation": false,
+   "robustness": 0.05540334705692528,
+   "committed": 100,
+   "branch": 760,
+   "wall": 687.4727292060852
+  },
+  {
+   "episode": 63,
+   "real_steps": 60040,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.005571878266584035,
+   "committed": 100,
+   "branch": 760,
+   "wall": 696.1325170993805
   }
  ],
  "wm_err": [
@@ -676,9 +716,9 @@
   }
  ],
  "stats": {
-  "decisions": 600,
-  "overturned": 325,
-  "no_pass": 94,
-  "top1_failed": 137
+  "decisions": 640,
+  "overturned": 345,
+  "no_pass": 98,
+  "top1_failed": 142
  }
 }

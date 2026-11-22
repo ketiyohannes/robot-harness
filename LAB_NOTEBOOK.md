@@ -157,3 +157,15 @@ eval on 30 fixed held-out seeds (10000–10029) with frozen world model:
 `B_plan_k1`, `C_verify_k4`, `D_verify_k4_lam0` (configs in `experiments/configs/`).
 Compute: torch 1 thread per process, all 9 in parallel. B is ~8 s/episode under load
 (CEM = 4 × 128 × 5 members × 20 steps × 4 iters per decision), so B takes ~1 h.
+
+## Bigger experiment (requested by the user at ~01:28)
+
+The user asked for a bigger experiment within the resource and time limits, plus a video.
+Plan (all push_safely, configs unchanged except budget/seeds):
+- **Longer budgets** (launched 01:29): `B_plan_k1_long` and `C_verify_k4_long` at 120k real
+  steps (2 seeds each); `A2_sac_long` at 300k steps (2 seeds), to see where each method
+  levels off and whether model-free / unverified planning catch up with more data.
+- **More seeds** (launched when wave 1 frees cores): seeds 3–6 for B and C at 60k → 7 seeds
+  each for the main comparison.
+Cost estimate: B at 120k ≈ 1,150 episodes × ~6–8 s ≈ 2–2.5 h under load. This is the
+slowest run and should finish around 05:00, leaving time for analysis, video and report.

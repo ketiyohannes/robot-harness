@@ -29,6 +29,10 @@ METHODS = {
     "B_plan_k1": "B: WM+CEM, no verify (k=1)",
     "C_verify_k4": "C: WM+CEM+verify (k=4)",
     "D_verify_k4_lam0": "D: C with lambda=0",
+    "E_verify_k2": "E: verify k=2",
+    "F_verify_k8": "F: verify k=8",
+    "B_plan_k1_push": "[Task 1: push] B (k=1)",
+    "C_verify_k4_push": "[Task 1: push] C (k=4)",
 }
 BUDGET = 60_000
 
@@ -142,8 +146,9 @@ def main():
                           steps_to_50=[t for t in to50], train_wall_min=ms([x["train_wall_s"] / 60 for x in sums], fmt="{:.1f}"),
                           raw_success=[x["success_rate"] for x in sums],
                           raw_safety=[x["safety_violation_rate"] for x in sums]))
-        details[key] = logs
-        if args.extra_evals and key.startswith("C"):
+        if not key.endswith("_push"):
+            details[key] = logs  # plots are push_safely only
+        if args.extra_evals and key == "C_verify_k4":
             ex = [extra_eval_no_verify(s) for s, _ in finals]
             table.append(dict(method="C's world model, act WITHOUT verify (k=1) at eval", key=key + "_noverify", seeds=len(ex),
                               budget=f"{BUDGET // 1000}k", success=ms([x["success_rate"] for x in ex], pct=True),
@@ -156,7 +161,8 @@ def main():
     # ------------------------------------------------------------------ plots
     fig, ax = plt.subplots(1, 2, figsize=(13, 4.5))
     colors = {"B_plan_k1": "tab:blue", "C_verify_k4": "tab:green", "D_verify_k4_lam0": "tab:olive",
-              "A_ppo_push_safely": "tab:red", "A2_sac_push_safely": "tab:purple"}
+              "A_ppo_push_safely": "tab:red", "A2_sac_push_safely": "tab:purple",
+              "E_verify_k2": "tab:cyan", "F_verify_k8": "tab:brown"}
     for key, logs in details.items():
         for i, lg in enumerate(logs):
             st = [c["real_steps"] for c in lg["curve"]]
