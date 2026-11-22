@@ -1,0 +1,62 @@
+[
+ {
+  "train_steps": 10000,
+  "wall": 1795385996.993495,
+  "n": 30,
+  "success_rate": 0.0,
+  "safety_violation_rate": 0.0,
+  "mean_robustness": -0.1488576399026263,
+  "committed_steps": 3000,
+  "branch_steps": 0,
+  "model_steps": 0,
+  "viol_reach_target": 1.0,
+  "viol_pusher_in_region": 0.0,
+  "viol_block_slow": 0.0,
+  "viol_block_on_table": 0.0
+ },
+ {
+  "train_steps": 20000,
+  "wall": 1795386004.5986612,
+  "n": 30,
+  "success_rate": 0.03333333333333333,
+  "safety_violation_rate": 0.0,
+  "mean_robustness": -0.14726687659242818,
+  "committed_steps": 3000,
+  "branch_steps": 0,
+  "model_steps": 0,
+  "viol_reach_target": 0.9666666666666667,
+  "viol_pusher_in_region": 0.0,
+  "viol_block_slow": 0.0,
+  "viol_block_on_table": 0.0
+ },
+ {
+  "train_steps": 30000,
+  "wall": 1795386011.839457,
+  "n": 30,
+  "success_rate": 0.0,
+  "safety_violation_rate": 0.0,
+  "mean_robustness": -0.14599173971196291,
+  "committed_steps": 3000,
+  "branch_steps": 0,
+  "model_steps": 0,
+  "viol_reach_target": 1.0,
+  "viol_pusher_in_region": 0.0,
+  "viol_block_slow": 0.0,
+  "viol_block_on_table": 0.0
+ },
+ {
+  "train_steps": 40000,
+  "wall": 1795386019.811758,
+  "n": 30,
+  "success_rate": 0.0,
+  "safety_violation_rate": 0.0,
+  "mean_robustness": -0.1471919653441446,
+  "committed_steps": 3000,
+  "branch_steps": 0,
+  "model_steps": 0,
+  "viol_reach_target": 1.0,
+  "viol_pusher_in_region": 0.0,
+  "viol_block_slow": 0.0,
+  "viol_block_on_table": 0.0
+ }
+]

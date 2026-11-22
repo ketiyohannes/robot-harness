@@ -465,6 +465,17 @@ def end_card(v: Video, summary: dict | None, seconds=7.0):
     v.add(img, int(seconds * FPS))
 
 
+def pick_decisions(tr, n=2):
+    """Prefer decisions where verification disagrees across branches and the block moves."""
+    scored = []
+    for i, d in enumerate(tr["decisions"]):
+        br = d.get("branches", [])
+        mixed = any(b["passed"] for b in br) and any(not b["passed"] for b in br)
+        moved = float(np.linalg.norm(d["committed"][-1][4:6] - d["committed"][0][4:6]))
+        scored.append((1.0 * mixed + min(moved / 0.05, 1.0), -i, i))
+    return sorted(i for *_, i in sorted(scored, reverse=True)[:n])
+
+
 def main():
     spec = Spec.load("push_safely")
     sr = SceneRenderer()
@@ -481,8 +492,7 @@ def main():
                lines=["MuJoCo planar push task  •  ensemble world model + CEM  •  exact snapshot/restore",
                       "overnight MVP: small models, short budgets, few seeds"])
     scene_intro(v, sr, spec, c_succ)
-    ndec = len(c_succ["trace"]["decisions"])
-    picks = [0, min(2, ndec - 1)]
+    picks = pick_decisions(c_succ["trace"], n=2)
     for n_, k in enumerate(picks):
         decision_walkthrough(v, sr, spec, c_succ, k, f"C (k=4), eval seed {c_succ['seed']}",
                              caption=f"Decision {n_ + 1} of the walkthrough: imagine in the model, verify the top-4 for real from a snapshot, act.")

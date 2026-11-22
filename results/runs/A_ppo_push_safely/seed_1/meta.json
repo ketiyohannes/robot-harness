@@ -1,0 +1,28 @@
+{
+ "config": {
+  "name": "A_ppo_push_safely",
+  "method": "ppo",
+  "task": "push_safely",
+  "seeds": [
+   0,
+   1,
+   2
+  ],
+  "total_steps": 1000000,
+  "eval_every": 10000,
+  "n_envs": 4,
+  "n_steps": 512,
+  "batch_size": 256,
+  "lr": 0.0003,
+  "gamma": 0.99,
+  "net_arch": [
+   64,
+   64
+  ],
+  "ent_coef": 0.0,
+  "safety_penalty": 1.0
+ },
+ "seed": 1,
+ "git": "b3984d5",
+ "started": "2026-11-23 01:19:49"
+}
