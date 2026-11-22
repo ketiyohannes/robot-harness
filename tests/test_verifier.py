@@ -6,7 +6,7 @@ from envs.push_env import STATE_DIM, TARGET_RADIUS
 from verifier.stl import Always, And, Eventually, Not, Or, Predicate
 from verifier.verifier import Spec
 
-T = 61
+T = 101
 TARGET = np.array([0.2, 0.1])
 
 

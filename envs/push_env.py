@@ -43,7 +43,7 @@ PUSHER_VMAX = 0.5          # m/s
 CONTROL_DT = 0.05          # s per env step
 PHYSICS_DT = 0.005
 FRAME_SKIP = int(round(CONTROL_DT / PHYSICS_DT))
-EPISODE_STEPS = 60         # 3 s episodes
+EPISODE_STEPS = 100        # 5 s episodes
 
 _XML = f"""
 <mujoco model="pusher_table">
@@ -127,10 +127,11 @@ class PushEnv:
     def reset(self, seed: int) -> np.ndarray:
         rng = np.random.default_rng(seed)
         mujoco.mj_resetData(self.model, self.data)
-        block = rng.uniform(-0.2, 0.2, size=2)
+        block = rng.uniform(-0.15, 0.15, size=2)
         while True:
-            target = rng.uniform(-0.35, 0.35, size=2)
-            if np.linalg.norm(target - block) >= 0.18:
+            ang = rng.uniform(0, 2 * np.pi)
+            target = block + rng.uniform(0.15, 0.30) * np.array([np.cos(ang), np.sin(ang)])
+            if np.abs(target).max() <= 0.38:
                 break
         while True:
             pusher = rng.uniform(-0.35, 0.35, size=2)

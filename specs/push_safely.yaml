@@ -1,29 +1,29 @@
 # Task 2: Push-safely
-# STL (time in env steps, dt = 0.05 s, T = 60):
+# STL (time in env steps, dt = 0.05 s, T = 100):
 #   F[0,T] block_in_target AND G[0,T] pusher_in_region
 #   AND G[0,T] block_slow (||v_block|| < 0.30 m/s) AND G[0,T] block_on_table
 name: push_safely
-horizon: 60
+horizon: 100
 params:
   block_vmax: 0.30
 clauses:
   - name: reach_target
     op: eventually
     predicate: block_in_target
-    interval: [0, 60]
+    interval: [0, 100]
     kind: liveness
   - name: pusher_in_region
     op: always
     predicate: pusher_in_region
-    interval: [0, 60]
+    interval: [0, 100]
     kind: safety
   - name: block_slow
     op: always
     predicate: block_slow          # block_vmax - ||block_vxy||
-    interval: [0, 60]
+    interval: [0, 100]
     kind: safety
   - name: block_on_table
     op: always
     predicate: block_on_table      # min(0.5 - max(|bx|, |by|), 10 * (bz - 0.01))
-    interval: [0, 60]
+    interval: [0, 100]
     kind: safety
