@@ -1,0 +1,23 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+# Data / builds
+data/
+builds/
+results/**/frames/
+results/checkpoints/
+*.log
+# Unity (unused: backend fell back to MuJoCo)
+unity/[Ll]ibrary/
+unity/[Tt]emp/
+unity/[Oo]bj/
+unity/[Bb]uild/
+unity/[Bb]uilds/
+unity/[Ll]ogs/
+unity/[Uu]ser[Ss]ettings/
+*.csproj
+*.sln
+.DS_Store
+.caffeinate.pid
