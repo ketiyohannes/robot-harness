@@ -112,7 +112,7 @@ class DynamicsEnsemble(nn.Module):
             opt.zero_grad()
             loss.backward()
             opt.step()
-            loss_val = float(loss)
+            loss_val = float(loss.detach())
             if verbose and it % 1000 == 0:
                 print(f"  wm it {it} loss {loss_val:.4f}", flush=True)
         return loss_val

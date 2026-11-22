@@ -4,7 +4,10 @@ Reward = STL-robustness-based shaping (v2, logged in LAB_NOTEBOOK.md):
     potential  Phi(s) = rho_target(s) - 0.5 * ||pusher - block||
     r_t = 10 * (Phi(s_{t+1}) - Phi(s_t))            (potential-based progress shaping)
           + 0.5 * [rho_target(s_{t+1}) > 0]          (inside-target bonus)
-          + 5 * sum_c min(0, rho_safety_c(s_{t+1}))  (per-step safety robustness penalty)
+          - p * #{c : rho_safety_c(s_{t+1}) < 0}     (bounded per-step safety penalty, p = config
+                                                     `safety_penalty`; v1 used
+                                                     5*min(0, rho), which was unbounded when the
+                                                     block fell off and taught PPO to avoid it)
     final step additionally: + 10 * clip(rho_spec(trajectory), -1, 1)  (exact episode STL)
 rho_target(s) = TARGET_RADIUS - ||block - target|| (the predicate inside F[0,T]).
 Observation adds relative features (block - pusher, target - block) to the 12-D obs.
@@ -26,13 +29,14 @@ def augment_obs(obs: np.ndarray) -> np.ndarray:
 class PushGymEnv(gym.Env):
     metadata = {"render_modes": []}
 
-    def __init__(self, spec: str = "push_safely", seed: int = 0):
+    def __init__(self, spec: str = "push_safely", seed: int = 0, safety_penalty: float = 1.0):
         super().__init__()
         self.env = PushEnv()
         self.spec = Spec.load(spec)
         self.observation_space = gym.spaces.Box(-np.inf, np.inf, (OBS_DIM + 4,), np.float32)
         self.action_space = gym.spaces.Box(-1.0, 1.0, (ACT_DIM,), np.float32)
         self._rng = np.random.default_rng(seed)
+        self.safety_penalty = safety_penalty
         self._states = []
         self._preds = None
 
@@ -57,7 +61,7 @@ class PushGymEnv(gym.Env):
         r = 10.0 * (phi - self._phi) + 0.5 * float(per_step["reach_target"] > 0)
         self._phi = phi
         for c in self.spec.safety_clauses:
-            r += 5.0 * min(0.0, float(per_step[c]))
+            r -= self.safety_penalty * float(per_step[c] < 0)
         if done:
             ok, rob, per = self.spec.verify(np.array(self._states), self.env.target)
             r += 10.0 * float(np.clip(rob, -1.0, 1.0))

@@ -1,0 +1,14 @@
+name: smoke_B
+method: iva
+task: push_safely
+seeds: [0]
+pretrain_steps: 5000
+pretrain_iters: 4000
+train_budget: 20000
+eval_episodes: 10
+eval_traces: 0
+agent:
+  k_verify: 1
+  act_steps: 10
+  retrain_every: 3000
+  retrain_iters: 1500

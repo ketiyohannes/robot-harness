@@ -56,7 +56,7 @@ def run(cfg: dict, seed: int, out_dir: Path):
     torch.set_num_threads(1)
     out_dir.mkdir(parents=True, exist_ok=True)
     spec = Spec.load(cfg["task"])
-    venv = DummyVecEnv([lambda i=i: PushGymEnv(cfg["task"], seed=seed * 100 + i) for i in range(cfg.get("n_envs", 4))])
+    venv = DummyVecEnv([lambda i=i: PushGymEnv(cfg["task"], seed=seed * 100 + i, safety_penalty=cfg.get("safety_penalty", 1.0)) for i in range(cfg.get("n_envs", 4))])
     curve_path = out_dir / "learning_curve.json"
     rows = json.loads(curve_path.read_text()) if curve_path.exists() else []
     ckpt = out_dir / "checkpoint.zip"
