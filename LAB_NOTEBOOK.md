@@ -169,3 +169,28 @@ Plan (all push_safely, configs unchanged except budget/seeds):
   each for the main comparison.
 Cost estimate: B at 120k ≈ 1,150 episodes × ~6–8 s ≈ 2–2.5 h under load. This is the
 slowest run and should finish around 05:00, leaving time for analysis, video and report.
+
+## Results log (01:23 – 03:33)
+
+- 01:23 C/D finished (60k): C 77/80/93%, D 93/90/90% success, 0% safety violations.
+- ~01:50 PPO 1M (3 seeds): 0%. SAC 60k (3 seeds): 0%. E (k=2): 93/93/90%. F (k=8): 93/93/93%.
+  Task 1 C: 100/100%.
+- 02:02 Load average about 50: torch was pinned to 1 thread, but numpy/Accelerate threads
+  were not. All later launches use `OMP_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1`.
+- 02:31 B finished (60k): 83/80/87% success, 7/0/7% safety violations (all block_slow).
+  C at 120k: 100/93%. SAC at 300k: 0/0%.
+- 02:31 Launched seeds 3–6 for B and C at 60k.
+- 02:35 Demo traces recorded from C seed 2 and B seed 2. Draft video rendered. Fixes:
+  - the legend overlapped the table, so it moved to the HUD panel;
+  - an edit left a stray indent, so `make_video.py` failed to parse — fixed;
+  - the action was too small in the full-table view, so walkthroughs and the side-by-side
+    now use a zoomed orthographic camera.
+- 03:30 All runs finished. Analysis run with `--extra_evals` (C's model evaluated with k=1).
+  Final: B 83 ± 3% / 6 ± 4% violations (7 seeds); C 84 ± 5% / 0% (7 seeds); C's model without
+  verification 80 ± 5% / 6 ± 3%. Training episodes with a violation in executed steps:
+  B 158 ± 7, C 6.6 ± 1.6 per seed. Real steps to 50% rolling training success:
+  B 13.8–22.7k, C 20.5–29.9k.
+- 03:33 Final video: 83.1 s, 1280×720, 30 fps, 2,493 frames. Five sampled frames checked
+  (`results/video_frames_check/`). None are black.
+- In traced decisions, the model's rejected #1 plans failed block_slow in 103/131 cases and
+  reach_target (on branches reaching T) in 46/131. A branch can fail both.
