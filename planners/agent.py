@@ -38,6 +38,10 @@ class AgentConfig:
     retrain_every: int = 4000       # M real steps between world-model retrains
     retrain_iters: int = 1500
     error_weighted: bool = True
+    # What to commit when no verified branch passes: "best_score" commits the best-scoring
+    # failing branch; "stop" commits a zero-velocity hold for N steps if every branch broke a
+    # safety clause (liveness-only failures still commit the best score).
+    no_pass_fallback: str = "best_score"
     cem: CEMConfig = field(default_factory=CEMConfig)
 
 
@@ -137,8 +141,15 @@ class IVAAgent:
                 self.stats["top1_failed"] += int(not branches[0]["passed"])
                 dec.update(branches=branches, any_passed=bool(passing))
             self.stats["decisions"] += 1
+            act_seq = plan["actions"][chosen, :n_act]
+            safety = set(self.spec.safety_clauses)
+            if (cfg.no_pass_fallback == "stop" and cfg.k_verify > 1 and not dec["any_passed"]
+                    and all(set(b["violated"]) & safety for b in dec["branches"])):
+                act_seq = np.zeros_like(act_seq)
+                self.stats["stopped"] = self.stats.get("stopped", 0) + 1
+                dec["fallback"] = "stop"
             seg_phys = [env.get_physics()] if capture else None
-            seg = _exec(env, plan["actions"][chosen, :n_act], dataset, seg_phys)
+            seg = _exec(env, act_seq, dataset, seg_phys)
             committed += n_act
             history.extend(seg[1:])
             dec.update(chosen=chosen, committed=seg, committed_physics=seg_phys,

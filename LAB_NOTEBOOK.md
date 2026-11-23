@@ -245,3 +245,30 @@ two-finger gripper, same Imagine → Verify → Act loop, overnight on this Mac.
   cup, 30% anywhere; mostly low) with OU noise on top. The puck now moves in 16% of transitions
   and the cup in 11%. It is observation-only and shared by every arm method; SAC gets the same
   5k transitions prefilled into its replay buffer, counted in its budget.
+
+## Pilot 2 and launch (23:21 – 23:47)
+
+- Pilot 2 (waypoint exploration), seed 0. C reached 35% rolling training success at 46k real
+  steps with 2 violating training episodes so far. B at 14k: 0% success, and 13 of its last 20
+  training episodes broke a safety clause.
+- Oracle check (perfect model, k = 1, λ = 0) solved 7/8 eval seeds, so the planning objective
+  works on the arm.
+- 23:31: wave 1 launched (`results/arm_wave1.txt`, 9 parallel):
+  - B and C at 100k, seeds 1–4 (seed 0 = pilot);
+  - B and C at 200k, seeds 0–1;
+  - E (k = 2) at 100k, seeds 0–2;
+  - SAC at 100k (5k waypoint prefill), seeds 0–2;
+  - PPO at 1M, seeds 0–2.
+- 23:46: C seed 0 final eval: **27% success, 13% episodes with a safety violation**. Verification
+  did not remove violations here, unlike on the planar task. The traces show why:
+  - in 19% of eval decisions **no branch passed** (`no_pass`), and the agent then commits the
+    best-scoring failing branch;
+  - in seed 10003 all 4 candidates hit the puck too hard (puck_slow) at t = 20, so the committed
+    one did too;
+  - most other failures are reach_target: the puck moves toward the target but too slowly for
+    the 6 s deadline.
+  The learned model under-predicts the puck's speed on impact.
+- Added `no_pass_fallback: stop`: if every verified branch broke a safety clause, hold still for
+  N steps instead of committing a failing plan. Liveness-only failures still commit the best
+  score. Wave 2 (2 parallel): G = C + stop fallback (seeds 0–2) and D = C with λ = 0 (seeds
+  0–2), both at 100k.

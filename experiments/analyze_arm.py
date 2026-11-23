@@ -29,11 +29,14 @@ METHODS = {
     "arm_A2_sac": "A2: SAC",
     "arm_B_plan_k1": "B: WM+CEM, no verify (k=1)",
     "arm_C_verify_k4": "C: WM+CEM+verify (k=4)",
+    "arm_D_verify_k4_lam0": "D: C with lambda=0",
     "arm_E_verify_k2": "E: verify k=2",
+    "arm_G_verify_k4_stop": "G: C + stop if no branch passes",
     "arm_B_plan_k1_long": "B: no verify, 2x budget",
     "arm_C_verify_k4_long": "C: verify k=4, 2x budget",
 }
-COLORS = {"arm_B_plan_k1": "#d9822b", "arm_C_verify_k4": "#2b7bd9", "arm_E_verify_k2": "#7b4bd9",
+COLORS = {"arm_B_plan_k1": "#d9822b", "arm_C_verify_k4": "#2b7bd9", "arm_E_verify_k2": "#7b4bd9", "arm_D_verify_k4_lam0": "#2bb0b0",
+          "arm_G_verify_k4_stop": "#2b9d5b",
           "arm_B_plan_k1_long": "#f0b070", "arm_C_verify_k4_long": "#80b0f0", "arm_A2_sac": "#888888",
           "arm_A_ppo": "#444444"}
 

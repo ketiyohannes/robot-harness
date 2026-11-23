@@ -1,0 +1,6 @@
+.venv/bin/python -m experiments.run --config experiments/configs/arm_G_verify_k4_stop.yaml --seeds 0
+.venv/bin/python -m experiments.run --config experiments/configs/arm_G_verify_k4_stop.yaml --seeds 1
+.venv/bin/python -m experiments.run --config experiments/configs/arm_G_verify_k4_stop.yaml --seeds 2
+.venv/bin/python -m experiments.run --config experiments/configs/arm_D_verify_k4_lam0.yaml --seeds 0
+.venv/bin/python -m experiments.run --config experiments/configs/arm_D_verify_k4_lam0.yaml --seeds 1
+.venv/bin/python -m experiments.run --config experiments/configs/arm_D_verify_k4_lam0.yaml --seeds 2
