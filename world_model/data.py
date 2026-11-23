@@ -5,7 +5,6 @@ from pathlib import Path
 
 import numpy as np
 
-from envs.push_env import PushEnv
 
 DATA_DIR = Path(__file__).resolve().parents[1] / "data"
 
@@ -13,30 +12,30 @@ DATA_DIR = Path(__file__).resolve().parents[1] / "data"
 class OUNoisePolicy:
     """Temporally correlated random actions (random exploration that actually travels)."""
 
-    def __init__(self, rng, theta=0.15, sigma=0.5):
-        self.rng, self.theta, self.sigma = rng, theta, sigma
-        self.x = np.zeros(2)
+    def __init__(self, rng, theta=0.15, sigma=0.5, dim=2):
+        self.rng, self.theta, self.sigma, self.dim = rng, theta, sigma, dim
+        self.x = np.zeros(dim)
 
     def reset(self):
-        self.x = self.rng.uniform(-1, 1, 2)
+        self.x = self.rng.uniform(-1, 1, self.dim)
 
     def __call__(self, obs):
-        self.x += -self.theta * self.x + self.sigma * self.rng.normal(size=2)
+        self.x += -self.theta * self.x + self.sigma * self.rng.normal(size=self.dim)
         return np.clip(self.x, -1, 1)
 
 
 class UniformPolicy:
-    def __init__(self, rng):
-        self.rng = rng
+    def __init__(self, rng, dim=2):
+        self.rng, self.dim = rng, dim
 
     def reset(self):
         pass
 
     def __call__(self, obs):
-        return self.rng.uniform(-1, 1, 2)
+        return self.rng.uniform(-1, 1, self.dim)
 
 
-def collect(env: PushEnv, policy, n_steps: int, seed0: int):
+def collect(env, policy, n_steps: int, seed0: int):
     """Roll out full episodes until n_steps transitions. Returns dict of arrays."""
     S, A, NS, EP = [], [], [], []
     ep = 0

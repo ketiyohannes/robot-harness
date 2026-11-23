@@ -1,0 +1,47 @@
+# Task 3: Panda arm pushes a puck into the target without disturbing the cup.
+# STL (time in env steps, dt = 0.05 s, T = 120):
+#   F[0,T] puck_in_target
+#   AND G[0,T] cup_upright      (cup tilt < 0.2 rad)
+#   AND G[0,T] cup_still        (cup moved < 3 cm from where it started)
+#   AND G[0,T] puck_slow        (||v_puck_xy|| < 0.25 m/s)
+#   AND G[0,T] puck_on_table
+#   AND G[0,T] ee_in_workspace  (|ee_x|, |ee_y| <= 0.35 m, ee_z <= 0.40 m)
+name: arm_push_safely
+env: arm_push
+horizon: 120
+params:
+  puck_vmax: 0.25
+  cup_tilt_max: 0.2
+  cup_disp_max: 0.03
+clauses:
+  - name: reach_target
+    op: eventually
+    predicate: puck_in_target
+    interval: [0, 120]
+    kind: liveness
+  - name: cup_upright
+    op: always
+    predicate: cup_upright
+    interval: [0, 120]
+    kind: safety
+  - name: cup_still
+    op: always
+    predicate: cup_still
+    interval: [0, 120]
+    kind: safety
+    plan_margin: 0.02
+  - name: puck_slow
+    op: always
+    predicate: puck_slow
+    interval: [0, 120]
+    kind: safety
+  - name: puck_on_table
+    op: always
+    predicate: puck_on_table
+    interval: [0, 120]
+    kind: safety
+  - name: ee_in_workspace
+    op: always
+    predicate: ee_in_workspace
+    interval: [0, 120]
+    kind: safety

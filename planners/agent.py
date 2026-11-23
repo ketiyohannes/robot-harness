@@ -22,7 +22,7 @@ from pathlib import Path
 import numpy as np
 import torch
 
-from envs.push_env import PushEnv
+from envs.registry import env_info, make_env
 from experiments.common import EVAL_SEEDS, dump_json, episode_record, git_hash, summarize
 from planners.cem import CEMConfig, CEMPlanner, plan_score
 from verifier.verifier import Spec
@@ -58,7 +58,7 @@ class Dataset:
         return len(self.s)
 
 
-def _exec(env: PushEnv, actions, dataset: Dataset | None):
+def _exec(env, actions, dataset: Dataset | None):
     states = [env.get_state()]
     for a in actions:
         s = env.get_state()
@@ -76,7 +76,7 @@ class IVAAgent:
         self.planner = CEMPlanner(model, spec, cfg.cem, seed=seed)
         self.stats = dict(decisions=0, overturned=0, no_pass=0, top1_failed=0)
 
-    def run_episode(self, env: PushEnv, seed: int, dataset: Dataset | None, trace: bool = False):
+    def run_episode(self, env, seed: int, dataset: Dataset | None, trace: bool = False):
         cfg = self.cfg
         env.reset(seed)
         self.planner.reset()
@@ -93,7 +93,7 @@ class IVAAgent:
             plan = self.planner.plan(s0, env.target, horizon=H, shift=shift)
             n_act = min(cfg.act_steps, H)
             chosen, dec = 0, dict(t=t, state=s0, target=env.target.copy(),
-                                  imagined=plan["imagined"].mean(0)[..., [0, 1, 4, 5]],
+                                  imagined=plan["imagined"].mean(0)[..., list(self.planner.info.vis_idx)],
                                   imagined_score=plan["score"], imagined_unc=plan["unc"],
                                   ghosts=plan["ghosts"], shortlisted=list(range(min(cfg.k_verify, len(plan["score"])))))
             if cfg.k_verify > 1:
@@ -111,7 +111,7 @@ class IVAAgent:
                         full = self.spec.verify(np.concatenate([np.array(history), real[1:]]), env.target, eps=cfg.eps)
                         ok = ok and full[0]
                     real_J = float(plan_score(self.spec, real, env.target, cfg.cem)["J"])
-                    reach_rob = float(self.spec.batch_clause_robustness(real, env.target)["reach_target"])
+                    reach_rob = float(self.spec.batch_clause_robustness(real, env.target)[self.spec.liveness_clause])
                     violated = [k for k, v in per.items() if v <= cfg.eps]
                     if full is not None and not full[0]:
                         violated += [k for k, v in full[2].items() if v <= cfg.eps and k not in violated]
@@ -171,13 +171,14 @@ def run(cfg: dict, seed: int, out_dir: Path):
     acfg = _train_cfg(cfg.get("agent", {}))
     dump_json(dict(config=cfg, agent=asdict(acfg), seed=seed, git=git_hash(),
                    started=time.strftime("%Y-%m-%d %H:%M:%S")), out_dir / "meta.json")
-    env = PushEnv()
+    info = env_info(spec.env)
+    env = make_env(spec.env)
     rng = np.random.default_rng(seed)
     t_start = time.time()
     data = Dataset()
-    pre = collect(env, OUNoisePolicy(rng), cfg["pretrain_steps"], seed0=1_000_000 + seed * 10_000)
+    pre = collect(env, OUNoisePolicy(rng, dim=info.act_dim), cfg["pretrain_steps"], seed0=1_000_000 + seed * 10_000)
     data.add_batch(pre)
-    model = DynamicsEnsemble()
+    model = DynamicsEnsemble(state_dim=info.state_dim, act_dim=info.act_dim)
     model.fit(*data.arrays(), epochs_steps=cfg.get("pretrain_iters", 4000), seed=seed)
     agent = IVAAgent(model, spec, acfg, seed=seed)
     budget = cfg["train_budget"]
@@ -220,7 +221,7 @@ def run(cfg: dict, seed: int, out_dir: Path):
     dump_json(dict(curve=curve, wm_err=wm_err, stats=train_stats), out_dir / "train_log.json")
     # ---------------------------------------------------------------- evaluation (frozen model)
     agent.stats = dict(decisions=0, overturned=0, no_pass=0, top1_failed=0)
-    env_eval = PushEnv()
+    env_eval = make_env(spec.env)
     t_eval = time.time()
     recs = []
     n_trace = cfg.get("eval_traces", 3)

@@ -32,15 +32,17 @@ class EnsembleLinear(nn.Module):
 
 
 class DynamicsEnsemble(nn.Module):
-    def __init__(self, n_members: int = 5, hidden: int = 200, layers: int = 3):
+    def __init__(self, n_members: int = 5, hidden: int = 200, layers: int = 3,
+                 state_dim: int = STATE_DIM, act_dim: int = ACT_DIM):
         super().__init__()
         self.n_members = n_members
-        d_in = STATE_DIM + ACT_DIM
-        dims = [d_in] + [hidden] * layers + [STATE_DIM]
+        self.state_dim, self.act_dim = state_dim, act_dim
+        d_in = state_dim + act_dim
+        dims = [d_in] + [hidden] * layers + [state_dim]
         self.layers = nn.ModuleList(EnsembleLinear(n_members, a, b) for a, b in zip(dims[:-1], dims[1:]))
         self.act = nn.SiLU()
         for name in ("in_mu", "in_sd", "out_mu", "out_sd"):
-            d = d_in if name.startswith("in") else STATE_DIM
+            d = d_in if name.startswith("in") else state_dim
             self.register_buffer(name, torch.zeros(d) if "mu" in name else torch.ones(d))
 
     # ---------------------------------------------------------------- core
@@ -66,10 +68,11 @@ class DynamicsEnsemble(nn.Module):
         """
         acts = torch.as_tensor(actions, dtype=torch.float32)
         N, H, _ = acts.shape
-        s = torch.as_tensor(np.broadcast_to(state0, (N, STATE_DIM)).copy(), dtype=torch.float32)
-        s = s.unsqueeze(0).expand(self.n_members, N, STATE_DIM).contiguous()
+        S = self.state_dim
+        s = torch.as_tensor(np.broadcast_to(state0, (N, S)).copy(), dtype=torch.float32)
+        s = s.unsqueeze(0).expand(self.n_members, N, S).contiguous()
         out = [s]
-        a_e = acts.unsqueeze(0).expand(self.n_members, N, H, ACT_DIM)
+        a_e = acts.unsqueeze(0).expand(self.n_members, N, H, self.act_dim)
         for t in range(H):
             s = self.forward(s, a_e[:, :, t])
             out.append(s)
@@ -119,7 +122,7 @@ class DynamicsEnsemble(nn.Module):
 
     @torch.no_grad()
     def one_step_error(self, s, a, ns) -> np.ndarray:
-        """Per-transition error of the ensemble mean (unnormalised L2 over block+pusher xy)."""
+        """Per-transition error of the ensemble mean (unnormalised L2 over the full state)."""
         S = torch.as_tensor(s, dtype=torch.float32).unsqueeze(0).expand(self.n_members, -1, -1)
         A = torch.as_tensor(a, dtype=torch.float32).unsqueeze(0).expand(self.n_members, -1, -1)
         pred = self.forward(S, A).mean(0).numpy()

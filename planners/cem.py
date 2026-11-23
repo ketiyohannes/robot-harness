@@ -21,7 +21,7 @@ from dataclasses import dataclass
 
 import numpy as np
 
-from envs.push_env import ACT_DIM
+from envs.registry import env_info
 from verifier.verifier import Spec
 
 
@@ -44,11 +44,14 @@ class CEMConfig:
 
 def plan_score(spec: Spec, states: np.ndarray, target: np.ndarray, cfg: CEMConfig) -> dict:
     """Score trajectories states (..., H+1, S). Returns dict with 'J' (...) and components."""
+    info = env_info(spec.env)
     per = spec.batch_clause_robustness(states, target)
-    d_bt_end = np.linalg.norm(states[..., -1, 4:6] - target, axis=-1)
-    d_pb_min = np.linalg.norm(states[..., 0:2] - states[..., 4:6], axis=-1).min(-1)
-    safe = sum(np.minimum(0.0, per[c] - cfg.safe_margin) for c in spec.safety_clauses) if spec.safety_clauses else 0.0
-    J = per["reach_target"] - cfg.w_term * d_bt_end - cfg.w_app * d_pb_min + cfg.w_safe * safe
+    obj_xy, tool, obj = list(info.object_xy), list(info.tool_idx), list(info.object_idx)
+    d_bt_end = np.linalg.norm(states[..., -1, obj_xy] - np.asarray(target)[..., :2], axis=-1)
+    d_pb_min = np.linalg.norm(states[..., tool] - states[..., obj], axis=-1).min(-1)
+    safe = sum(np.minimum(0.0, per[c] - spec.plan_margins.get(c, cfg.safe_margin))
+               for c in spec.safety_clauses) if spec.safety_clauses else 0.0
+    J = per[spec.liveness_clause] - cfg.w_term * d_bt_end - cfg.w_app * d_pb_min + cfg.w_safe * safe
     return dict(J=J, per=per)
 
 
@@ -58,6 +61,8 @@ class CEMPlanner:
         self.rng = np.random.default_rng(seed)
         self.means = None
         self.model_steps = 0  # imagined transitions (per ensemble member) computed
+        self.info = env_info(spec.env)
+        self.act_dim = self.info.act_dim
 
     def reset(self):
         self.means = None
@@ -66,7 +71,7 @@ class CEMPlanner:
         traj = self.model.rollout(state, actions)  # (E, N, H+1, S)
         self.model_steps += actions.shape[0] * actions.shape[1]
         sc = plan_score(self.spec, traj, target, self.cfg)
-        unc = traj[..., [0, 1, 4, 5]].std(0).mean(-1).mean(-1)  # (N,)
+        unc = traj[..., list(self.info.unc_idx)].std(0).mean(-1).mean(-1)  # (N,)
         score = sc["J"].mean(0) - self.cfg.lam * unc
         return traj, score, unc, sc
 
@@ -74,18 +79,19 @@ class CEMPlanner:
         c = self.cfg
         H = horizon or c.horizon
         K, N = c.n_candidates, c.population
+        A = self.act_dim
         if self.means is None or self.means.shape[1] < H:
-            mu = np.zeros((K, H, ACT_DIM))
+            mu = np.zeros((K, H, A))
         else:
-            mu = np.concatenate([self.means[:, shift:], np.zeros((K, shift, ACT_DIM))], 1)[:, :H]
+            mu = np.concatenate([self.means[:, shift:], np.zeros((K, shift, A))], 1)[:, :H]
             mu[1:] = 0.5 * mu[1:]  # keep restarts loosely tied to the past, for diversity
-        std = np.full((K, H, ACT_DIM), c.init_std)
-        best_a = np.zeros((K, H, ACT_DIM))
+        std = np.full((K, H, A), c.init_std)
+        best_a = np.zeros((K, H, A))
         best_s = np.full(K, -np.inf)
         for _ in range(c.iterations):
-            samples = np.clip(mu[:, None] + std[:, None] * self.rng.normal(size=(K, N, H, ACT_DIM)), -1, 1)
+            samples = np.clip(mu[:, None] + std[:, None] * self.rng.normal(size=(K, N, H, A)), -1, 1)
             samples[:, 0] = np.clip(mu, -1, 1)  # always re-evaluate the current mean
-            traj, score, unc, _ = self._imagine(state, samples.reshape(K * N, H, ACT_DIM), target)
+            traj, score, unc, _ = self._imagine(state, samples.reshape(K * N, H, A), target)
             score = score.reshape(K, N)
             order = np.argsort(-score, axis=1)
             el = order[:, :c.elites]
@@ -102,7 +108,7 @@ class CEMPlanner:
         traj, score, unc, sc = self._imagine(state, best_a, target)
         rank = np.argsort(-score)
         ghosts_idx = self.rng.choice(K * N, size=min(c.n_ghosts, K * N), replace=False)
-        ghosts = last_traj.mean(0)[ghosts_idx][..., [0, 1, 4, 5]]
+        ghosts = last_traj.mean(0)[ghosts_idx][..., list(self.info.vis_idx)]
         return dict(
             actions=best_a[rank], imagined=traj[:, rank], score=score[rank], unc=unc[rank],
             imagined_per_clause={k: v.mean(0)[rank] for k, v in sc["per"].items()},
