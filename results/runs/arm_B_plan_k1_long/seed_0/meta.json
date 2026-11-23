@@ -40,6 +40,7 @@
   "retrain_every": 4000,
   "retrain_iters": 1500,
   "error_weighted": true,
+  "no_pass_fallback": "best_score",
   "cem": {
    "horizon": 20,
    "n_candidates": 4,
@@ -57,6 +58,6 @@
   }
  },
  "seed": 0,
- "git": "a17eada",
- "started": "2026-11-23 23:30:51"
+ "git": "b14815f",
+ "started": "2026-11-24 01:24:16"
 }

@@ -1,0 +1,7 @@
+[23:47:19] start 1: .venv/bin/python -m experiments.run --config experiments/configs/arm_G_verify_k4_stop.yaml --seeds 0 -> results/logs/_venv_bin_python__m_experiments_run___config_experiments_configs_arm_G_verify_k4_stop_yaml___seeds_0_.log
+[23:47:19] start 2: .venv/bin/python -m experiments.run --config experiments/configs/arm_G_verify_k4_stop.yaml --seeds 1 -> results/logs/_venv_bin_python__m_experiments_run___config_experiments_configs_arm_G_verify_k4_stop_yaml___seeds_1_.log
+[00:14:27] start 3: .venv/bin/python -m experiments.run --config experiments/configs/arm_G_verify_k4_stop.yaml --seeds 2 -> results/logs/_venv_bin_python__m_experiments_run___config_experiments_configs_arm_G_verify_k4_stop_yaml___seeds_2_.log
+[00:14:27] start 4: .venv/bin/python -m experiments.run --config experiments/configs/arm_D_verify_k4_lam0.yaml --seeds 0 -> results/logs/_venv_bin_python__m_experiments_run___config_experiments_configs_arm_D_verify_k4_lam0_yaml___seeds_0_.log
+[00:44:01] start 5: .venv/bin/python -m experiments.run --config experiments/configs/arm_D_verify_k4_lam0.yaml --seeds 1 -> results/logs/_venv_bin_python__m_experiments_run___config_experiments_configs_arm_D_verify_k4_lam0_yaml___seeds_1_.log
+[00:44:31] start 6: .venv/bin/python -m experiments.run --config experiments/configs/arm_D_verify_k4_lam0.yaml --seeds 2 -> results/logs/_venv_bin_python__m_experiments_run___config_experiments_configs_arm_D_verify_k4_lam0_yaml___seeds_2_.log
+[01:14:33] all jobs done

@@ -168,6 +168,10 @@ class ArmPushEnv:
         self._grip_u = m.actuator("panda/actuator8").id
         self._ctrl_lo = m.actuator_ctrlrange[self._arm_u, 0]
         self._ctrl_hi = m.actuator_ctrlrange[self._arm_u, 1]
+        jids = [m.joint(f"panda/joint{i}").id for i in range(1, 8)]
+        # Keep the reset IK a little inside the joint limits.
+        self._jnt_lo = m.jnt_range[jids, 0] + 0.05
+        self._jnt_hi = m.jnt_range[jids, 1] - 0.05
         self._ee = m.site("panda/ee").id
         self._puck_q = m.joint("puck").qposadr[0]
         self._puck_v = m.joint("puck").dofadr[0]
@@ -223,17 +227,33 @@ class ArmPushEnv:
         self.data.ctrl[self._arm_u] = np.clip(q + _LEAD * dq, self._ctrl_lo, self._ctrl_hi)
         self.data.ctrl[self._grip_u] = 0.0  # gripper closed
 
-    def _solve_ik_static(self, ee_goal: np.ndarray, iters: int = 200):
-        """Kinematic IK used only at reset to place the arm at a start pose."""
+    def _solve_ik_static(self, ee_goal: np.ndarray, iters: int = 400) -> bool:
+        """Kinematic IK used only at reset to place the arm at a start pose.
+
+        Damped, step-limited Gauss-Newton from the home posture with joint limits enforced every
+        iteration. Returns False if it did not converge (the caller then draws another start).
+        An earlier undamped full-step version diverged on ~10% of seeds to joint angles far
+        outside the limits, which made the arm swing wildly at t = 0 (see LAB_NOTEBOOK.md).
+        """
         m, d = self.model, self.data
+        d.qpos[self._arm_q] = _HOME_Q
+        lo, hi = self._jnt_lo, self._jnt_hi
         for _ in range(iters):
             mujoco.mj_kinematics(m, d)
             mujoco.mj_comPos(m, d)
             err = ee_goal - d.site_xpos[self._ee]
-            if np.linalg.norm(err) < 1e-5:
-                break
-            dq = self._ik_dq(err / CONTROL_DT, k_rot=1.0 / CONTROL_DT, k_null=0.5) * CONTROL_DT
-            d.qpos[self._arm_q] += dq
+            dq = self._ik_dq(0.5 * err / CONTROL_DT, k_rot=0.5 / CONTROL_DT, k_null=0.2) * CONTROL_DT
+            n = np.linalg.norm(dq)
+            if n > 0.2:
+                dq *= 0.2 / n
+            d.qpos[self._arm_q] = np.clip(d.qpos[self._arm_q] + dq, lo, hi)
+        mujoco.mj_kinematics(m, d)
+        R = d.site_xmat[self._ee].reshape(3, 3)
+        rot_err = np.linalg.norm(0.5 * sum(np.cross(R[:, i], self._R_des[:, i]) for i in range(3)))
+        pos_err = np.linalg.norm(ee_goal - d.site_xpos[self._ee])
+        q = d.qpos[self._arm_q]
+        inside = np.all(q >= lo + 1e-3) and np.all(q <= hi - 1e-3)
+        return bool(pos_err < 1e-3 and rot_err < 1e-2 and inside)
 
     # ------------------------------------------------------------------ core API
     def reset(self, seed: int) -> np.ndarray:
@@ -255,10 +275,13 @@ class ArmPushEnv:
             if (np.linalg.norm(cup - puck) >= 0.09 and np.linalg.norm(cup - target) >= 0.08
                     and np.abs(cup).max() <= 0.30):
                 break
-        ee0 = np.array([rng.uniform(-0.25, -0.05), rng.uniform(-0.2, 0.2), rng.uniform(0.15, 0.25)])
-        d.qpos[self._arm_q] = _HOME_Q
         d.qpos[self._fing_q] = 0.0
-        self._solve_ik_static(ee0)
+        for _ in range(20):
+            ee0 = np.array([rng.uniform(-0.25, -0.05), rng.uniform(-0.2, 0.2), rng.uniform(0.15, 0.25)])
+            if self._solve_ik_static(ee0):
+                break
+        else:
+            raise RuntimeError(f"reset IK failed for seed {seed}")
         d.qpos[self._puck_q:self._puck_q + 7] = [puck[0], puck[1], PUCK_HALF_H, 1, 0, 0, 0]
         d.qpos[self._cup_q:self._cup_q + 7] = [cup[0], cup[1], CUP_HALF_H, 1, 0, 0, 0]
         d.qvel[:] = 0.0

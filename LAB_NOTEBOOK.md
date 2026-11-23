@@ -272,3 +272,30 @@ two-finger gripper, same Imagine → Verify → Act loop, overnight on this Mac.
   N steps instead of committing a failing plan. Liveness-only failures still commit the best
   score. Wave 2 (2 parallel): G = C + stop fallback (seeds 0–2) and D = C with λ = 0 (seeds
   0–2), both at 100k.
+
+## Run v1 invalidated: reset IK bug (01:20)
+
+Wave 1 results looked as follows:
+- C (100k, 5 seeds): 27/57/7/0/33% success, 13–20% safety violations.
+- B: 0% everywhere.
+- PPO: 0%.
+- G (stop fallback): 20/70/3% success, 10% violations.
+- D (λ = 0): 30/63/7% success.
+
+One pattern did not make sense: **every** method, every seed, broke ee_in_workspace in exactly
+the same 3 of 30 eval episodes (seeds 10013, 10027, 10028), and broke the cup clauses on 10027.
+Cause: the reset-time static IK took undamped full Gauss-Newton steps and diverged on about 10%
+of seeds to joint angles far outside the limits (e.g. −35 rad). The servos, clipped to their
+ctrl ranges, then swung the arm wildly at t = 0. This is an environment bug, not a policy
+effect.
+
+Fix: damped, step-limited IK from home, with joint limits enforced every iteration and a
+convergence check that redraws the start pose if needed. Checked on 430 seeds (eval, training
+and pretraining ranges): no drift and no cup motion under zero action. Scripted controller on
+the eval seeds: 87% success, 0 safety violations.
+
+All arm runs were killed and moved to `results/archive/arm_v1_ik_bug/` (kept for the record,
+not reported). Everything is relaunched on the fixed env (`results/arm_wave_final.txt`, 32
+jobs, 10 parallel), plus **B with λ = 0** (3 seeds). In v1, B never descended: it hovered
+about 20 cm above the table for 100k steps. B with λ = 0 tests whether the uncertainty penalty
+is what kept it away from the objects.
