@@ -6,21 +6,21 @@ method because it is a diagnostic.
 """
 import numpy as np
 
-from envs.push_env import PushEnv
 
 
 class OracleModel:
     n_members = 1
 
-    def __init__(self, src_env: PushEnv):
+    def __init__(self, src_env):
         self.src = src_env
-        self.sim = PushEnv()
+        self.sim = type(src_env)()
+        self.state_dim = src_env.get_state().shape[0]
 
     def rollout(self, state0, actions):
         import mujoco
         buf = np.empty(self.src._state_size)
         mujoco.mj_getState(self.src.model, self.src.data, buf, self.src._STATE_SPEC)
-        out = np.empty((1, actions.shape[0], actions.shape[1] + 1, 10))
+        out = np.empty((1, actions.shape[0], actions.shape[1] + 1, self.state_dim))
         for n in range(actions.shape[0]):
             mujoco.mj_setState(self.sim.model, self.sim.data, buf, self.src._STATE_SPEC)
             mujoco.mj_forward(self.sim.model, self.sim.data)

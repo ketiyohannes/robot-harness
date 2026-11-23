@@ -26,7 +26,7 @@ from envs.registry import env_info, make_env
 from experiments.common import EVAL_SEEDS, dump_json, episode_record, git_hash, summarize
 from planners.cem import CEMConfig, CEMPlanner, plan_score
 from verifier.verifier import Spec
-from world_model.data import OUNoisePolicy, collect
+from world_model.data import ArmWaypointExplorer, OUNoisePolicy, collect
 from world_model.ensemble import DynamicsEnsemble
 
 
@@ -58,7 +58,9 @@ class Dataset:
         return len(self.s)
 
 
-def _exec(env, actions, dataset: Dataset | None):
+def _exec(env, actions, dataset: Dataset | None, physics: list | None = None):
+    """Execute actions for real. If ``physics`` is a list, the full sim state after every step is
+    appended to it (only for traces that are rendered later; needs ``env.get_physics``)."""
     states = [env.get_state()]
     for a in actions:
         s = env.get_state()
@@ -66,6 +68,8 @@ def _exec(env, actions, dataset: Dataset | None):
         ns = env.get_state()
         if dataset is not None:
             dataset.add(s, np.clip(a, -1, 1), ns)
+        if physics is not None:
+            physics.append(env.get_physics())
         states.append(ns)
     return np.array(states)
 
@@ -86,6 +90,9 @@ class IVAAgent:
         model0 = self.planner.model_steps
         decisions = []
         shift = 0
+        capture = trace and hasattr(env, "get_physics")
+        if capture:
+            physics0 = env.get_physics()
         while env.t < T:
             t = env.t
             H = min(cfg.cem.horizon, T - t)
@@ -101,7 +108,8 @@ class IVAAgent:
                 branches = []
                 for i in dec["shortlisted"]:
                     env.restore_snapshot(sid)
-                    real = _exec(env, plan["actions"][i, :H], dataset)
+                    phys = [env.get_physics()] if capture else None
+                    real = _exec(env, plan["actions"][i, :H], dataset, phys)
                     branch += H
                     # Safety clauses checked on the branch window (exact). If the branch reaches the
                     # episode end, the full spec over history + branch is checked as well.
@@ -117,7 +125,7 @@ class IVAAgent:
                         violated += [k for k, v in full[2].items() if v <= cfg.eps and k not in violated]
                     branches.append(dict(idx=i, real=real, passed=bool(ok), safety_rob=rob,
                                          reach_rob=reach_rob, real_J=real_J, violated=violated,
-                                         per_clause=per))
+                                         per_clause=per, physics=phys))
                 env.restore_snapshot(sid)
                 env.drop_snapshot(sid)
                 passing = [b for b in branches if b["passed"]]
@@ -129,10 +137,12 @@ class IVAAgent:
                 self.stats["top1_failed"] += int(not branches[0]["passed"])
                 dec.update(branches=branches, any_passed=bool(passing))
             self.stats["decisions"] += 1
-            seg = _exec(env, plan["actions"][chosen, :n_act], dataset)
+            seg_phys = [env.get_physics()] if capture else None
+            seg = _exec(env, plan["actions"][chosen, :n_act], dataset, seg_phys)
             committed += n_act
             history.extend(seg[1:])
-            dec.update(chosen=chosen, committed=seg)
+            dec.update(chosen=chosen, committed=seg, committed_physics=seg_phys,
+                       actions=plan["actions"][:, :H])
             if trace:
                 decisions.append(dec)
             # Warm-start the next plan from the chosen sequence, shifted by n_act.
@@ -143,7 +153,8 @@ class IVAAgent:
                              self.planner.model_steps - model0)
         if trace:
             rec["trace"] = dict(decisions=decisions, history=np.array(history), target=env.target.copy(),
-                                spec=self.spec.name, k=cfg.k_verify)
+                                spec=self.spec.name, k=cfg.k_verify,
+                                physics0=physics0 if capture else None)
         return rec
 
 
@@ -176,7 +187,9 @@ def run(cfg: dict, seed: int, out_dir: Path):
     rng = np.random.default_rng(seed)
     t_start = time.time()
     data = Dataset()
-    pre = collect(env, OUNoisePolicy(rng, dim=info.act_dim), cfg["pretrain_steps"], seed0=1_000_000 + seed * 10_000)
+    explorer = (ArmWaypointExplorer(rng) if cfg.get("pretrain_policy", "ou") == "arm_waypoint"
+                else OUNoisePolicy(rng, dim=info.act_dim))
+    pre = collect(env, explorer, cfg["pretrain_steps"], seed0=1_000_000 + seed * 10_000)
     data.add_batch(pre)
     model = DynamicsEnsemble(state_dim=info.state_dim, act_dim=info.act_dim)
     model.fit(*data.arrays(), epochs_steps=cfg.get("pretrain_iters", 4000), seed=seed)

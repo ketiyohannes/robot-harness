@@ -3,7 +3,8 @@ method: iva
 task: arm_push_safely
 seeds: [0, 1, 2, 3, 4]
 torch_threads: 1
-pretrain_steps: 5000        # OU-noise random exploration, counted in the budget
+pretrain_steps: 5000        # random waypoint exploration (ArmWaypointExplorer), counted in the budget
+pretrain_policy: arm_waypoint
 pretrain_iters: 4000
 train_budget: 100000        # total real env steps (pretrain + committed + branch)
 eval_episodes: 30           # fixed EVAL_SEEDS, frozen world model

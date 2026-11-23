@@ -101,6 +101,8 @@ _SCENE_XML = f"""
     <camera name="top" pos="0 0 2.0" xyaxes="1 0 0 0 1 0" projection="orthographic" fovy="0.80"/>
     <camera name="front" pos="0.95 -0.85 0.75" xyaxes="0.67 0.74 0 -0.33 0.30 0.89" fovy="40"/>
     <camera name="side" pos="0.15 -1.15 0.55" xyaxes="1 0 0 0 0.42 0.91" fovy="45"/>
+    <camera name="video" pos="0.62 -0.78 0.72" xyaxes="0.7442 0.6679 0 -0.3782 0.4214 0.8242" fovy="50"/>
+    <camera name="close" pos="0.42 -0.55 0.48" xyaxes="0.8051 0.5932 0 -0.3329 0.4518 0.8277" fovy="50"/>
     <geom name="floor" type="plane" pos="0 0 -0.75" size="4 4 0.1" material="floor"/>
     <geom name="table" type="box" pos="{(TABLE_X[0] + TABLE_X[1]) / 2} 0 -0.025"
           size="{(TABLE_X[1] - TABLE_X[0]) / 2} {(TABLE_Y[1] - TABLE_Y[0]) / 2} 0.025"
@@ -298,6 +300,19 @@ class ArmPushEnv:
         return np.concatenate([self.get_state(), self.target])
 
     # ------------------------------------------------------------------ snapshots
+    def get_physics(self) -> np.ndarray:
+        """Full integration state (for rendering recorded traces)."""
+        buf = np.empty(self._state_size)
+        mujoco.mj_getState(self.model, self.data, buf, self._STATE_SPEC)
+        return buf
+
+    def set_physics(self, buf: np.ndarray, target: np.ndarray | None = None) -> None:
+        mujoco.mj_setState(self.model, self.data, buf, self._STATE_SPEC)
+        if target is not None:
+            self.target = np.asarray(target, dtype=np.float64).copy()
+            self.model.site_pos[self._target_site, :2] = self.target[:2]
+        mujoco.mj_forward(self.model, self.data)
+
     def save_snapshot(self) -> int:
         buf = np.empty(self._state_size)
         mujoco.mj_getState(self.model, self.data, buf, self._STATE_SPEC)

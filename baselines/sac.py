@@ -10,6 +10,7 @@ import json
 import time
 from pathlib import Path
 
+import numpy as np
 import torch
 from stable_baselines3 import SAC
 from stable_baselines3.common.vec_env import DummyVecEnv
@@ -17,7 +18,29 @@ from stable_baselines3.common.vec_env import DummyVecEnv
 from baselines.ppo import EvalCallback, evaluate_policy
 from envs.gym_wrapper import PushGymEnv
 from experiments.common import dump_json, git_hash, summarize
+from world_model.data import ArmWaypointExplorer
 from verifier.verifier import Spec
+
+
+def _prefill(model, env, n_steps: int, policy: str, seed: int):
+    """Fill the replay buffer with the same structured exploration the arm planners pretrain on.
+
+    These steps are real env steps and are counted in the budget (``total_steps``)."""
+    if policy != "arm_waypoint":
+        raise ValueError(policy)
+    explorer = ArmWaypointExplorer(np.random.default_rng(1_000_000 + seed))
+    obs, _ = env.reset(seed=1_000_000 + seed * 10_000)
+    explorer.reset()
+    ep = 0
+    for _ in range(n_steps):
+        act = explorer(obs).astype(np.float32)
+        nobs, r, term, trunc, info = env.step(act)
+        model.replay_buffer.add(obs[None], nobs[None], act[None], np.array([r]), np.array([term]), [info])
+        obs = nobs
+        if term or trunc:
+            ep += 1
+            obs, _ = env.reset(seed=1_000_000 + seed * 10_000 + ep)
+            explorer.reset()
 
 
 def run(cfg: dict, seed: int, out_dir: Path):
@@ -41,13 +64,16 @@ def run(cfg: dict, seed: int, out_dir: Path):
     dump_json(dict(config=cfg, seed=seed, git=git_hash(), started=time.strftime("%Y-%m-%d %H:%M:%S")),
               out_dir / "meta.json")
     t0 = time.time()
-    remaining = cfg["total_steps"] - model.num_timesteps
+    prefill = int(cfg.get("prefill_steps", 0))
+    if prefill and model.num_timesteps == 0:
+        _prefill(model, venv.envs[0], prefill, cfg.get("prefill_policy", "arm_waypoint"), seed)
+    remaining = cfg["total_steps"] - prefill - model.num_timesteps
     if remaining > 0:
         model.learn(remaining, callback=EvalCallback(spec, cfg["eval_every"], out_dir, rows),
                     reset_num_timesteps=False)
     final = evaluate_policy(model, spec)
     summ = summarize(final)
-    summ.update(train_real_steps=int(model.num_timesteps), wall_clock_s=time.time() - t0)
+    summ.update(train_real_steps=int(model.num_timesteps) + prefill, prefill_steps=prefill, wall_clock_s=time.time() - t0)
     dump_json(dict(summary=summ, episodes=final), out_dir / "final_eval.json")
     model.save(ckpt)
     print("FINAL", json.dumps(summ), flush=True)

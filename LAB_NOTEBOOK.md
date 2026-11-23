@@ -194,3 +194,54 @@ slowest run and should finish around 05:00, leaving time for analysis, video and
   (`results/video_frames_check/`). None are black.
 - In traced decisions, the model's rejected #1 plans failed block_slow in 103/131 cases and
   reach_target (on branches reaching T) in 46/131. A branch can fail both.
+
+---
+
+# Night 2: robot-arm version (Franka Panda)
+
+User request (23:10): "go with level one, implement it end to end". Level 1 = a robot arm with a
+two-finger gripper, same Imagine → Verify → Act loop, overnight on this Mac.
+
+## Setup (23:12 – 23:20)
+
+- Robot model: Franka Emika Panda from MuJoCo Menagerie (Apache-2.0), sparse-cloned into
+  `third_party/` (gitignored) by `scripts/fetch_assets.sh`, pinned to commit 370c439.
+- Scene built with `MjSpec`: the Menagerie arm is attached to a table scene. Arm bodies use
+  gravity compensation, and an `ee` site sits at the fingertips.
+- Control: the action is a 3-D fingertip velocity (±0.25 m/s per axis). A damped-least-squares
+  differential-IK controller runs every 10 ms; it holds the gripper pointing down and pulls the
+  null space toward home. It writes joint targets `q + 0.1·q̇_des` for the Panda position servos
+  (kp/kv = 0.1 s, so the servos track q̇_des). The gripper stays closed.
+- Task: push a puck (r 3 cm) into a target (r 5 cm) within 6 s (120 steps). A short cup stands
+  beside the puck→target line, 7–13 cm off it. Spec `specs/arm_push_safely.yaml`:
+  F puck_in_target ∧ G cup_upright (tilt < 0.2 rad) ∧ G cup_still (moved < 3 cm) ∧ G puck_slow
+  (< 0.25 m/s) ∧ G puck_on_table ∧ G ee_in_workspace.
+- World-model state: 21-D (ee pos/vel, puck pos/vel, cup xy/z/up-axis xy/lin vel xy/ang vel xy).
+- The code was generalised through `envs/registry.py`: ensemble dims, CEM action dim, planner
+  heuristic indices, uncertainty indices, per-clause plan margins in the spec yaml, a gym
+  wrapper for both envs, and a generic oracle model. The push results are unaffected and the
+  old tests pass.
+
+## Problems hit
+
+- **A tall cup was unavoidable.** The Panda hand is 20 cm wide and its bottom sits 3.9 cm above
+  the fingertip, so while pushing it swept a 11 cm cup in 23/40 scripted episodes. Fix: shorter
+  cup (6 cm) and push height 3 cm. The hand can now pass over the cup when the fingertip is high
+  enough, which a careless low sweep still violates.
+  Scripted controller after the fix: 75–80% success (`scripts/arm_scripted.py`).
+- **Snapshot/restore was not bit-exact at first** (84% of elements differed). After `mj_step`,
+  site poses describe the state before integration, while a restore is followed by `mj_forward`.
+  The controller read stale poses on one path and fresh poses on the other. Fix: recompute
+  kinematics before each control update, and run `mj_forward` at the end of each env step.
+  Now bit-exact (`tests/test_arm.py`).
+- **`ps` in this sandbox only shows a few processes.** I wrongly concluded that background jobs
+  had died and launched duplicates. `pgrep -fl` shows them; I killed the duplicates. All jobs now
+  run through `scripts/run_jobs.sh` (parallel queue, one log per job).
+- **Pilot 1 (OU-noise pretraining): 0% success at 31k steps.** The arm hovered 6–7 cm from the
+  puck and never pushed. Random 3-D OU noise moves the puck in only 0.2% of transitions, so the
+  model never learns contact, and in imagination pushing does nothing. A perfect-model (oracle)
+  planner solved 4/4 seeds with the same objective, so the objective is fine. Fix:
+  `ArmWaypointExplorer`, which moves toward random waypoints (55% near the puck, 15% near the
+  cup, 30% anywhere; mostly low) with OU noise on top. The puck now moves in 16% of transitions
+  and the cup in 11%. It is observation-only and shared by every arm method; SAC gets the same
+  5k transitions prefilled into its replay buffer, counted in its budget.

@@ -12,20 +12,20 @@ from stable_baselines3.common.callbacks import BaseCallback
 from stable_baselines3.common.vec_env import DummyVecEnv
 
 from envs.gym_wrapper import PushGymEnv, augment_obs
-from envs.push_env import PushEnv
+from envs.registry import make_env
 from experiments.common import EVAL_SEEDS, dump_json, episode_record, git_hash, summarize
 from verifier.verifier import Spec
 
 
 def evaluate_policy(model, spec: Spec, seeds=EVAL_SEEDS):
-    env = PushEnv()
+    env = make_env(spec.env)
     recs = []
     for sd in seeds:
         obs = env.reset(sd)
         states = [env.get_state()]
         done = False
         while not done:
-            act, _ = model.predict(augment_obs(obs), deterministic=True)
+            act, _ = model.predict(augment_obs(obs, spec.env), deterministic=True)
             obs, done, _ = env.step(act)
             states.append(env.get_state())
         recs.append(episode_record(spec, states, env.target, sd, committed_steps=env.t))
