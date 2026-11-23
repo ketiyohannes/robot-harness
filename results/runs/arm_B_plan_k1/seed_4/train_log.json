@@ -1,0 +1,2504 @@
+{
+ "curve": [
+  {
+   "episode": 0,
+   "real_steps": 5120,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.17852362713829345,
+   "committed": 120,
+   "branch": 0,
+   "wall": 60.88431215286255
+  },
+  {
+   "episode": 1,
+   "real_steps": 5240,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.18467902530354663,
+   "committed": 120,
+   "branch": 0,
+   "wall": 68.05301785469055
+  },
+  {
+   "episode": 2,
+   "real_steps": 5360,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.1762787280311146,
+   "committed": 120,
+   "branch": 0,
+   "wall": 74.977205991745
+  },
+  {
+   "episode": 3,
+   "real_steps": 5480,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.165322331287796,
+   "committed": 120,
+   "branch": 0,
+   "wall": 82.18644309043884
+  },
+  {
+   "episode": 4,
+   "real_steps": 5600,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.15937089986845226,
+   "committed": 120,
+   "branch": 0,
+   "wall": 89.30153203010559
+  },
+  {
+   "episode": 5,
+   "real_steps": 5720,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.1910567975392941,
+   "committed": 120,
+   "branch": 0,
+   "wall": 96.00399112701416
+  },
+  {
+   "episode": 6,
+   "real_steps": 5840,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.14601308385028894,
+   "committed": 120,
+   "branch": 0,
+   "wall": 103.55058407783508
+  },
+  {
+   "episode": 7,
+   "real_steps": 5960,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.14447157839055552,
+   "committed": 120,
+   "branch": 0,
+   "wall": 110.41457104682922
+  },
+  {
+   "episode": 8,
+   "real_steps": 6080,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.1468318994750602,
+   "committed": 120,
+   "branch": 0,
+   "wall": 116.97964811325073
+  },
+  {
+   "episode": 9,
+   "real_steps": 6200,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.19707987516571418,
+   "committed": 120,
+   "branch": 0,
+   "wall": 123.7033941745758
+  },
+  {
+   "episode": 10,
+   "real_steps": 6320,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.14448389178675608,
+   "committed": 120,
+   "branch": 0,
+   "wall": 130.19909191131592
+  },
+  {
+   "episode": 11,
+   "real_steps": 6440,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.16154916242932227,
+   "committed": 120,
+   "branch": 0,
+   "wall": 137.0476930141449
+  },
+  {
+   "episode": 12,
+   "real_steps": 6560,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.15431994510905467,
+   "committed": 120,
+   "branch": 0,
+   "wall": 143.73000812530518
+  },
+  {
+   "episode": 13,
+   "real_steps": 6680,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.15833465609542485,
+   "committed": 120,
+   "branch": 0,
+   "wall": 150.37283396720886
+  },
+  {
+   "episode": 14,
+   "real_steps": 6800,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.1255609888896438,
+   "committed": 120,
+   "branch": 0,
+   "wall": 157.4783627986908
+  },
+  {
+   "episode": 15,
+   "real_steps": 6920,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.18579901178629898,
+   "committed": 120,
+   "branch": 0,
+   "wall": 164.51889419555664
+  },
+  {
+   "episode": 16,
+   "real_steps": 7040,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.1915624341334186,
+   "committed": 120,
+   "branch": 0,
+   "wall": 171.49793410301208
+  },
+  {
+   "episode": 17,
+   "real_steps": 7160,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.12308879224271112,
+   "committed": 120,
+   "branch": 0,
+   "wall": 177.95516395568848
+  },
+  {
+   "episode": 18,
+   "real_steps": 7280,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.17260264532678915,
+   "committed": 120,
+   "branch": 0,
+   "wall": 184.37046194076538
+  },
+  {
+   "episode": 19,
+   "real_steps": 7400,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.17522583372964856,
+   "committed": 120,
+   "branch": 0,
+   "wall": 191.4493589401245
+  },
+  {
+   "episode": 20,
+   "real_steps": 7520,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.15969095393169347,
+   "committed": 120,
+   "branch": 0,
+   "wall": 198.81054282188416
+  },
+  {
+   "episode": 21,
+   "real_steps": 7640,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.14694743405716731,
+   "committed": 120,
+   "branch": 0,
+   "wall": 205.3630359172821
+  },
+  {
+   "episode": 22,
+   "real_steps": 7760,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.14710745294629285,
+   "committed": 120,
+   "branch": 0,
+   "wall": 212.35307693481445
+  },
+  {
+   "episode": 23,
+   "real_steps": 7880,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.16907111613283687,
+   "committed": 120,
+   "branch": 0,
+   "wall": 218.82381796836853
+  },
+  {
+   "episode": 24,
+   "real_steps": 8000,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.19769130754047243,
+   "committed": 120,
+   "branch": 0,
+   "wall": 225.9142541885376
+  },
+  {
+   "episode": 25,
+   "real_steps": 8120,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.15656480303485243,
+   "committed": 120,
+   "branch": 0,
+   "wall": 232.35000491142273
+  },
+  {
+   "episode": 26,
+   "real_steps": 8240,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.12452816876076565,
+   "committed": 120,
+   "branch": 0,
+   "wall": 239.25986003875732
+  },
+  {
+   "episode": 27,
+   "real_steps": 8360,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.07282106363186616,
+   "committed": 120,
+   "branch": 0,
+   "wall": 245.58002090454102
+  },
+  {
+   "episode": 28,
+   "real_steps": 8480,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.13721779178875393,
+   "committed": 120,
+   "branch": 0,
+   "wall": 253.01312375068665
+  },
+  {
+   "episode": 29,
+   "real_steps": 8600,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.1520341476304659,
+   "committed": 120,
+   "branch": 0,
+   "wall": 259.5447750091553
+  },
+  {
+   "episode": 30,
+   "real_steps": 8720,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.18015336471313054,
+   "committed": 120,
+   "branch": 0,
+   "wall": 266.31904101371765
+  },
+  {
+   "episode": 31,
+   "real_steps": 8840,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.09972668621500007,
+   "committed": 120,
+   "branch": 0,
+   "wall": 273.7404978275299
+  },
+  {
+   "episode": 32,
+   "real_steps": 8960,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.12150546173868117,
+   "committed": 120,
+   "branch": 0,
+   "wall": 279.99553418159485
+  },
+  {
+   "episode": 33,
+   "real_steps": 9080,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.14399267327123444,
+   "committed": 120,
+   "branch": 0,
+   "wall": 287.2374219894409
+  },
+  {
+   "episode": 34,
+   "real_steps": 9200,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.12828331407099874,
+   "committed": 120,
+   "branch": 0,
+   "wall": 309.0624678134918
+  },
+  {
+   "episode": 35,
+   "real_steps": 9320,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.10945947577750041,
+   "committed": 120,
+   "branch": 0,
+   "wall": 315.77846598625183
+  },
+  {
+   "episode": 36,
+   "real_steps": 9440,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.06764195467823271,
+   "committed": 120,
+   "branch": 0,
+   "wall": 322.2242639064789
+  },
+  {
+   "episode": 37,
+   "real_steps": 9560,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.15879367411821332,
+   "committed": 120,
+   "branch": 0,
+   "wall": 329.36870408058167
+  },
+  {
+   "episode": 38,
+   "real_steps": 9680,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.07971485090893443,
+   "committed": 120,
+   "branch": 0,
+   "wall": 337.27744007110596
+  },
+  {
+   "episode": 39,
+   "real_steps": 9800,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.1523434380923021,
+   "committed": 120,
+   "branch": 0,
+   "wall": 344.88110280036926
+  },
+  {
+   "episode": 40,
+   "real_steps": 9920,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.10907081991040672,
+   "committed": 120,
+   "branch": 0,
+   "wall": 351.4996931552887
+  },
+  {
+   "episode": 41,
+   "real_steps": 10040,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.11529894619118418,
+   "committed": 120,
+   "branch": 0,
+   "wall": 357.99634408950806
+  },
+  {
+   "episode": 42,
+   "real_steps": 10160,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.1919538755430169,
+   "committed": 120,
+   "branch": 0,
+   "wall": 364.79942989349365
+  },
+  {
+   "episode": 43,
+   "real_steps": 10280,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.12955990695424818,
+   "committed": 120,
+   "branch": 0,
+   "wall": 371.58457803726196
+  },
+  {
+   "episode": 44,
+   "real_steps": 10400,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.09190482079499072,
+   "committed": 120,
+   "branch": 0,
+   "wall": 378.98177886009216
+  },
+  {
+   "episode": 45,
+   "real_steps": 10520,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.08957222903033456,
+   "committed": 120,
+   "branch": 0,
+   "wall": 385.16655588150024
+  },
+  {
+   "episode": 46,
+   "real_steps": 10640,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.048963772367960984,
+   "committed": 120,
+   "branch": 0,
+   "wall": 392.2636091709137
+  },
+  {
+   "episode": 47,
+   "real_steps": 10760,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.13708162077354136,
+   "committed": 120,
+   "branch": 0,
+   "wall": 399.4273180961609
+  },
+  {
+   "episode": 48,
+   "real_steps": 10880,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.15659232596267092,
+   "committed": 120,
+   "branch": 0,
+   "wall": 406.6832640171051
+  },
+  {
+   "episode": 49,
+   "real_steps": 11000,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.1160251437729979,
+   "committed": 120,
+   "branch": 0,
+   "wall": 412.9105339050293
+  },
+  {
+   "episode": 50,
+   "real_steps": 11120,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.10492032451847132,
+   "committed": 120,
+   "branch": 0,
+   "wall": 420.24540400505066
+  },
+  {
+   "episode": 51,
+   "real_steps": 11240,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.10249329351629698,
+   "committed": 120,
+   "branch": 0,
+   "wall": 427.2378659248352
+  },
+  {
+   "episode": 52,
+   "real_steps": 11360,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.17894258632021554,
+   "committed": 120,
+   "branch": 0,
+   "wall": 434.19718194007874
+  },
+  {
+   "episode": 53,
+   "real_steps": 11480,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -1.3707734252710837,
+   "committed": 120,
+   "branch": 0,
+   "wall": 441.72617292404175
+  },
+  {
+   "episode": 54,
+   "real_steps": 11600,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.13628882836486067,
+   "committed": 120,
+   "branch": 0,
+   "wall": 448.2767298221588
+  },
+  {
+   "episode": 55,
+   "real_steps": 11720,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.125483023723503,
+   "committed": 120,
+   "branch": 0,
+   "wall": 455.03860998153687
+  },
+  {
+   "episode": 56,
+   "real_steps": 11840,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.08894244216330248,
+   "committed": 120,
+   "branch": 0,
+   "wall": 461.3450858592987
+  },
+  {
+   "episode": 57,
+   "real_steps": 11960,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.04953956611794774,
+   "committed": 120,
+   "branch": 0,
+   "wall": 469.0763289928436
+  },
+  {
+   "episode": 58,
+   "real_steps": 12080,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.11349687608899557,
+   "committed": 120,
+   "branch": 0,
+   "wall": 475.9059479236603
+  },
+  {
+   "episode": 59,
+   "real_steps": 12200,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.14314917587060333,
+   "committed": 120,
+   "branch": 0,
+   "wall": 482.5577380657196
+  },
+  {
+   "episode": 60,
+   "real_steps": 12320,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.12891602519235001,
+   "committed": 120,
+   "branch": 0,
+   "wall": 490.2263171672821
+  },
+  {
+   "episode": 61,
+   "real_steps": 12440,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.046593208797221966,
+   "committed": 120,
+   "branch": 0,
+   "wall": 496.9571940898895
+  },
+  {
+   "episode": 62,
+   "real_steps": 12560,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.1878246669145402,
+   "committed": 120,
+   "branch": 0,
+   "wall": 504.2531998157501
+  },
+  {
+   "episode": 63,
+   "real_steps": 12680,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.12337812773780467,
+   "committed": 120,
+   "branch": 0,
+   "wall": 511.3903660774231
+  },
+  {
+   "episode": 64,
+   "real_steps": 12800,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.19064975395445188,
+   "committed": 120,
+   "branch": 0,
+   "wall": 517.8091168403625
+  },
+  {
+   "episode": 65,
+   "real_steps": 12920,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.10060275154268049,
+   "committed": 120,
+   "branch": 0,
+   "wall": 524.6059029102325
+  },
+  {
+   "episode": 66,
+   "real_steps": 13040,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.08369457054791697,
+   "committed": 120,
+   "branch": 0,
+   "wall": 532.1268799304962
+  },
+  {
+   "episode": 67,
+   "real_steps": 13160,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.06867843989989192,
+   "committed": 120,
+   "branch": 0,
+   "wall": 538.549861907959
+  },
+  {
+   "episode": 68,
+   "real_steps": 13280,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.12778787044187323,
+   "committed": 120,
+   "branch": 0,
+   "wall": 559.9784510135651
+  },
+  {
+   "episode": 69,
+   "real_steps": 13400,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.06765494382211529,
+   "committed": 120,
+   "branch": 0,
+   "wall": 567.0510580539703
+  },
+  {
+   "episode": 70,
+   "real_steps": 13520,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.12617481557223148,
+   "committed": 120,
+   "branch": 0,
+   "wall": 574.1687049865723
+  },
+  {
+   "episode": 71,
+   "real_steps": 13640,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.15716827617790724,
+   "committed": 120,
+   "branch": 0,
+   "wall": 580.7545499801636
+  },
+  {
+   "episode": 72,
+   "real_steps": 13760,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.08675668487835869,
+   "committed": 120,
+   "branch": 0,
+   "wall": 588.1392388343811
+  },
+  {
+   "episode": 73,
+   "real_steps": 13880,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.10713047120305136,
+   "committed": 120,
+   "branch": 0,
+   "wall": 594.304927110672
+  },
+  {
+   "episode": 74,
+   "real_steps": 14000,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.08314787939536243,
+   "committed": 120,
+   "branch": 0,
+   "wall": 601.386360168457
+  },
+  {
+   "episode": 75,
+   "real_steps": 14120,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.07230613860473276,
+   "committed": 120,
+   "branch": 0,
+   "wall": 607.8187830448151
+  },
+  {
+   "episode": 76,
+   "real_steps": 14240,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.05498295780738999,
+   "committed": 120,
+   "branch": 0,
+   "wall": 615.3219678401947
+  },
+  {
+   "episode": 77,
+   "real_steps": 14360,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.0701408244624161,
+   "committed": 120,
+   "branch": 0,
+   "wall": 621.9093210697174
+  },
+  {
+   "episode": 78,
+   "real_steps": 14480,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.02772082172339274,
+   "committed": 120,
+   "branch": 0,
+   "wall": 628.8634490966797
+  },
+  {
+   "episode": 79,
+   "real_steps": 14600,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.10609389598015756,
+   "committed": 120,
+   "branch": 0,
+   "wall": 636.0597250461578
+  },
+  {
+   "episode": 80,
+   "real_steps": 14720,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.11375024486999202,
+   "committed": 120,
+   "branch": 0,
+   "wall": 642.3099808692932
+  },
+  {
+   "episode": 81,
+   "real_steps": 14840,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.026900744637564034,
+   "committed": 120,
+   "branch": 0,
+   "wall": 649.5279040336609
+  },
+  {
+   "episode": 82,
+   "real_steps": 14960,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.11260136886520931,
+   "committed": 120,
+   "branch": 0,
+   "wall": 656.58553814888
+  },
+  {
+   "episode": 83,
+   "real_steps": 15080,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.06983527717573135,
+   "committed": 120,
+   "branch": 0,
+   "wall": 663.2092308998108
+  },
+  {
+   "episode": 84,
+   "real_steps": 15200,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.047438008881404925,
+   "committed": 120,
+   "branch": 0,
+   "wall": 669.8479738235474
+  },
+  {
+   "episode": 85,
+   "real_steps": 15320,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.1663233440823339,
+   "committed": 120,
+   "branch": 0,
+   "wall": 676.3368101119995
+  },
+  {
+   "episode": 86,
+   "real_steps": 15440,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.12132206663341343,
+   "committed": 120,
+   "branch": 0,
+   "wall": 683.4908459186554
+  },
+  {
+   "episode": 87,
+   "real_steps": 15560,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.018198936573781757,
+   "committed": 120,
+   "branch": 0,
+   "wall": 689.413666009903
+  },
+  {
+   "episode": 88,
+   "real_steps": 15680,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.035788310996024225,
+   "committed": 120,
+   "branch": 0,
+   "wall": 696.0786287784576
+  },
+  {
+   "episode": 89,
+   "real_steps": 15800,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.10306853403332429,
+   "committed": 120,
+   "branch": 0,
+   "wall": 702.6402530670166
+  },
+  {
+   "episode": 90,
+   "real_steps": 15920,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.13032876157060125,
+   "committed": 120,
+   "branch": 0,
+   "wall": 709.2001631259918
+  },
+  {
+   "episode": 91,
+   "real_steps": 16040,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.12132725089573497,
+   "committed": 120,
+   "branch": 0,
+   "wall": 716.953773021698
+  },
+  {
+   "episode": 92,
+   "real_steps": 16160,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.1605091122822065,
+   "committed": 120,
+   "branch": 0,
+   "wall": 724.2117140293121
+  },
+  {
+   "episode": 93,
+   "real_steps": 16280,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.0990078990048429,
+   "committed": 120,
+   "branch": 0,
+   "wall": 730.9687948226929
+  },
+  {
+   "episode": 94,
+   "real_steps": 16400,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.10310951499706321,
+   "committed": 120,
+   "branch": 0,
+   "wall": 737.2454521656036
+  },
+  {
+   "episode": 95,
+   "real_steps": 16520,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.14507046042554816,
+   "committed": 120,
+   "branch": 0,
+   "wall": 744.465940952301
+  },
+  {
+   "episode": 96,
+   "real_steps": 16640,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.07345957844631958,
+   "committed": 120,
+   "branch": 0,
+   "wall": 752.1291799545288
+  },
+  {
+   "episode": 97,
+   "real_steps": 16760,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.11692497987224625,
+   "committed": 120,
+   "branch": 0,
+   "wall": 758.597470998764
+  },
+  {
+   "episode": 98,
+   "real_steps": 16880,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.1111837187896579,
+   "committed": 120,
+   "branch": 0,
+   "wall": 765.5575950145721
+  },
+  {
+   "episode": 99,
+   "real_steps": 17000,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.09197133440684781,
+   "committed": 120,
+   "branch": 0,
+   "wall": 772.6498911380768
+  },
+  {
+   "episode": 100,
+   "real_steps": 17120,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.06647301090473151,
+   "committed": 120,
+   "branch": 0,
+   "wall": 779.4867100715637
+  },
+  {
+   "episode": 101,
+   "real_steps": 17240,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.1300051340588772,
+   "committed": 120,
+   "branch": 0,
+   "wall": 786.2044539451599
+  },
+  {
+   "episode": 102,
+   "real_steps": 17360,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.17055857575166422,
+   "committed": 120,
+   "branch": 0,
+   "wall": 808.8732957839966
+  },
+  {
+   "episode": 103,
+   "real_steps": 17480,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.10375330090195405,
+   "committed": 120,
+   "branch": 0,
+   "wall": 816.0988721847534
+  },
+  {
+   "episode": 104,
+   "real_steps": 17600,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.02074843576514962,
+   "committed": 120,
+   "branch": 0,
+   "wall": 822.6608839035034
+  },
+  {
+   "episode": 105,
+   "real_steps": 17720,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.11974364757850885,
+   "committed": 120,
+   "branch": 0,
+   "wall": 829.5477838516235
+  },
+  {
+   "episode": 106,
+   "real_steps": 17840,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.12236931968817684,
+   "committed": 120,
+   "branch": 0,
+   "wall": 835.3682770729065
+  },
+  {
+   "episode": 107,
+   "real_steps": 17960,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.1769882965296143,
+   "committed": 120,
+   "branch": 0,
+   "wall": 842.1995158195496
+  },
+  {
+   "episode": 108,
+   "real_steps": 18080,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.17972571137921062,
+   "committed": 120,
+   "branch": 0,
+   "wall": 848.9977531433105
+  },
+  {
+   "episode": 109,
+   "real_steps": 18200,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.12440830784679356,
+   "committed": 120,
+   "branch": 0,
+   "wall": 855.8070640563965
+  },
+  {
+   "episode": 110,
+   "real_steps": 18320,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.09513531150031414,
+   "committed": 120,
+   "branch": 0,
+   "wall": 862.7223770618439
+  },
+  {
+   "episode": 111,
+   "real_steps": 18440,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.04302855149463382,
+   "committed": 120,
+   "branch": 0,
+   "wall": 869.3998568058014
+  },
+  {
+   "episode": 112,
+   "real_steps": 18560,
+   "success": true,
+   "safety_violation": false,
+   "robustness": 0.010088683455441672,
+   "committed": 120,
+   "branch": 0,
+   "wall": 875.7423701286316
+  },
+  {
+   "episode": 113,
+   "real_steps": 18680,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.25715156544174766,
+   "committed": 120,
+   "branch": 0,
+   "wall": 882.0579810142517
+  },
+  {
+   "episode": 114,
+   "real_steps": 18800,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.14298262719421762,
+   "committed": 120,
+   "branch": 0,
+   "wall": 889.2725350856781
+  },
+  {
+   "episode": 115,
+   "real_steps": 18920,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.06113397009568322,
+   "committed": 120,
+   "branch": 0,
+   "wall": 896.0906119346619
+  },
+  {
+   "episode": 116,
+   "real_steps": 19040,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.04974374835259629,
+   "committed": 120,
+   "branch": 0,
+   "wall": 903.9662809371948
+  },
+  {
+   "episode": 117,
+   "real_steps": 19160,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.1422015840148395,
+   "committed": 120,
+   "branch": 0,
+   "wall": 911.0336410999298
+  },
+  {
+   "episode": 118,
+   "real_steps": 19280,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.03914940413468905,
+   "committed": 120,
+   "branch": 0,
+   "wall": 918.1574530601501
+  },
+  {
+   "episode": 119,
+   "real_steps": 19400,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.051459052235538025,
+   "committed": 120,
+   "branch": 0,
+   "wall": 924.5032539367676
+  },
+  {
+   "episode": 120,
+   "real_steps": 19520,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.057196635477181484,
+   "committed": 120,
+   "branch": 0,
+   "wall": 931.5251457691193
+  },
+  {
+   "episode": 121,
+   "real_steps": 19640,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.10937796277325008,
+   "committed": 120,
+   "branch": 0,
+   "wall": 938.4646048545837
+  },
+  {
+   "episode": 122,
+   "real_steps": 19760,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.14074257285422515,
+   "committed": 120,
+   "branch": 0,
+   "wall": 945.1446940898895
+  },
+  {
+   "episode": 123,
+   "real_steps": 19880,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.09939203321173566,
+   "committed": 120,
+   "branch": 0,
+   "wall": 951.8507070541382
+  },
+  {
+   "episode": 124,
+   "real_steps": 20000,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.09862061589892106,
+   "committed": 120,
+   "branch": 0,
+   "wall": 959.1910309791565
+  },
+  {
+   "episode": 125,
+   "real_steps": 20120,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.15242303614962494,
+   "committed": 120,
+   "branch": 0,
+   "wall": 966.4414510726929
+  },
+  {
+   "episode": 126,
+   "real_steps": 20240,
+   "success": true,
+   "safety_violation": false,
+   "robustness": 0.0011269264616231636,
+   "committed": 120,
+   "branch": 0,
+   "wall": 973.4322309494019
+  },
+  {
+   "episode": 127,
+   "real_steps": 20360,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.13961005445822333,
+   "committed": 120,
+   "branch": 0,
+   "wall": 980.4292480945587
+  },
+  {
+   "episode": 128,
+   "real_steps": 20480,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.10895807981723175,
+   "committed": 120,
+   "branch": 0,
+   "wall": 986.5708768367767
+  },
+  {
+   "episode": 129,
+   "real_steps": 20600,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.05727434675004417,
+   "committed": 120,
+   "branch": 0,
+   "wall": 993.4197759628296
+  },
+  {
+   "episode": 130,
+   "real_steps": 20720,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.09127045870179623,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1000.1477570533752
+  },
+  {
+   "episode": 131,
+   "real_steps": 20840,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.08851599179555066,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1007.123458147049
+  },
+  {
+   "episode": 132,
+   "real_steps": 20960,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.16588364813085915,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1013.5451881885529
+  },
+  {
+   "episode": 133,
+   "real_steps": 21080,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.09725085102469067,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1020.5134220123291
+  },
+  {
+   "episode": 134,
+   "real_steps": 21200,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.06291056603698156,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1027.294075012207
+  },
+  {
+   "episode": 135,
+   "real_steps": 21320,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.058748871585404275,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1033.7233521938324
+  },
+  {
+   "episode": 136,
+   "real_steps": 21440,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.069315428969828,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1055.9627749919891
+  },
+  {
+   "episode": 137,
+   "real_steps": 21560,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.06799319881172876,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1062.7683877944946
+  },
+  {
+   "episode": 138,
+   "real_steps": 21680,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.09715228665193136,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1069.7212579250336
+  },
+  {
+   "episode": 139,
+   "real_steps": 21800,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.12917071147020132,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1077.0398290157318
+  },
+  {
+   "episode": 140,
+   "real_steps": 21920,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.014702429714240517,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1084.2064509391785
+  },
+  {
+   "episode": 141,
+   "real_steps": 22040,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.024706857639093555,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1091.3657841682434
+  },
+  {
+   "episode": 142,
+   "real_steps": 22160,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.06846898434631936,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1098.4422769546509
+  },
+  {
+   "episode": 143,
+   "real_steps": 22280,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.050882949740341576,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1106.2466750144958
+  },
+  {
+   "episode": 144,
+   "real_steps": 22400,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.13501956178730612,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1112.9918279647827
+  },
+  {
+   "episode": 145,
+   "real_steps": 22520,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.12641858389830513,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1120.5689821243286
+  },
+  {
+   "episode": 146,
+   "real_steps": 22640,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.06319230731707998,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1127.4587988853455
+  },
+  {
+   "episode": 147,
+   "real_steps": 22760,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.14420822818180085,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1134.6477057933807
+  },
+  {
+   "episode": 148,
+   "real_steps": 22880,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.13964672574278852,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1141.6188380718231
+  },
+  {
+   "episode": 149,
+   "real_steps": 23000,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.14872233277951363,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1148.453222990036
+  },
+  {
+   "episode": 150,
+   "real_steps": 23120,
+   "success": true,
+   "safety_violation": false,
+   "robustness": 0.0013150466924385928,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1155.4203779697418
+  },
+  {
+   "episode": 151,
+   "real_steps": 23240,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.08675287200253995,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1162.6844611167908
+  },
+  {
+   "episode": 152,
+   "real_steps": 23360,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.08813132939810638,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1169.1094431877136
+  },
+  {
+   "episode": 153,
+   "real_steps": 23480,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.06270485987270824,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1176.3162508010864
+  },
+  {
+   "episode": 154,
+   "real_steps": 23600,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.11108772769586157,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1183.0590012073517
+  },
+  {
+   "episode": 155,
+   "real_steps": 23720,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.050163287438479975,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1190.7466950416565
+  },
+  {
+   "episode": 156,
+   "real_steps": 23840,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.0314229944882503,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1197.4281740188599
+  },
+  {
+   "episode": 157,
+   "real_steps": 23960,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.05675874519133926,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1204.085650920868
+  },
+  {
+   "episode": 158,
+   "real_steps": 24080,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.09780090357992531,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1211.5978000164032
+  },
+  {
+   "episode": 159,
+   "real_steps": 24200,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.11169134789805296,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1218.4778349399567
+  },
+  {
+   "episode": 160,
+   "real_steps": 24320,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.15839704032871338,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1225.7125210762024
+  },
+  {
+   "episode": 161,
+   "real_steps": 24440,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.06227581966215018,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1232.147309064865
+  },
+  {
+   "episode": 162,
+   "real_steps": 24560,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.12006370461943955,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1239.9539620876312
+  },
+  {
+   "episode": 163,
+   "real_steps": 24680,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.19017202930336663,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1246.9005179405212
+  },
+  {
+   "episode": 164,
+   "real_steps": 24800,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.10487930271861846,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1253.2887089252472
+  },
+  {
+   "episode": 165,
+   "real_steps": 24920,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.08444854337416456,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1260.546914100647
+  },
+  {
+   "episode": 166,
+   "real_steps": 25040,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.16517022881010512,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1268.18319106102
+  },
+  {
+   "episode": 167,
+   "real_steps": 25160,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.1094987905409494,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1275.9854640960693
+  },
+  {
+   "episode": 168,
+   "real_steps": 25280,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.08729109635284554,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1282.496643781662
+  },
+  {
+   "episode": 169,
+   "real_steps": 25400,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.2387402116702832,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1289.0509629249573
+  },
+  {
+   "episode": 170,
+   "real_steps": 25520,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.12253447608276431,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1311.8081631660461
+  },
+  {
+   "episode": 171,
+   "real_steps": 25640,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.05430671548694689,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1319.136761188507
+  },
+  {
+   "episode": 172,
+   "real_steps": 25760,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.09298341442336949,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1326.1340091228485
+  },
+  {
+   "episode": 173,
+   "real_steps": 25880,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.04616899941736116,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1332.4348480701447
+  },
+  {
+   "episode": 174,
+   "real_steps": 26000,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.007283586381336471,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1339.187628030777
+  },
+  {
+   "episode": 175,
+   "real_steps": 26120,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.08285065643192373,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1346.2128148078918
+  },
+  {
+   "episode": 176,
+   "real_steps": 26240,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.08454378048245921,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1354.0446248054504
+  },
+  {
+   "episode": 177,
+   "real_steps": 26360,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.1413043602263031,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1360.2761538028717
+  },
+  {
+   "episode": 178,
+   "real_steps": 26480,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.09633541606558736,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1367.038465976715
+  },
+  {
+   "episode": 179,
+   "real_steps": 26600,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.015137763382218533,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1374.2471280097961
+  },
+  {
+   "episode": 180,
+   "real_steps": 26720,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.0925647231555435,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1381.045639038086
+  },
+  {
+   "episode": 181,
+   "real_steps": 26840,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.04547904010258076,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1388.1670970916748
+  },
+  {
+   "episode": 182,
+   "real_steps": 26960,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.029465681239317754,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1395.2126679420471
+  },
+  {
+   "episode": 183,
+   "real_steps": 27080,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.04418671259741108,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1402.084841966629
+  },
+  {
+   "episode": 184,
+   "real_steps": 27200,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.1700281850805424,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1409.001788854599
+  },
+  {
+   "episode": 185,
+   "real_steps": 27320,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.03645970977369861,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1416.2024991512299
+  },
+  {
+   "episode": 186,
+   "real_steps": 27440,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.05331540703219398,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1423.2356469631195
+  },
+  {
+   "episode": 187,
+   "real_steps": 27560,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.01821031959169303,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1429.4851038455963
+  },
+  {
+   "episode": 188,
+   "real_steps": 27680,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.0896090000485511,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1436.3705039024353
+  },
+  {
+   "episode": 189,
+   "real_steps": 27800,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.09018312010890432,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1443.7014169692993
+  },
+  {
+   "episode": 190,
+   "real_steps": 27920,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.03409909515682902,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1450.8985719680786
+  },
+  {
+   "episode": 191,
+   "real_steps": 28040,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.03372117324881646,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1457.7315027713776
+  },
+  {
+   "episode": 192,
+   "real_steps": 28160,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.09693523314702196,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1464.3663799762726
+  },
+  {
+   "episode": 193,
+   "real_steps": 28280,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.06320460156272796,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1472.1215000152588
+  },
+  {
+   "episode": 194,
+   "real_steps": 28400,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.14151494270549464,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1480.059564113617
+  },
+  {
+   "episode": 195,
+   "real_steps": 28520,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.008071987905105979,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1487.069020986557
+  },
+  {
+   "episode": 196,
+   "real_steps": 28640,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.03956897830906976,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1493.3341960906982
+  },
+  {
+   "episode": 197,
+   "real_steps": 28760,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.036544651166766626,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1500.19775390625
+  },
+  {
+   "episode": 198,
+   "real_steps": 28880,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.12188953675167015,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1507.5810408592224
+  },
+  {
+   "episode": 199,
+   "real_steps": 29000,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.05354118434355165,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1514.9650161266327
+  },
+  {
+   "episode": 200,
+   "real_steps": 29120,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.021678515686034433,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1522.0684521198273
+  },
+  {
+   "episode": 201,
+   "real_steps": 29240,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.13975157243763464,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1529.3530440330505
+  },
+  {
+   "episode": 202,
+   "real_steps": 29360,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.08376191763281764,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1537.3829691410065
+  },
+  {
+   "episode": 203,
+   "real_steps": 29480,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.09208337136199417,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1544.9481410980225
+  },
+  {
+   "episode": 204,
+   "real_steps": 29600,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.1230884370721184,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1571.0878129005432
+  },
+  {
+   "episode": 205,
+   "real_steps": 29720,
+   "success": true,
+   "safety_violation": false,
+   "robustness": 0.011726851326544434,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1580.1253249645233
+  },
+  {
+   "episode": 206,
+   "real_steps": 29840,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.12748257587930528,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1588.0982820987701
+  },
+  {
+   "episode": 207,
+   "real_steps": 29960,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.0469316816978228,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1595.9052510261536
+  },
+  {
+   "episode": 208,
+   "real_steps": 30080,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.042084493836260714,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1603.3954150676727
+  },
+  {
+   "episode": 209,
+   "real_steps": 30200,
+   "success": true,
+   "safety_violation": false,
+   "robustness": 0.0118128430902553,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1611.125610113144
+  },
+  {
+   "episode": 210,
+   "real_steps": 30320,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.05975695132820533,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1619.5175340175629
+  },
+  {
+   "episode": 211,
+   "real_steps": 30440,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.06335035595887367,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1627.2166159152985
+  },
+  {
+   "episode": 212,
+   "real_steps": 30560,
+   "success": true,
+   "safety_violation": false,
+   "robustness": 0.016411136074638982,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1635.7381598949432
+  },
+  {
+   "episode": 213,
+   "real_steps": 30680,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.03823214601825917,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1643.910826921463
+  },
+  {
+   "episode": 214,
+   "real_steps": 30800,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.10017924749836211,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1651.8342971801758
+  },
+  {
+   "episode": 215,
+   "real_steps": 30920,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.06051271521984214,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1659.4664280414581
+  },
+  {
+   "episode": 216,
+   "real_steps": 31040,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.00896601582074516,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1668.6990249156952
+  },
+  {
+   "episode": 217,
+   "real_steps": 31160,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.040770542255995246,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1676.0878069400787
+  },
+  {
+   "episode": 218,
+   "real_steps": 31280,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.06687433224775016,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1684.1887609958649
+  },
+  {
+   "episode": 219,
+   "real_steps": 31400,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.11705184494184921,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1691.5367710590363
+  },
+  {
+   "episode": 220,
+   "real_steps": 31520,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.028020104825779615,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1699.5171120166779
+  },
+  {
+   "episode": 221,
+   "real_steps": 31640,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.09031650719038126,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1706.549477815628
+  },
+  {
+   "episode": 222,
+   "real_steps": 31760,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.021030793029067046,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1714.5313758850098
+  },
+  {
+   "episode": 223,
+   "real_steps": 31880,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.06972431410680702,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1723.2971410751343
+  },
+  {
+   "episode": 224,
+   "real_steps": 32000,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.00487949726712486,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1730.5479838848114
+  },
+  {
+   "episode": 225,
+   "real_steps": 32120,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.05420773127530204,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1737.9289338588715
+  },
+  {
+   "episode": 226,
+   "real_steps": 32240,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.10631436226896569,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1745.7452600002289
+  },
+  {
+   "episode": 227,
+   "real_steps": 32360,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.14024118664803947,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1753.9687039852142
+  },
+  {
+   "episode": 228,
+   "real_steps": 32480,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.13470346358360985,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1761.7959308624268
+  },
+  {
+   "episode": 229,
+   "real_steps": 32600,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.05348961127131047,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1768.86443400383
+  },
+  {
+   "episode": 230,
+   "real_steps": 32720,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.06331514248400069,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1776.3163478374481
+  },
+  {
+   "episode": 231,
+   "real_steps": 32840,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.12600145843858046,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1784.908301115036
+  },
+  {
+   "episode": 232,
+   "real_steps": 32960,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.06235097403716168,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1793.9509880542755
+  },
+  {
+   "episode": 233,
+   "real_steps": 33080,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.16073016522276506,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1803.3167119026184
+  },
+  {
+   "episode": 234,
+   "real_steps": 33200,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.08947022787631022,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1811.309944152832
+  },
+  {
+   "episode": 235,
+   "real_steps": 33320,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.009429773056249924,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1819.1454908847809
+  },
+  {
+   "episode": 236,
+   "real_steps": 33440,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.05742198464745618,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1826.5112130641937
+  },
+  {
+   "episode": 237,
+   "real_steps": 33560,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.04617012552730937,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1834.280130147934
+  },
+  {
+   "episode": 238,
+   "real_steps": 33680,
+   "success": true,
+   "safety_violation": false,
+   "robustness": 0.002368301502946979,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1857.595731973648
+  },
+  {
+   "episode": 239,
+   "real_steps": 33800,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.05466538996849721,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1866.3104829788208
+  },
+  {
+   "episode": 240,
+   "real_steps": 33920,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.07918955837575005,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1874.5592830181122
+  },
+  {
+   "episode": 241,
+   "real_steps": 34040,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.09130444957125838,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1882.431349992752
+  },
+  {
+   "episode": 242,
+   "real_steps": 34160,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.029147741831227342,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1890.9553039073944
+  },
+  {
+   "episode": 243,
+   "real_steps": 34280,
+   "success": false,
+   "safety_violation": false,
+   "robustness": -0.02688630673303133,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1900.3425500392914
+  },
+  {
+   "episode": 244,
+   "real_steps": 34400,
+   "success": false,
+   "safety_violation": true,
+   "robustness": -0.0775239829859769,
+   "committed": 120,
+   "branch": 0,
+   "wall": 1909.289983034134
+  }
+ ],
+ "wm_err": [
+  {
+   "real_steps": 9080,
+   "n_data": 9080,
+   "err_new_data_before": 0.09877244464586105,
+   "err_new_data_after": 0.05676058807628806
+  },
+  {
+   "real_steps": 13160,
+   "n_data": 13160,
+   "err_new_data_before": 0.19837481657508346,
+   "err_new_data_after": 0.058573491151622366
+  },
+  {
+   "real_steps": 17240,
+   "n_data": 17240,
+   "err_new_data_before": 0.09935894945847441,
+   "err_new_data_after": 0.059268531741853786
+  },
+  {
+   "real_steps": 21320,
+   "n_data": 21320,
+   "err_new_data_before": 0.07531082251704334,
+   "err_new_data_after": 0.049325295896787386
+  },
+  {
+   "real_steps": 25400,
+   "n_data": 25400,
+   "err_new_data_before": 0.08021897426614986,
+   "err_new_data_after": 0.0520829383400843
+  },
+  {
+   "real_steps": 29480,
+   "n_data": 29480,
+   "err_new_data_before": 0.06325615336295043,
+   "err_new_data_after": 0.045164267984842396
+  },
+  {
+   "real_steps": 33560,
+   "n_data": 33560,
+   "err_new_data_before": 0.07401930966716146,
+   "err_new_data_after": 0.0471633526128802
+  }
+ ],
+ "stats": {
+  "decisions": 2940,
+  "overturned": 0,
+  "no_pass": 0,
+  "top1_failed": 0
+ }
+}

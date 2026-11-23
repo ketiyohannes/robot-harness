@@ -113,6 +113,30 @@ def _verdict(b):
     return "PASS" if b["passed"] else "FAIL " + "/".join(b["violated"])[:22]
 
 
+def _callout(d, sc, p, text, offset):
+    """Label with a leader line, placed at a pixel offset from the projected point."""
+    q = sc.px(p)
+    e = (q[0] + offset[0], q[1] + offset[1])
+    d.line([tuple(q), e], fill=(255, 255, 255, 220), width=2)
+    d.ellipse([q[0] - 4, q[1] - 4, q[0] + 4, q[1] + 4], fill=(255, 255, 255, 255))
+    w = d.textlength(text, font=F_SMALL)
+    x = e[0] - w - 6 if offset[0] < 0 else e[0] + 6
+    d.text((x, e[1] - 10), text, font=F_SMALL, fill=(255, 255, 255, 255), stroke_width=3, stroke_fill=(0, 0, 0, 220))
+
+
+def legend(img: Image.Image, y0=H - 178):
+    """Compact colour legend for the HUD panel (the planar demo's legend collides with the
+    longer arm HUD)."""
+    d = ImageDraw.Draw(img)
+    x0 = SCENE + 28
+    items = [((200, 200, 200), "imagined samples (world model)"), (CYAN, "candidates #1..#4 (#1 = model's pick)"),
+             (GREEN, "real branch: PASSED"), (RED, "real branch: FAILED"), (WHITE, "committed plan")]
+    for i, (col, txt) in enumerate(items):
+        y = y0 + 18 * i
+        d.line([(x0, y + 8), (x0 + 24, y + 8)], fill=col, width=4)
+        d.text((x0 + 32, y), txt, font=F_SMALL, fill=DIM)
+
+
 def _label_3d(d, sc, p, text, col, dx=12, dy=-10):
     q = sc.px(p)
     d.text((q[0] + dx, q[1] + dy), text, font=F_SMALL, fill=(*col, 255), stroke_width=2, stroke_fill=(0, 0, 0, 200))
@@ -121,15 +145,15 @@ def _label_3d(d, sc, p, text, col, dx=12, dy=-10):
 # ---------------------------------------------------------------------------- segments
 def scene_intro(v: Video, sc: ArmScene, spec: Spec, rec, seconds=7.0):
     tr = rec["trace"]
-    sc.frame_episode(tr, zoom=1.25)
+    sc.frame_episode(tr, zoom=1.0)
     s0, tgt = tr["history"][0], tr["target"]
     scene = sc.render(tr["physics0"], tgt)
     ov = Image.new("RGBA", scene.size, (0, 0, 0, 0))
     d = ImageDraw.Draw(ov)
-    _label_3d(d, sc, s0[0:3] + [0, 0, 0.12], "Franka Panda arm", WHITE)
-    _label_3d(d, sc, s0[6:9] + [0, 0, 0.03], "puck", WHITE)
-    _label_3d(d, sc, np.array([*tgt[:2], 0.0]), "target zone", WHITE, dy=12)
-    _label_3d(d, sc, np.array([*tgt[2:4], 0.07]), "cup (don't touch)", WHITE)
+    _callout(d, sc, s0[0:3] + [0, 0, 0.10], "Franka Panda arm", (60, -70))
+    _callout(d, sc, s0[6:9] + [0, 0, 0.02], "puck", (90, -60))
+    _callout(d, sc, np.array([*tgt[:2], 0.0]), "target zone", (-150, 70))
+    _callout(d, sc, np.array([*tgt[2:4], 0.06]), "cup: don't move or tip it", (70, 80))
     img = compose(scene, ov)
     lines = ["Task: arm-push-safely (MuJoCo, 6 s, dt = 0.05 s)",
              "Action: 3-D fingertip velocity (gripper closed)", "",
@@ -192,7 +216,8 @@ def decision_walkthrough(v: Video, sc: ArmScene, spec: Spec, rec, k_idx, label, 
         img = compose(base_scene, ov)
         ex = [(f"#{r + 1} imagined score {dec['imagined_score'][r]:+.3f}  unc {dec['imagined_unc'][r]:.3f}", CAND_COLORS[r])
               for r in range(K)] if f >= n1 else None
-        hud(img, "IMAGINE", BLUE, info("CEM in the learned ensemble → top-k plans"), status, caption, ex, show_legend=True)
+        hud(img, "IMAGINE", BLUE, info("CEM in the learned ensemble → top-k plans"), status, caption, ex)
+        legend(img)
         v.add(img)
     v.add(img, int(0.6 * FPS))
 
@@ -212,7 +237,8 @@ def decision_walkthrough(v: Video, sc: ArmScene, spec: Spec, rec, k_idx, label, 
             hud(img, f"VERIFY branch {bi + 1}/{len(branches)}", AMBER,
                 info(f"restore snapshot → run candidate #{br['idx'] + 1} for real"), status, caption,
                 [(f"#{pb['idx'] + 1}: {_verdict(pb)}  score {pb['real_J']:+.3f}", GREEN if pb["passed"] else RED)
-                 for pb in done], show_legend=True)
+                 for pb in done])
+            legend(img)
             v.add(img)
         done.append(br)
         col = GREEN if br["passed"] else RED
@@ -229,7 +255,8 @@ def decision_walkthrough(v: Video, sc: ArmScene, spec: Spec, rec, k_idx, label, 
         hud(img, f"VERIFY branch {bi + 1}/{len(branches)}", AMBER,
             info(f"safety ρ = {br['safety_rob']:+.3f}   reach ρ = {br['reach_rob']:+.3f}"), status, caption,
             [(f"#{pb['idx'] + 1}: {_verdict(pb)}  score {pb['real_J']:+.3f}", GREEN if pb["passed"] else RED)
-             for pb in done], show_legend=True)
+             for pb in done])
+        legend(img)
         v.add(img, int(0.7 * FPS))
 
     # ACT
@@ -247,7 +274,8 @@ def decision_walkthrough(v: Video, sc: ArmScene, spec: Spec, rec, k_idx, label, 
             draw_path(d, sc.px(puck(seg[:fi + 1])), WHITE, width=5, alpha=255)
             img = compose(scene, ov)
             hist_now = np.concatenate([history, seg[1:fi + 1]]) if fi > 0 else history
-            hud(img, "ACT", GREEN, info(msg), clause_status(spec, hist_now, tgt), caption, show_legend=True)
+            hud(img, "ACT", GREEN, info(msg), clause_status(spec, hist_now, tgt), caption)
+            legend(img)
             v.add(img)
     v.add(img, int(0.7 * FPS))
 
@@ -356,11 +384,17 @@ def pick_decisions(tr, n=2):
 
 
 def main():
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--traces", default=str(TRACES))
+    ap.add_argument("--out", default=str(ROOT / "results" / "arm_demo.mp4"))
+    args = ap.parse_args()
+    traces = Path(args.traces)
     spec = Spec.load("arm_push_safely")
-    idx = json.loads((TRACES / "index.json").read_text())
-    load = lambda n: pickle.load(open(TRACES / n, "rb"))  # noqa: E731
+    idx = json.loads((traces / "index.json").read_text())
+    load = lambda n: pickle.load(open(traces / n, "rb"))  # noqa: E731
     c_succ = load("c_success.pkl")
-    c_ov = load("c_overturn.pkl") if (TRACES / "c_overturn.pkl").exists() else None
+    c_ov = load("c_overturn.pkl") if (traces / "c_overturn.pkl").exists() else None
     summary_path = ROOT / "results" / "arm_summary.json"
     summary = json.loads(summary_path.read_text()) if summary_path.exists() else None
     sc = ArmScene()
@@ -385,7 +419,7 @@ def main():
         sc.frame_episode(c_ov["trace"])
         decision_walkthrough(v, sc, spec, c_ov, idx["c_overturn_decision"], f"C (k=4), eval seed {c_ov['seed']}",
                              caption="Overturn: candidate #1 (the model's pick) violates the spec when actually executed.")
-    if (TRACES / "contrast_c.pkl").exists():
+    if (traces / "contrast_c.pkl").exists():
         rb, rc = load("contrast_b.pkl"), load("contrast_c.pkl")
         title_card(v, "Same scene: without vs with verification",
                    f"eval seed {rc['seed']}  (B and C each use their own trained world model; slow motion)", seconds=2.5)
@@ -394,14 +428,14 @@ def main():
                "Arm: learning curves vs total real steps (incl. branches) and committed safety violations")
     end_card(v, summary)
 
-    out = ROOT / "results" / "arm_demo.mp4"
+    out = Path(args.out)
     with imageio.get_writer(out, fps=FPS, codec="libx264", quality=8, macro_block_size=16, pixelformat="yuv420p") as w:
         for fr in v.frames:
             w.append_data(fr)
     print(f"wrote {out}: {len(v.frames)} frames, {len(v.frames) / FPS:.1f}s")
     start = int(10 * FPS)
     gif = [np.asarray(Image.fromarray(f).resize((480, 270))) for f in v.frames[start:start + 20 * FPS:3]]
-    imageio.mimsave(ROOT / "results" / "arm_demo.gif", gif, duration=0.1, loop=0)
+    imageio.mimsave(out.with_suffix(".gif"), gif, duration=0.1, loop=0)
     print(f"wrote arm_demo.gif: {len(gif)} frames")
 
 

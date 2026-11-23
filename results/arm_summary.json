@@ -1,0 +1,29 @@
+{
+ "table": [
+  {
+   "method": "C: WM+CEM+verify (k=4)",
+   "key": "arm_C_verify_k4",
+   "seeds": 1,
+   "budget": "101k",
+   "success": "70% \u00b1 0",
+   "safety": "3% \u00b1 0",
+   "steps_per_ep": "1040",
+   "overturned": "57% \u00b1 0",
+   "top1_failed": "17% \u00b1 0"
+  }
+ ],
+ "train": [
+  {
+   "method": "C: WM+CEM+verify (k=4)",
+   "episodes": "92",
+   "viol": "2.00 \u00b1 0.00",
+   "viol_frac": "2%",
+   "cross": "32.0k",
+   "wall": "20.73 \u00b1 0.00"
+  }
+ ],
+ "notes": [
+  "Real steps include every verification branch step.",
+  "Same 30 held-out scenes for every method; world model frozen during evaluation."
+ ]
+}

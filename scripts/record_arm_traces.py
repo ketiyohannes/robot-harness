@@ -67,8 +67,11 @@ def main():
     ap.add_argument("--c_run", default=str(ROOT / "results/runs/arm_C_verify_k4/seed_0"))
     ap.add_argument("--b_run", default=str(ROOT / "results/runs/arm_B_plan_k1/seed_0"))
     ap.add_argument("--n_seeds", type=int, default=30)
+    ap.add_argument("--out", default=None)
     args = ap.parse_args()
     torch.manual_seed(0)
+    global OUT
+    OUT = Path(args.out) if args.out else OUT
     OUT.mkdir(parents=True, exist_ok=True)
     c_agent, spec = load_agent(Path(args.c_run), seed=123)
     b_agent, _ = load_agent(Path(args.b_run), seed=123)
