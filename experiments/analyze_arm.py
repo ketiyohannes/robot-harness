@@ -28,6 +28,7 @@ METHODS = {
     "arm_A_ppo": "A: PPO",
     "arm_A2_sac": "A2: SAC",
     "arm_B_plan_k1": "B: WM+CEM, no verify (k=1)",
+    "arm_B_plan_k1_lam0": "B with lambda=0",
     "arm_C_verify_k4": "C: WM+CEM+verify (k=4)",
     "arm_D_verify_k4_lam0": "D: C with lambda=0",
     "arm_E_verify_k2": "E: verify k=2",
@@ -35,7 +36,7 @@ METHODS = {
     "arm_B_plan_k1_long": "B: no verify, 2x budget",
     "arm_C_verify_k4_long": "C: verify k=4, 2x budget",
 }
-COLORS = {"arm_B_plan_k1": "#d9822b", "arm_C_verify_k4": "#2b7bd9", "arm_E_verify_k2": "#7b4bd9", "arm_D_verify_k4_lam0": "#2bb0b0",
+COLORS = {"arm_B_plan_k1": "#d9822b", "arm_B_plan_k1_lam0": "#c0504d", "arm_C_verify_k4": "#2b7bd9", "arm_E_verify_k2": "#7b4bd9", "arm_D_verify_k4_lam0": "#2bb0b0",
           "arm_G_verify_k4_stop": "#2b9d5b",
           "arm_B_plan_k1_long": "#f0b070", "arm_C_verify_k4_long": "#80b0f0", "arm_A2_sac": "#888888",
           "arm_A_ppo": "#444444"}
@@ -166,18 +167,35 @@ def main():
     print("\n".join(md))
 
     # ------------------------------------------------------------------ plots
+    # Mean ± std over seeds on a common real-step grid (rolling success interpolated per seed).
+    plot_keys = ["arm_B_plan_k1", "arm_C_verify_k4", "arm_E_verify_k2", "arm_G_verify_k4_stop",
+                 "arm_B_plan_k1_long", "arm_C_verify_k4_long"]
     fig, ax = plt.subplots(1, 2, figsize=(13, 4.8))
-    for key, runs in curves.items():
+    for key in plot_keys:
+        runs = [r for r in curves.get(key, []) if r[0] == "train"]
+        if not runs:
+            continue
         col = COLORS.get(key, "k")
-        for i, (kind, steps, succ, viol) in enumerate(runs):
-            lab = METHODS[key] if i == 0 else None
-            ax[0].plot(np.asarray(steps) / 1000, succ, color=col, alpha=0.8, lw=1.4, label=lab,
-                       ls="-" if kind == "train" else "--", marker=None if kind == "train" else "o", ms=3)
-            if viol is not None:
-                ax[1].plot(np.asarray(steps) / 1000, viol, color=col, alpha=0.8, lw=1.4, label=lab)
+        top = min(max(r[1]) for r in runs)
+        grid = np.linspace(min(r[1][0] for r in runs), top, 200)
+        succ = np.array([np.interp(grid, r[1], r[2]) for r in runs])
+        viol = np.array([np.interp(grid, r[1], r[3]) for r in runs])
+        lab = f"{METHODS[key]} ({len(runs)} seeds)"
+        ls = "--" if key.endswith("_long") else "-"
+        for a, y in ((ax[0], succ), (ax[1], viol)):
+            a.plot(grid / 1000, y.mean(0), color=col, lw=2, ls=ls, label=lab)
+            a.fill_between(grid / 1000, y.mean(0) - y.std(0), y.mean(0) + y.std(0), color=col, alpha=0.15)
+    for key in ("arm_A2_sac", "arm_A_ppo"):
+        runs = curves.get(key, [])
+        if runs:
+            steps = np.asarray(runs[0][1]) / 1000
+            mean = np.mean([r[2] for r in runs], 0)
+            keep = steps <= 205
+            ax[0].plot(steps[keep], mean[keep], color=COLORS[key], ls=":", marker="o", ms=3,
+                       label=f"{METHODS[key]} (eval; {len(runs)} seeds{', 1M total' if key == 'arm_A_ppo' else ''})")
     ax[0].set_xlabel("total real env steps (k), incl. verification branches")
-    ax[0].set_ylabel("success (rolling 10 train episodes; SAC/PPO: eval)")
-    ax[0].set_title("Learning: success vs real steps")
+    ax[0].set_ylabel("success (rolling 10 training episodes)")
+    ax[0].set_title("Learning: success vs real steps (mean ± std over seeds)")
     ax[1].set_xlabel("total real env steps (k)")
     ax[1].set_ylabel("cumulative training episodes with a safety violation")
     ax[1].set_title("Safety during training (executed steps only)")
@@ -204,8 +222,9 @@ def main():
     fig.savefig(PLOTS / "arm_eval_bars.png", dpi=130)
 
     summary = dict(table=[{k: v for k, v in r.items() if not k.endswith("_raw")} for r in table], train=train_rows,
-                   notes=["Real steps include every verification branch step.",
-                          "Same 30 held-out scenes for every method; world model frozen during evaluation."])
+                   notes=["Real steps include every verification branch step (k = 4: 120 committed + 920 branch per episode).",
+                          "Same 30 held-out scenes for every method; world model frozen during evaluation.",
+                          "Safety violations without verification are mostly puck_slow (pushing the puck too hard)."])
     (ROOT / "results" / "arm_summary.json").write_text(json.dumps(summary, indent=1))
 
 

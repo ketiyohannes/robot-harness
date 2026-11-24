@@ -1,6 +1,24 @@
 {
  "table": [
   {
+   "method": "A: PPO",
+   "key": "arm_A_ppo",
+   "seeds": 3,
+   "budget": "1001k",
+   "success": "0% \u00b1 0",
+   "safety": "0% \u00b1 0",
+   "steps_per_ep": "120"
+  },
+  {
+   "method": "A2: SAC",
+   "key": "arm_A2_sac",
+   "seeds": 3,
+   "budget": "100k",
+   "success": "0% \u00b1 0",
+   "safety": "7% \u00b1 3",
+   "steps_per_ep": "120"
+  },
+  {
    "method": "B: WM+CEM, no verify (k=1)",
    "key": "arm_B_plan_k1",
    "seeds": 5,
@@ -10,15 +28,113 @@
    "steps_per_ep": "120"
   },
   {
+   "method": "B with lambda=0",
+   "key": "arm_B_plan_k1_lam0",
+   "seeds": 3,
+   "budget": "100k",
+   "success": "32% \u00b1 3",
+   "safety": "48% \u00b1 4",
+   "steps_per_ep": "120"
+  },
+  {
    "method": "C: WM+CEM+verify (k=4)",
    "key": "arm_C_verify_k4",
-   "seeds": 1,
+   "seeds": 5,
    "budget": "101k",
-   "success": "70% \u00b1 0",
-   "safety": "3% \u00b1 0",
+   "success": "70% \u00b1 2",
+   "safety": "1% \u00b1 2",
+   "steps_per_ep": "1040",
+   "overturned": "59% \u00b1 4",
+   "top1_failed": "15% \u00b1 3"
+  },
+  {
+   "method": "C: WM+CEM+verify (k=4): its model acting WITHOUT verify",
+   "key": "arm_C_verify_k4_noverify",
+   "seeds": 5,
+   "budget": "101k",
+   "success": "28% \u00b1 7",
+   "safety": "49% \u00b1 5",
+   "steps_per_ep": "120"
+  },
+  {
+   "method": "D: C with lambda=0",
+   "key": "arm_D_verify_k4_lam0",
+   "seeds": 3,
+   "budget": "101k",
+   "success": "72% \u00b1 6",
+   "safety": "1% \u00b1 2",
    "steps_per_ep": "1040",
    "overturned": "57% \u00b1 0",
-   "top1_failed": "17% \u00b1 0"
+   "top1_failed": "13% \u00b1 2"
+  },
+  {
+   "method": "D: C with lambda=0: its model acting WITHOUT verify",
+   "key": "arm_D_verify_k4_lam0_noverify",
+   "seeds": 3,
+   "budget": "101k",
+   "success": "23% \u00b1 5",
+   "safety": "49% \u00b1 6",
+   "steps_per_ep": "120"
+  },
+  {
+   "method": "E: verify k=2",
+   "key": "arm_E_verify_k2",
+   "seeds": 3,
+   "budget": "100k",
+   "success": "68% \u00b1 12",
+   "safety": "6% \u00b1 3",
+   "steps_per_ep": "580",
+   "overturned": "41% \u00b1 1",
+   "top1_failed": "13% \u00b1 3"
+  },
+  {
+   "method": "E: verify k=2: its model acting WITHOUT verify",
+   "key": "arm_E_verify_k2_noverify",
+   "seeds": 3,
+   "budget": "100k",
+   "success": "34% \u00b1 8",
+   "safety": "48% \u00b1 4",
+   "steps_per_ep": "120"
+  },
+  {
+   "method": "G: C + stop if no branch passes",
+   "key": "arm_G_verify_k4_stop",
+   "seeds": 3,
+   "budget": "101k",
+   "success": "83% \u00b1 5",
+   "safety": "0% \u00b1 0",
+   "steps_per_ep": "1040",
+   "overturned": "59% \u00b1 1",
+   "top1_failed": "10% \u00b1 1"
+  },
+  {
+   "method": "G: C + stop if no branch passes: its model acting WITHOUT verify",
+   "key": "arm_G_verify_k4_stop_noverify",
+   "seeds": 3,
+   "budget": "101k",
+   "success": "27% \u00b1 3",
+   "safety": "53% \u00b1 3",
+   "steps_per_ep": "120"
+  },
+  {
+   "method": "B: no verify, 2x budget",
+   "key": "arm_B_plan_k1_long",
+   "seeds": 2,
+   "budget": "200k",
+   "success": "43% \u00b1 3",
+   "safety": "43% \u00b1 7",
+   "steps_per_ep": "120"
+  },
+  {
+   "method": "C: verify k=4, 2x budget",
+   "key": "arm_C_verify_k4_long",
+   "seeds": 2,
+   "budget": "201k",
+   "success": "83% \u00b1 3",
+   "safety": "2% \u00b1 2",
+   "steps_per_ep": "1040",
+   "overturned": "57% \u00b1 0",
+   "top1_failed": "12% \u00b1 0"
   }
  ],
  "train": [
@@ -31,16 +147,65 @@
    "wall": "103.32 \u00b1 1.16"
   },
   {
+   "method": "B with lambda=0",
+   "episodes": "792",
+   "viol": "430.00 \u00b1 17.96",
+   "viol_frac": "54%",
+   "cross": "37.8k, 53.0k, 56.0k",
+   "wall": "101.91 \u00b1 1.05"
+  },
+  {
    "method": "C: WM+CEM+verify (k=4)",
    "episodes": "92",
-   "viol": "2.00 \u00b1 0.00",
+   "viol": "1.60 \u00b1 0.80",
    "viol_frac": "2%",
-   "cross": "32.0k",
-   "wall": "20.73 \u00b1 0.00"
+   "cross": "32.0k, 66.4k, 39.3k, 39.3k, 59.1k",
+   "wall": "18.94 \u00b1 0.91"
+  },
+  {
+   "method": "D: C with lambda=0",
+   "episodes": "92",
+   "viol": "1.67 \u00b1 0.94",
+   "viol_frac": "2%",
+   "cross": "47.6k, 43.5k, 33.1k",
+   "wall": "20.02 \u00b1 0.26"
+  },
+  {
+   "method": "E: verify k=2",
+   "episodes": "164",
+   "viol": "18.00 \u00b1 7.48",
+   "viol_frac": "11%",
+   "cross": "36.3k, 42.7k, 46.8k",
+   "wall": "25.97 \u00b1 0.31"
+  },
+  {
+   "method": "G: C + stop if no branch passes",
+   "episodes": "92",
+   "viol": "0.33 \u00b1 0.47",
+   "viol_frac": "0%",
+   "cross": "32.0k, 46.6k, 54.9k",
+   "wall": "17.03 \u00b1 0.19"
+  },
+  {
+   "method": "B: no verify, 2x budget",
+   "episodes": "1625",
+   "viol": "779.00 \u00b1 17.00",
+   "viol_frac": "48%",
+   "cross": "36.8k, 46.4k",
+   "wall": "188.47 \u00b1 0.60"
+  },
+  {
+   "method": "C: verify k=4, 2x budget",
+   "episodes": "188",
+   "viol": "3.50 \u00b1 0.50",
+   "viol_frac": "2%",
+   "cross": "32.0k, 66.4k",
+   "wall": "37.78 \u00b1 0.21"
   }
  ],
  "notes": [
-  "Real steps include every verification branch step.",
-  "Same 30 held-out scenes for every method; world model frozen during evaluation."
+  "Real steps include every verification branch step (k = 4: 120 committed + 920 branch per episode).",
+  "Same 30 held-out scenes for every method; world model frozen during evaluation.",
+  "Safety violations without verification are mostly puck_slow (pushing the puck too hard)."
  ]
 }

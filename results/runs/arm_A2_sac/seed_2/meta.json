@@ -1,0 +1,26 @@
+{
+ "config": {
+  "name": "arm_A2_sac",
+  "method": "sac",
+  "task": "arm_push_safely",
+  "seeds": [
+   0,
+   1,
+   2
+  ],
+  "total_steps": 100000,
+  "eval_every": 10000,
+  "learning_starts": 2000,
+  "safety_penalty": 1.0,
+  "net_arch": [
+   256,
+   256
+  ],
+  "torch_threads": 1,
+  "prefill_steps": 5000,
+  "prefill_policy": "arm_waypoint"
+ },
+ "seed": 2,
+ "git": "c5a228d",
+ "started": "2026-11-24 04:15:05"
+}

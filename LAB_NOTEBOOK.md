@@ -299,3 +299,30 @@ not reported). Everything is relaunched on the fixed env (`results/arm_wave_fina
 jobs, 10 parallel), plus **B with λ = 0** (3 seeds). In v1, B never descended: it hovered
 about 20 cm above the table for 100k steps. B with λ = 0 tests whether the uncertainty penalty
 is what kept it away from the objects.
+
+## Final arm results (01:24 – 04:50)
+
+- 01:24: final wave launched (32 jobs). 03:12: B at 100k finished:
+  33/30/40/33/30% success, 60/53/43/47/50% safety violations, mostly puck_slow.
+- 04:34: all jobs done, no errors. Extra evals (each verified run's model acting with k = 1)
+  ran in parallel.
+- Final (5 seeds):
+  - B 33 ± 4% success / 51 ± 6% violations;
+  - C 70 ± 2% / 1 ± 2%;
+  - C's model without verify 28 ± 7% / 49 ± 5%.
+- Variants:
+  - G (stop fallback) 83 ± 5% / 0%;
+  - D (λ = 0) 72 ± 6% / 1%;
+  - E (k = 2) 68 ± 12% / 6%;
+  - B (λ = 0) 32 ± 3% / 48%;
+  - 200k budget: B 43% / 43%, C 83% / 2%.
+- Model-free: SAC 0% (7% violations), PPO 1M 0%.
+- Training violations per seed: B 400 ± 31 of 792 episodes; C 1.6 ± 0.8 of 92.
+- Real steps to 50% rolling training success: B 35.6–62.0k, C 32.0–66.4k. Same speed.
+- Demo traces: C seed 0 and B seed 0 re-run on all 30 eval scenes (C 25/30, B 16/30; planner
+  RNG differs from the official eval). Picked scenes:
+  - success: 10000;
+  - overturn: 10007, decision 2 (model's #1 tips the cup);
+  - contrast: 10003 (B breaks puck_slow, C succeeds).
+- Video: 80.8 s, 1280×720, 30 fps. Nine frames checked (`results/arm_video_frames_check/`).
+  Learning plots were redrawn as mean ± std over seeds, because per-seed lines were unreadable.

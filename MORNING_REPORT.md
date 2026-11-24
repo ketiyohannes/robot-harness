@@ -1,4 +1,84 @@
-# Morning report — Imagine → Verify → Act MVP
+# Morning report — night 2: robot arm (Franka Panda)
+
+## Summary
+
+The Imagine → Verify → Act loop now runs on a 7-joint **Franka Panda arm** in MuJoCo, end to
+end. The task: push a puck into a target zone within 6 s without hitting it too hard, tipping or
+moving the cup next to it, or leaving the workspace. All of these are STL clauses, checked
+exactly.
+
+At an equal budget of **100k real sim steps** (5 seeds each, branch steps counted):
+
+| | success | test runs breaking a safety rule | real steps per test run |
+|---|---|---|---|
+| B: plan in the learned model, act without checking | 33% ± 4 | **51% ± 6** | 120 |
+| **C: check the top 4 plans for real, then act** | **70% ± 2** | **1% ± 2** | 1040 |
+| C's own model, acting without checking | 28% ± 7 | 49% ± 5 | 120 |
+| G: C, but hold still when no plan passes (3 seeds) | 83% ± 5 | 0% | 1040 |
+| SAC (100k) / PPO (1M) | 0% / 0% | 7% / 0% | 120 |
+
+- **Safety.** Checking cuts rule-breaking from 51% to 1% in testing, and from 400 to 1.6 bad
+  training episodes per seed. B's violations are mostly hitting the puck too hard: its model
+  under-predicts how fast the puck flies off.
+- **Success.** Unlike the flat task, checking also **doubles success** on the arm (70% vs 33%;
+  83% vs 43% at 200k).
+- **Cost.** It is the same as before: **8.7× more real steps per episode**, and no faster
+  learning in real steps (both reach 50% training success after about 32–66k steps).
+
+Video: [`results/arm_demo.mp4`](results/arm_demo.mp4), 81 s, 1280×720, 30 fps. GIF:
+`results/arm_demo.gif`. Full analysis: [`RESULTS_ARM.md`](RESULTS_ARM.md).
+
+## What went wrong overnight (and was fixed)
+
+1. **A tall cup was unavoidable.** The Panda hand is 20 cm wide and swept an 11 cm cup in most
+   scripted pushes. I made the cup 6 cm tall.
+2. **Snapshot/restore was not exact at first.** The controller read stale kinematics after
+   `mj_step`. Fixed, and tested bit-exact.
+3. **The first pilot learned nothing (0%).** Random 3-D exploration touched the puck in only 0.2%
+   of steps, so the model never learned that pushing moves it. Added a waypoint explorer
+   (16% contact), shared by every method including SAC.
+4. **The first full run (32 jobs) was invalid.** The reset IK diverged on about 10% of scenes and
+   the arm flailed at t = 0. I found it because every method failed the same 3 eval scenes.
+   Fixed, checked on 430 scenes, archived the bad results (`results/archive/arm_v1_ik_bug/`,
+   not reported) and reran everything.
+
+## Decisions I made without you
+
+- Robot: **Franka Panda from MuJoCo Menagerie** (Apache-2.0). It is fetched by
+  `scripts/fetch_assets.sh` into `third_party/`, which is gitignored.
+- Control: **3-D fingertip velocity with a differential-IK controller**, gripper closed and
+  used as the pusher. I did not try grasping; pick-and-place is a possible next step.
+- The cup is short (6 cm), and the task is 6 s long.
+- Exploration prior (`ArmWaypointExplorer`) for every arm method; see the limitations in
+  `RESULTS_ARM.md`.
+- Added the **"hold still if no branch passes"** variant (G) after seeing that C's remaining
+  violations came from committing a failing plan when all 4 candidates failed.
+- Added **B with λ = 0**. The uncertainty penalty was not why B underperforms (32% vs 33%).
+
+## Next steps
+
+1. Make G (hold still when nothing passes) the default, and run more seeds.
+2. Check the branches in a *perturbed* simulator (different friction or masses) to mimic
+   sim-to-real. This is the key open question.
+3. Adaptive k: verify only when the model is unsure. k = 2 already gives 68% success with 6%
+   violations at 580 steps.
+4. Pick-and-place with the gripper (4-D action).
+
+## Reproduce (arm)
+
+```bash
+scripts/fetch_assets.sh                                   # Panda model -> third_party/
+python -m pytest -q tests                                 # 18 tests incl. arm determinism
+python scripts/arm_scripted.py --episodes 30              # feasibility check (87%)
+scripts/run_jobs.sh results/arm_wave_final.txt 10         # all 32 arm runs
+python -m experiments.analyze_arm --extra_evals           # results/arm_table.md, plots, arm_summary.json
+python scripts/record_arm_traces.py --c_run results/runs/arm_C_verify_k4/seed_0 --b_run results/runs/arm_B_plan_k1/seed_0
+python scripts/make_arm_video.py                          # results/arm_demo.mp4 / .gif
+```
+
+---
+
+# Night 1 report — planar push (Imagine → Verify → Act MVP)
 
 ## Summary
 

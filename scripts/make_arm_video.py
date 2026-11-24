@@ -364,7 +364,13 @@ def end_card(v: Video, summary: dict | None, seconds=10.0):
         for x, c in zip(xs, cols):
             d.text((x, y), c, font=F_SMALL, fill=DIM)
         y += 34
-        for r in summary["table"]:
+        short = {"arm_A_ppo": "A: PPO (1M steps)", "arm_A2_sac": "A2: SAC",
+                 "arm_B_plan_k1": "B: plan in model, no verify", "arm_C_verify_k4": "C: verify top-4 (k=4)",
+                 "arm_C_verify_k4_noverify": "   C's model acting without verify",
+                 "arm_E_verify_k2": "E: verify top-2 (k=2)", "arm_G_verify_k4_stop": "G: C + hold still if none pass",
+                 "arm_B_plan_k1_long": "B, 2x budget", "arm_C_verify_k4_long": "C, 2x budget"}
+        rows = [dict(r, method=short[r["key"]]) for r in summary["table"] if r["key"] in short]
+        for r in rows:
             vals = [r["method"], r.get("seeds", "-"), r["budget"], r["success"], r["safety"], r["steps_per_ep"], r.get("overturned", "-")]
             for x, val in zip(xs, vals):
                 d.text((x, y), str(val), font=F_SMALL, fill=FG)

@@ -1,0 +1,63 @@
+{
+ "config": {
+  "name": "arm_C_verify_k4_long",
+  "method": "iva",
+  "task": "arm_push_safely",
+  "seeds": [
+   0,
+   1
+  ],
+  "torch_threads": 1,
+  "pretrain_steps": 5000,
+  "pretrain_policy": "arm_waypoint",
+  "pretrain_iters": 4000,
+  "train_budget": 200000,
+  "eval_episodes": 30,
+  "eval_traces": 5,
+  "trace_every": 10,
+  "agent": {
+   "k_verify": 4,
+   "act_steps": 10,
+   "eps": 0.0,
+   "retrain_every": 4000,
+   "retrain_iters": 1500,
+   "error_weighted": true,
+   "cem": {
+    "horizon": 20,
+    "n_candidates": 4,
+    "population": 128,
+    "elites": 12,
+    "iterations": 4,
+    "lam": 2.0,
+    "safe_margin": 0.05
+   }
+  }
+ },
+ "agent": {
+  "k_verify": 4,
+  "act_steps": 10,
+  "eps": 0.0,
+  "retrain_every": 4000,
+  "retrain_iters": 1500,
+  "error_weighted": true,
+  "no_pass_fallback": "best_score",
+  "cem": {
+   "horizon": 20,
+   "n_candidates": 4,
+   "population": 128,
+   "elites": 12,
+   "iterations": 4,
+   "init_std": 0.6,
+   "min_std": 0.05,
+   "w_term": 1.0,
+   "w_app": 0.3,
+   "w_safe": 10.0,
+   "safe_margin": 0.05,
+   "lam": 2.0,
+   "n_ghosts": 16
+  }
+ },
+ "seed": 1,
+ "git": "c5a228d",
+ "started": "2026-11-24 03:34:05"
+}
