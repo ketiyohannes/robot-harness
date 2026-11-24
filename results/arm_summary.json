@@ -1,6 +1,15 @@
 {
  "table": [
   {
+   "method": "B: WM+CEM, no verify (k=1)",
+   "key": "arm_B_plan_k1",
+   "seeds": 5,
+   "budget": "100k",
+   "success": "33% \u00b1 4",
+   "safety": "51% \u00b1 6",
+   "steps_per_ep": "120"
+  },
+  {
    "method": "C: WM+CEM+verify (k=4)",
    "key": "arm_C_verify_k4",
    "seeds": 1,
@@ -13,6 +22,14 @@
   }
  ],
  "train": [
+  {
+   "method": "B: WM+CEM, no verify (k=1)",
+   "episodes": "792",
+   "viol": "399.80 \u00b1 31.01",
+   "viol_frac": "50%",
+   "cross": "36.8k, 46.4k, 35.6k, 62.0k, 44.6k",
+   "wall": "103.32 \u00b1 1.16"
+  },
   {
    "method": "C: WM+CEM+verify (k=4)",
    "episodes": "92",

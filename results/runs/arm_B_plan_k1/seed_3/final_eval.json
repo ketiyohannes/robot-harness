@@ -1,0 +1,786 @@
+{
+ "summary": {
+  "n": 30,
+  "success_rate": 0.3333333333333333,
+  "safety_violation_rate": 0.4666666666666667,
+  "mean_robustness": -0.023775508557815846,
+  "committed_steps": 3600,
+  "branch_steps": 0,
+  "model_steps": 14158800,
+  "viol_reach_target": 0.3,
+  "viol_cup_upright": 0.0,
+  "viol_cup_still": 0.06666666666666667,
+  "viol_puck_slow": 0.43333333333333335,
+  "viol_puck_on_table": 0.0,
+  "viol_ee_in_workspace": 0.0,
+  "train_real_steps": 100040,
+  "eval_real_steps": 3600,
+  "train_wall_s": 6104.039001703262,
+  "eval_wall_s": 205.78458619117737,
+  "train_episodes": 792,
+  "train_stats": {
+   "decisions": 9504,
+   "overturned": 0,
+   "no_pass": 0,
+   "top1_failed": 0
+  },
+  "eval_stats": {
+   "decisions": 360,
+   "overturned": 0,
+   "no_pass": 0,
+   "top1_failed": 0
+  }
+ },
+ "episodes": [
+  {
+   "seed": 10000,
+   "success": true,
+   "robustness": 0.029996337195665298,
+   "per_clause": {
+    "reach_target": 0.04542631118022905,
+    "cup_upright": 0.19987775287638138,
+    "cup_still": 0.029996337195665298,
+    "puck_slow": 0.04136149470951536,
+    "puck_on_table": 0.1373516084657853,
+    "ee_in_workspace": 0.18631367845329608
+   },
+   "violated": {
+    "reach_target": false,
+    "cup_upright": false,
+    "cup_still": false,
+    "puck_slow": false,
+    "puck_on_table": false,
+    "ee_in_workspace": false
+   },
+   "safety_violation": false,
+   "committed_steps": 120,
+   "branch_steps": 0,
+   "model_steps": 471960
+  },
+  {
+   "seed": 10001,
+   "success": true,
+   "robustness": 0.02999595757509631,
+   "per_clause": {
+    "reach_target": 0.04933432872675129,
+    "cup_upright": 0.19986542261161147,
+    "cup_still": 0.02999595757509631,
+    "puck_slow": 0.049331026880314294,
+    "puck_on_table": 0.14247804765562552,
+    "ee_in_workspace": 0.13838000340416162
+   },
+   "violated": {
+    "reach_target": false,
+    "cup_upright": false,
+    "cup_still": false,
+    "puck_slow": false,
+    "puck_on_table": false,
+    "ee_in_workspace": false
+   },
+   "safety_violation": false,
+   "committed_steps": 120,
+   "branch_steps": 0,
+   "model_steps": 471960
+  },
+  {
+   "seed": 10002,
+   "success": true,
+   "robustness": 0.005830810025436818,
+   "per_clause": {
+    "reach_target": 0.005830810025436818,
+    "cup_upright": 0.1980989864505959,
+    "cup_still": 0.02573341821621034,
+    "puck_slow": 0.07563963648792285,
+    "puck_on_table": 0.14214238076723462,
+    "ee_in_workspace": 0.17514838653454312
+   },
+   "violated": {
+    "reach_target": false,
+    "cup_upright": false,
+    "cup_still": false,
+    "puck_slow": false,
+    "puck_on_table": false,
+    "ee_in_workspace": false
+   },
+   "safety_violation": false,
+   "committed_steps": 120,
+   "branch_steps": 0,
+   "model_steps": 471960
+  },
+  {
+   "seed": 10003,
+   "success": false,
+   "robustness": -0.057734755305554386,
+   "per_clause": {
+    "reach_target": 0.04493354371020547,
+    "cup_upright": 0.19987097852173427,
+    "cup_still": 0.029996132636387125,
+    "puck_slow": -0.057734755305554386,
+    "puck_on_table": 0.1429748140737423,
+    "ee_in_workspace": 0.14364024197309433
+   },
+   "violated": {
+    "reach_target": false,
+    "cup_upright": false,
+    "cup_still": false,
+    "puck_slow": true,
+    "puck_on_table": false,
+    "ee_in_workspace": false
+   },
+   "safety_violation": true,
+   "committed_steps": 120,
+   "branch_steps": 0,
+   "model_steps": 471960
+  },
+  {
+   "seed": 10004,
+   "success": true,
+   "robustness": 0.018486914585802372,
+   "per_clause": {
+    "reach_target": 0.02850607542703524,
+    "cup_upright": 0.19987383103687628,
+    "cup_still": 0.029996237235855747,
+    "puck_slow": 0.018486914585802372,
+    "puck_on_table": 0.14186816215558337,
+    "ee_in_workspace": 0.1706491965566881
+   },
+   "violated": {
+    "reach_target": false,
+    "cup_upright": false,
+    "cup_still": false,
+    "puck_slow": false,
+    "puck_on_table": false,
+    "ee_in_workspace": false
+   },
+   "safety_violation": false,
+   "committed_steps": 120,
+   "branch_steps": 0,
+   "model_steps": 471960
+  },
+  {
+   "seed": 10005,
+   "success": false,
+   "robustness": -0.00041414894093305676,
+   "per_clause": {
+    "reach_target": 0.04863043190861056,
+    "cup_upright": 0.19985959929666147,
+    "cup_still": 0.029995798871422837,
+    "puck_slow": -0.00041414894093305676,
+    "puck_on_table": 0.1407715725247955,
+    "ee_in_workspace": 0.09990686902367618
+   },
+   "violated": {
+    "reach_target": false,
+    "cup_upright": false,
+    "cup_still": false,
+    "puck_slow": true,
+    "puck_on_table": false,
+    "ee_in_workspace": false
+   },
+   "safety_violation": true,
+   "committed_steps": 120,
+   "branch_steps": 0,
+   "model_steps": 471960
+  },
+  {
+   "seed": 10006,
+   "success": true,
+   "robustness": 0.011406022369003177,
+   "per_clause": {
+    "reach_target": 0.03703376583692143,
+    "cup_upright": 0.1998581524016602,
+    "cup_still": 0.029995750562639905,
+    "puck_slow": 0.011406022369003177,
+    "puck_on_table": 0.13331218840800563,
+    "ee_in_workspace": 0.0940870562691617
+   },
+   "violated": {
+    "reach_target": false,
+    "cup_upright": false,
+    "cup_still": false,
+    "puck_slow": false,
+    "puck_on_table": false,
+    "ee_in_workspace": false
+   },
+   "safety_violation": false,
+   "committed_steps": 120,
+   "branch_steps": 0,
+   "model_steps": 471960
+  },
+  {
+   "seed": 10007,
+   "success": false,
+   "robustness": -0.03349845601044785,
+   "per_clause": {
+    "reach_target": -0.03349845601044785,
+    "cup_upright": 0.19987294531639546,
+    "cup_still": 0.029996201278209324,
+    "puck_slow": 0.04642448521813958,
+    "puck_on_table": 0.1369108087475338,
+    "ee_in_workspace": 0.10451913110826047
+   },
+   "violated": {
+    "reach_target": true,
+    "cup_upright": false,
+    "cup_still": false,
+    "puck_slow": false,
+    "puck_on_table": false,
+    "ee_in_workspace": false
+   },
+   "safety_violation": false,
+   "committed_steps": 120,
+   "branch_steps": 0,
+   "model_steps": 471960
+  },
+  {
+   "seed": 10008,
+   "success": false,
+   "robustness": -0.22098344396588654,
+   "per_clause": {
+    "reach_target": 0.029051412799526336,
+    "cup_upright": 0.19984657884975796,
+    "cup_still": 0.02999539931232187,
+    "puck_slow": -0.22098344396588654,
+    "puck_on_table": 0.14190573292711925,
+    "ee_in_workspace": 0.11402075012959947
+   },
+   "violated": {
+    "reach_target": false,
+    "cup_upright": false,
+    "cup_still": false,
+    "puck_slow": true,
+    "puck_on_table": false,
+    "ee_in_workspace": false
+   },
+   "safety_violation": true,
+   "committed_steps": 120,
+   "branch_steps": 0,
+   "model_steps": 471960
+  },
+  {
+   "seed": 10009,
+   "success": false,
+   "robustness": -0.009097170154896021,
+   "per_clause": {
+    "reach_target": -0.009097170154896021,
+    "cup_upright": 0.19986086269253303,
+    "cup_still": 0.029995834887845792,
+    "puck_slow": 0.01209404518471699,
+    "puck_on_table": 0.13983521265070456,
+    "ee_in_workspace": 0.10380901295314324
+   },
+   "violated": {
+    "reach_target": true,
+    "cup_upright": false,
+    "cup_still": false,
+    "puck_slow": false,
+    "puck_on_table": false,
+    "ee_in_workspace": false
+   },
+   "safety_violation": false,
+   "committed_steps": 120,
+   "branch_steps": 0,
+   "model_steps": 471960
+  },
+  {
+   "seed": 10010,
+   "success": false,
+   "robustness": -0.004050237415135605,
+   "per_clause": {
+    "reach_target": 0.019326621067026036,
+    "cup_upright": 0.1998543948278341,
+    "cup_still": 0.029995618154182464,
+    "puck_slow": -0.004050237415135605,
+    "puck_on_table": 0.14140671394766105,
+    "ee_in_workspace": 0.1544557474160396
+   },
+   "violated": {
+    "reach_target": false,
+    "cup_upright": false,
+    "cup_still": false,
+    "puck_slow": true,
+    "puck_on_table": false,
+    "ee_in_workspace": false
+   },
+   "safety_violation": true,
+   "committed_steps": 120,
+   "branch_steps": 0,
+   "model_steps": 471960
+  },
+  {
+   "seed": 10011,
+   "success": false,
+   "robustness": -0.046671091621881544,
+   "per_clause": {
+    "reach_target": -0.046671091621881544,
+    "cup_upright": 0.19986615983985048,
+    "cup_still": 0.02999599103663679,
+    "puck_slow": 0.006996805486350316,
+    "puck_on_table": 0.13936502970664952,
+    "ee_in_workspace": 0.18320922277320079
+   },
+   "violated": {
+    "reach_target": true,
+    "cup_upright": false,
+    "cup_still": false,
+    "puck_slow": false,
+    "puck_on_table": false,
+    "ee_in_workspace": false
+   },
+   "safety_violation": false,
+   "committed_steps": 120,
+   "branch_steps": 0,
+   "model_steps": 471960
+  },
+  {
+   "seed": 10012,
+   "success": false,
+   "robustness": -0.07800501914845692,
+   "per_clause": {
+    "reach_target": 0.04471983630632015,
+    "cup_upright": 0.1998691447440702,
+    "cup_still": 0.02999608244846283,
+    "puck_slow": -0.07800501914845692,
+    "puck_on_table": 0.14481136982892567,
+    "ee_in_workspace": 0.1533145280166378
+   },
+   "violated": {
+    "reach_target": false,
+    "cup_upright": false,
+    "cup_still": false,
+    "puck_slow": true,
+    "puck_on_table": false,
+    "ee_in_workspace": false
+   },
+   "safety_violation": true,
+   "committed_steps": 120,
+   "branch_steps": 0,
+   "model_steps": 471960
+  },
+  {
+   "seed": 10013,
+   "success": true,
+   "robustness": 0.008278942556235486,
+   "per_clause": {
+    "reach_target": 0.047934142588390016,
+    "cup_upright": 0.19987876596172166,
+    "cup_still": 0.029996364095843463,
+    "puck_slow": 0.008278942556235486,
+    "puck_on_table": 0.1401604906090611,
+    "ee_in_workspace": 0.13446577324397604
+   },
+   "violated": {
+    "reach_target": false,
+    "cup_upright": false,
+    "cup_still": false,
+    "puck_slow": false,
+    "puck_on_table": false,
+    "ee_in_workspace": false
+   },
+   "safety_violation": false,
+   "committed_steps": 120,
+   "branch_steps": 0,
+   "model_steps": 471960
+  },
+  {
+   "seed": 10014,
+   "success": false,
+   "robustness": -0.0023699370976845713,
+   "per_clause": {
+    "reach_target": 0.02684497088606948,
+    "cup_upright": 0.19985053789222598,
+    "cup_still": 0.029995523865136785,
+    "puck_slow": -0.0023699370976845713,
+    "puck_on_table": 0.14011479519545153,
+    "ee_in_workspace": 0.08619525243325299
+   },
+   "violated": {
+    "reach_target": false,
+    "cup_upright": false,
+    "cup_still": false,
+    "puck_slow": true,
+    "puck_on_table": false,
+    "ee_in_workspace": false
+   },
+   "safety_violation": true,
+   "committed_steps": 120,
+   "branch_steps": 0,
+   "model_steps": 471960
+  },
+  {
+   "seed": 10015,
+   "success": false,
+   "robustness": -0.08110675398162315,
+   "per_clause": {
+    "reach_target": -0.007157604271044303,
+    "cup_upright": 0.19985766150501635,
+    "cup_still": 0.02999573986387781,
+    "puck_slow": -0.08110675398162315,
+    "puck_on_table": 0.14078015056847723,
+    "ee_in_workspace": 0.22686843063528356
+   },
+   "violated": {
+    "reach_target": true,
+    "cup_upright": false,
+    "cup_still": false,
+    "puck_slow": true,
+    "puck_on_table": false,
+    "ee_in_workspace": false
+   },
+   "safety_violation": true,
+   "committed_steps": 120,
+   "branch_steps": 0,
+   "model_steps": 471960
+  },
+  {
+   "seed": 10016,
+   "success": false,
+   "robustness": -0.016458399488990416,
+   "per_clause": {
+    "reach_target": 0.007225003598122101,
+    "cup_upright": 0.1939296748065903,
+    "cup_still": -0.001657719522178032,
+    "puck_slow": -0.016458399488990416,
+    "puck_on_table": 0.13415771213709912,
+    "ee_in_workspace": 0.19975391820855604
+   },
+   "violated": {
+    "reach_target": false,
+    "cup_upright": false,
+    "cup_still": true,
+    "puck_slow": true,
+    "puck_on_table": false,
+    "ee_in_workspace": false
+   },
+   "safety_violation": true,
+   "committed_steps": 120,
+   "branch_steps": 0,
+   "model_steps": 471960
+  },
+  {
+   "seed": 10017,
+   "success": false,
+   "robustness": -0.05622037617040068,
+   "per_clause": {
+    "reach_target": -0.05622037617040068,
+    "cup_upright": 0.18779157933237675,
+    "cup_still": -0.0051035902877983805,
+    "puck_slow": 0.052569636056749997,
+    "puck_on_table": 0.14091021234002127,
+    "ee_in_workspace": 0.17543350942133298
+   },
+   "violated": {
+    "reach_target": true,
+    "cup_upright": false,
+    "cup_still": true,
+    "puck_slow": false,
+    "puck_on_table": false,
+    "ee_in_workspace": false
+   },
+   "safety_violation": true,
+   "committed_steps": 120,
+   "branch_steps": 0,
+   "model_steps": 471960
+  },
+  {
+   "seed": 10018,
+   "success": false,
+   "robustness": -0.03996544513889863,
+   "per_clause": {
+    "reach_target": -0.03996544513889863,
+    "cup_upright": 0.1998701097896833,
+    "cup_still": 0.029996114333523723,
+    "puck_slow": 0.03525372903827678,
+    "puck_on_table": 0.13985061006411292,
+    "ee_in_workspace": 0.1289665545203897
+   },
+   "violated": {
+    "reach_target": true,
+    "cup_upright": false,
+    "cup_still": false,
+    "puck_slow": false,
+    "puck_on_table": false,
+    "ee_in_workspace": false
+   },
+   "safety_violation": false,
+   "committed_steps": 120,
+   "branch_steps": 0,
+   "model_steps": 471960
+  },
+  {
+   "seed": 10019,
+   "success": true,
+   "robustness": 0.029996119150360667,
+   "per_clause": {
+    "reach_target": 0.04867317244498636,
+    "cup_upright": 0.19987059960905357,
+    "cup_still": 0.029996119150360667,
+    "puck_slow": 0.056447995626627334,
+    "puck_on_table": 0.14253520376741868,
+    "ee_in_workspace": 0.17737588947836067
+   },
+   "violated": {
+    "reach_target": false,
+    "cup_upright": false,
+    "cup_still": false,
+    "puck_slow": false,
+    "puck_on_table": false,
+    "ee_in_workspace": false
+   },
+   "safety_violation": false,
+   "committed_steps": 120,
+   "branch_steps": 0,
+   "model_steps": 471960
+  },
+  {
+   "seed": 10020,
+   "success": true,
+   "robustness": 0.015291224815891763,
+   "per_clause": {
+    "reach_target": 0.015291224815891763,
+    "cup_upright": 0.1998569071383173,
+    "cup_still": 0.02999570604910811,
+    "puck_slow": 0.05040239206653188,
+    "puck_on_table": 0.13886963611045622,
+    "ee_in_workspace": 0.06642947492054024
+   },
+   "violated": {
+    "reach_target": false,
+    "cup_upright": false,
+    "cup_still": false,
+    "puck_slow": false,
+    "puck_on_table": false,
+    "ee_in_workspace": false
+   },
+   "safety_violation": false,
+   "committed_steps": 120,
+   "branch_steps": 0,
+   "model_steps": 471960
+  },
+  {
+   "seed": 10021,
+   "success": true,
+   "robustness": 0.029995627823069363,
+   "per_clause": {
+    "reach_target": 0.049426186826162115,
+    "cup_upright": 0.19985379432888523,
+    "cup_still": 0.029995627823069363,
+    "puck_slow": 0.0344604663740134,
+    "puck_on_table": 0.14095546175634802,
+    "ee_in_workspace": 0.10533918857873337
+   },
+   "violated": {
+    "reach_target": false,
+    "cup_upright": false,
+    "cup_still": false,
+    "puck_slow": false,
+    "puck_on_table": false,
+    "ee_in_workspace": false
+   },
+   "safety_violation": false,
+   "committed_steps": 120,
+   "branch_steps": 0,
+   "model_steps": 471960
+  },
+  {
+   "seed": 10022,
+   "success": true,
+   "robustness": 0.00918626186280156,
+   "per_clause": {
+    "reach_target": 0.00918626186280156,
+    "cup_upright": 0.19986850751082486,
+    "cup_still": 0.0299960678245701,
+    "puck_slow": 0.04274721194379935,
+    "puck_on_table": 0.1418420570199192,
+    "ee_in_workspace": 0.13548394964628346
+   },
+   "violated": {
+    "reach_target": false,
+    "cup_upright": false,
+    "cup_still": false,
+    "puck_slow": false,
+    "puck_on_table": false,
+    "ee_in_workspace": false
+   },
+   "safety_violation": false,
+   "committed_steps": 120,
+   "branch_steps": 0,
+   "model_steps": 471960
+  },
+  {
+   "seed": 10023,
+   "success": false,
+   "robustness": -0.03520210915691871,
+   "per_clause": {
+    "reach_target": -0.03520210915691871,
+    "cup_upright": 0.0063394672125692275,
+    "cup_still": 0.021306520129577185,
+    "puck_slow": 0.01837101140712402,
+    "puck_on_table": 0.14127497747503745,
+    "ee_in_workspace": 0.16892404169129155
+   },
+   "violated": {
+    "reach_target": true,
+    "cup_upright": false,
+    "cup_still": false,
+    "puck_slow": false,
+    "puck_on_table": false,
+    "ee_in_workspace": false
+   },
+   "safety_violation": false,
+   "committed_steps": 120,
+   "branch_steps": 0,
+   "model_steps": 471960
+  },
+  {
+   "seed": 10024,
+   "success": false,
+   "robustness": -0.03238791681476755,
+   "per_clause": {
+    "reach_target": 0.017993554278767525,
+    "cup_upright": 0.1978260874574115,
+    "cup_still": 0.025860655750022294,
+    "puck_slow": -0.03238791681476755,
+    "puck_on_table": 0.14331545230842654,
+    "ee_in_workspace": 0.10990744479412837
+   },
+   "violated": {
+    "reach_target": false,
+    "cup_upright": false,
+    "cup_still": false,
+    "puck_slow": true,
+    "puck_on_table": false,
+    "ee_in_workspace": false
+   },
+   "safety_violation": true,
+   "committed_steps": 120,
+   "branch_steps": 0,
+   "model_steps": 471960
+  },
+  {
+   "seed": 10025,
+   "success": false,
+   "robustness": -0.09826535424435634,
+   "per_clause": {
+    "reach_target": 0.004568420975512112,
+    "cup_upright": 0.1969866257871834,
+    "cup_still": 0.017352803193697218,
+    "puck_slow": -0.09826535424435634,
+    "puck_on_table": 0.14014550073244872,
+    "ee_in_workspace": 0.14070292412664115
+   },
+   "violated": {
+    "reach_target": false,
+    "cup_upright": false,
+    "cup_still": false,
+    "puck_slow": true,
+    "puck_on_table": false,
+    "ee_in_workspace": false
+   },
+   "safety_violation": true,
+   "committed_steps": 120,
+   "branch_steps": 0,
+   "model_steps": 471960
+  },
+  {
+   "seed": 10026,
+   "success": false,
+   "robustness": -0.02893943815370531,
+   "per_clause": {
+    "reach_target": -0.02893943815370531,
+    "cup_upright": 0.19986231495602555,
+    "cup_still": 0.02999586271292669,
+    "puck_slow": 0.012819686213165732,
+    "puck_on_table": 0.14124045457701567,
+    "ee_in_workspace": 0.1264523994666007
+   },
+   "violated": {
+    "reach_target": true,
+    "cup_upright": false,
+    "cup_still": false,
+    "puck_slow": false,
+    "puck_on_table": false,
+    "ee_in_workspace": false
+   },
+   "safety_violation": false,
+   "committed_steps": 120,
+   "branch_steps": 0,
+   "model_steps": 471960
+  },
+  {
+   "seed": 10027,
+   "success": false,
+   "robustness": -0.025831785942417418,
+   "per_clause": {
+    "reach_target": -0.014534520552236752,
+    "cup_upright": 0.19984607110888167,
+    "cup_still": 0.02999540075240176,
+    "puck_slow": -0.025831785942417418,
+    "puck_on_table": 0.13920941009785964,
+    "ee_in_workspace": 0.14646783789556597
+   },
+   "violated": {
+    "reach_target": true,
+    "cup_upright": false,
+    "cup_still": false,
+    "puck_slow": true,
+    "puck_on_table": false,
+    "ee_in_workspace": false
+   },
+   "safety_violation": true,
+   "committed_steps": 120,
+   "branch_steps": 0,
+   "model_steps": 471960
+  },
+  {
+   "seed": 10028,
+   "success": false,
+   "robustness": -0.01786596807143709,
+   "per_clause": {
+    "reach_target": 0.013524961872231997,
+    "cup_upright": 0.1998675991483568,
+    "cup_still": 0.029996034032185988,
+    "puck_slow": -0.01786596807143709,
+    "puck_on_table": 0.14082246234789594,
+    "ee_in_workspace": 0.09678772542417691
+   },
+   "violated": {
+    "reach_target": false,
+    "cup_upright": false,
+    "cup_still": false,
+    "puck_slow": true,
+    "puck_on_table": false,
+    "ee_in_workspace": false
+   },
+   "safety_violation": true,
+   "committed_steps": 120,
+   "branch_steps": 0,
+   "model_steps": 471960
+  },
+  {
+   "seed": 10029,
+   "success": false,
+   "robustness": -0.01666166786944634,
+   "per_clause": {
+    "reach_target": 0.004099294335297217,
+    "cup_upright": 0.19652512422938542,
+    "cup_still": 0.025245324718443117,
+    "puck_slow": -0.01666166786944634,
+    "puck_on_table": 0.13924750061983548,
+    "ee_in_workspace": 0.1264596054657889
+   },
+   "violated": {
+    "reach_target": false,
+    "cup_upright": false,
+    "cup_still": false,
+    "puck_slow": true,
+    "puck_on_table": false,
+    "ee_in_workspace": false
+   },
+   "safety_violation": true,
+   "committed_steps": 120,
+   "branch_steps": 0,
+   "model_steps": 471960
+  }
+ ]
+}

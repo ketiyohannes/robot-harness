@@ -1,0 +1,13 @@
+{
+ "c_run": "results/runs/arm_C_verify_k4/seed_0",
+ "b_run": "results/runs/arm_B_plan_k1/seed_0",
+ "c_success_seed": 10000,
+ "c_success_is_success": true,
+ "c_overturn_seed": 10007,
+ "c_overturn_decision": 2,
+ "contrast_seed": 10003,
+ "scan_c_success": 0.8333333333333334,
+ "scan_c_safety_violation": 0.06666666666666667,
+ "scan_b_success": 0.5333333333333333,
+ "scan_b_safety_violation": 0.36666666666666664
+}

@@ -334,14 +334,18 @@ def side_by_side(v: Video, spec: Spec, rec_b, rec_c):
             img.paste(Image.alpha_composite(scene, ov).convert("RGB"), (x0, 70))
             d.text((x0, 20), title, font=F_MED, fill=FG)
             final = t >= len(hist) - 1
+            speed = float(np.linalg.norm(hist[min(t, len(hist) - 1), 9:11]))
+            peak = float(np.linalg.norm(hist[:t + 1, 9:11], axis=-1).max())
+            d.text((x0, 676), f"puck speed {speed:.2f} m/s   (peak so far {peak:.2f}, limit 0.25)", font=F_SMALL,
+                   fill=RED if peak >= 0.25 else DIM)
             st = clause_status(spec, hist[:t + 1], tgt, final=final)
             bad = [s[0] for s in st if s[1] == "VIOLATED"]
             if final:
                 msg = "SUCCESS" if rec["success"] else "FAILED: " + ", ".join(bad)
                 steps = rec["committed_steps"] + rec["branch_steps"]
-                d.text((x0, 680), f"{msg}   (real steps this episode: {steps})", font=F_SMALL, fill=GREEN if rec["success"] else RED)
+                d.text((x0, 697), f"{msg}   (real steps this episode: {steps})", font=F_SMALL, fill=GREEN if rec["success"] else RED)
             else:
-                d.text((x0, 680), f"t = {t}/{T_MAX}   " + ("violated: " + ", ".join(bad) if bad else "no violations yet"),
+                d.text((x0, 697), f"t = {t}/{T_MAX}   " + ("violated: " + ", ".join(bad) if bad else "no violations yet"),
                        font=F_SMALL, fill=RED if bad else DIM)
         v.add(img, 2)  # slow motion: 2 frames per 50 ms step
     v.add(img, int(2.5 * FPS))
