@@ -65,3 +65,9 @@ scripts/run_jobs.sh results/arm_wave_final.txt 10
 python -m experiments.analyze_arm --extra_evals
 python scripts/record_arm_traces.py && python scripts/make_arm_video.py
 ```
+
+## License
+
+Apache-2.0 (see `LICENSE`). The Franka Panda model is from MuJoCo Menagerie (Apache-2.0). It is
+fetched by `scripts/fetch_assets.sh` and not redistributed here. Trained checkpoints are on
+Hugging Face: https://huggingface.co/ketiyohannes/robot-harness-world-models
